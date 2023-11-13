@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="alternate" type="application/rss+xml" href="/chapter4/index.xml" title="100 Pages to  FastAPI" />
+    <link rel="canonical" href="/chapter4/">
+
+    <title>
+        
+        Application services | 100 Pages to  FastAPI
+        
+    </title>
+
+    
+    <link href="/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="/css/ace.min.css">
+
+    
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                
+                100 Pages to  FastAPI
+            </a>
+        </div>
+        
+    </div>
+    <div class="feed-icons">
+            <a href="/chapter4/index.xml"><img src="/img/feed-icon.svg" alt="RSS feed" /></a>
+        </div>
+    </nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+
+        
+
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/preface/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/preface/"><h6>Preface</h6></a>
+        
+    </li>
+    <li data-nav-id="/table_of_content/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/table_of_content/"><h6>Table of Content</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter1/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter1/"><h6>Introduction to FastAPI</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter2/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter2/"><h6>The mWallet Project</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter3/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter3/"><h6>Identifying Routes</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter4/" class="nav-item my-1 active
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter4/"><h6>Application services</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter5/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter5/"><h6>The business domain entities and database layer</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter6/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter6/"><h6>Middleware in FastAPI</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter7/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter7/"><h6>Authorization and Authentication</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter8/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter8/"><h6>Testing</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter9/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter9/"><h6>Resources</h6></a>
+        
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#fastapi-path-parameters">FastAPI Path parameters</a></li>
+    <li><a href="#fastapi-query-parameters">FastAPI Query parameters</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#fastapi-body-parameters">FastAPI Body parameters</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<div class="d-flex flex-column">
+    <h1 class="js-title">Application services</h1>
+    <div class="d-flex align-items-center">
+        
+    </div>
+</div>
+
+<hr>
+
+
+<p>In previous Chapter, Identifying Routes, we had briefly mentioned FastAPI use of URI template to define the URL associated with an endpoint. Path parameter can be used to pass extra information to a given API endpoint.</p>
+<h2 id="fastapi-path-parameters">FastAPI Path parameters</h2>
+<p>Path parameters or variables are declared using the left and right curly braces with the named variable within the braces, example <code>{parameter}</code>.</p>
+<p>Once a parameter has been defined, the value assigned to the parameter can then be passed to the associated function of the given API endpoint. Let us revisit the previous example of <a href="/chapter3/">Chapter 3</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Any, List
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi <span style="color:#f92672">import</span> Depends, APIRouter
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> starlette.status <span style="color:#f92672">import</span> HTTP_200_OK, HTTP_202_ACCEPTED, HTTP_201_CREATED
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> db.adapters <span style="color:#f92672">import</span> parse_to_schema
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> schemas.user <span style="color:#f92672">import</span> UserPreference, UserDevices
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> schemas.util <span style="color:#f92672">import</span> GenericResponse
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> user <span style="color:#f92672">import</span> services <span style="color:#66d9ef">as</span> user_services
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>web_user_routes <span style="color:#f92672">=</span> APIRouter()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/preference&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;List all notices sent to this user or notices which the selected user subscribes to.&#39;</span>, response_model<span style="color:#f92672">=</span>GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_user_preference</span>(result_set: Any <span style="color:#f92672">=</span> Depends(user_services<span style="color:#f92672">.</span>create_user_preference)) <span style="color:#f92672">-&gt;</span> UserPreference:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.delete</span>(<span style="color:#e6db74">&#39;/user/preference/</span><span style="color:#e6db74">{preference}</span><span style="color:#e6db74">&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_202_ACCEPTED, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Delete a selected user’s preference.&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">destroy_user_preference</span>(result_set: Any <span style="color:#f92672">=</span> Depends(user_services<span style="color:#f92672">.</span>destroy_user_preference)) <span style="color:#f92672">-&gt;</span> bool:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> bool(result_set)
+</span></span></code></pre></div><p>The defined route URI is ==<code>/user/preference/{preference}</code>== which has a path variable or parameter called <code>preference</code>.  The data type of the variable is not specified in the example above.  We can specify a data type by adding a colon and the type of data, example, ==<code>/user/preference/{preference: str}</code>== implies the preference is expected to be a string type. In another scenario, we could specify the data type in the associated function (in our example, <code>user_services.destroy_user_preference</code>) and FastAPI will cast the parameter into the specified data type before passing it to the function as shown below. In the function below, the preference parameter is expected to be of type <code>str</code> or <code>UUID</code> and will be passed into the function by the <code>Path</code> class instance.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">destroy_user_preference</span>(preference: str <span style="color:#f92672">|</span> uuid<span style="color:#f92672">.</span>UUID <span style="color:#f92672">=</span> Path(<span style="color:#f92672">...</span>, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;The preference identifier for uniquely filtering user’s preference.&#34;</span> )) <span style="color:#f92672">-&gt;</span> bool: 
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># process preference here</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">...</span>
+</span></span></code></pre></div><p>The function definition shows a Path object being used to inject value into the function. This <code>Path</code> object is like the <code>Depends</code> object introduced earlier. The <code>Path</code>, <code>Body</code>, <code>Query</code>, <code>Form</code>, <code>Cookies</code> objects are example of FastAPI mechanism of passing request data to associated API functions. Note the ellipsis <code>...</code> that is the first argument of the <code>Path</code> initialization. This indicates that the parameter annotated by  <code>Path</code> is mandatory. To specify an optional parameter, the <code>None</code> keyword can be passed as the first argument. By using the <code>Path</code> class to specify and initialize the <code>preference</code> argument, FastAPI will automatically inject value passed in the URL into the underlying function through the <code>APIRouter</code> or specified router instance, in our example, <code>web_user_routes</code>. If a data type is specified, then the value of the parameter is parsed to the specified data type. Where the parameter cannot be parsed into the target data type, a HTTP parse error with the error code set to <code>422</code> will be raised.</p>
+<p>It is important to note that <code>Path</code> parameters are usually scalar types like <code>str</code>, <code>int</code>, or a <code>float</code>. If a Pydantic model is specified as the path parameter, then FastaAPI assumes a request body is expected and not a path variable. A path parameter can also be given a default value. In the previous example, we specified that <code>preference</code> must be assigned a value in the URL string by using ellipsis in our Path initialization. Alternatively, we can specify a default value either by declaring this in the argument of the function or by specifying the default parameter of <code>Path</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">destroy_user_preference</span>(preference: str <span style="color:#f92672">|</span> uuid<span style="color:#f92672">.</span>UUID <span style="color:#f92672">=</span> Path(default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;786-rt4&#39;</span>, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;The preference identifier for uniquely filtering user’s preference.&#34;</span>)) <span style="color:#f92672">-&gt;</span> bool: 
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># process preference here</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">...</span> 
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">destroy_user_preference</span>(preference: str <span style="color:#f92672">|</span> uuid<span style="color:#f92672">.</span>UUID <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;786-rt4&#39;</span>)) <span style="color:#f92672">-&gt;</span>  bool: 
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># process preference here</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>	
+</span></span></code></pre></div><p>Both cases assign a default value of &lsquo;786-rt4&rsquo; to the preference parameter. However, in the first case, we specify that the preference value be retrieved from the URL path and then passed to the function as a string or UUID type. In the later case, we specified the default value be assigned to the parameter preference. Any function calling <code>destroy_user_prefence</code> will need to provide a value for preference else the default value will be used.</p>
+<p>It is important to note that path parameter can only be defined once for a given route that is added to a router. Also, associated function to an API endpoint URL should not be shared across other URLs. The example below will give a warning.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Case A</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/preference/</span><span style="color:#e6db74">{preference}</span><span style="color:#e6db74">&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;...&#39;</span>, response_model<span style="color:#f92672">=</span>GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_user_preference</span>(result_set: Any <span style="color:#f92672">=</span> Depends(user_services<span style="color:#f92672">.</span>create_user_preference)) <span style="color:#f92672">-&gt;</span> UserPreference:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Case B: Same endpoint function in Case A used for different URL. </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># While this may run successfully, it makes it difficult to maintain code</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/modify/</span><span style="color:#e6db74">{preference}</span><span style="color:#e6db74">&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;...&#39;</span>, response_model<span style="color:#f92672">=</span>GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_user_preference</span>(result_set: Any <span style="color:#f92672">=</span> Depends(user_services<span style="color:#f92672">.</span>create_user_preference)) <span style="color:#f92672">-&gt;</span> UserPreference:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Case C: Matches URL of Case A though with different endpoint function</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastAPI will give warning here. Both A and C will resolve as equivalent or identical endpoint.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/preference/</span><span style="color:#e6db74">{preference}</span><span style="color:#e6db74">&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;...&#39;</span>, response_model<span style="color:#f92672">=</span>GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_user_preference</span>(result_set: Any <span style="color:#f92672">=</span> Depends(user_services<span style="color:#f92672">.</span>change_user_preference)) <span style="color:#f92672">-&gt;</span> UserPreference:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set)
+</span></span></code></pre></div><p>Both Cases B and C are not valid and should not be used.</p>
+<h2 id="fastapi-query-parameters">FastAPI Query parameters</h2>
+<p>API endpoint functions with parameters that are not defined in the path are automatically converted to <code>Query</code> parameters. In the URL or URI template, the query is a key-value pair following the question mark. Example URL: <code>https://example.com?name=xavier&amp;power=vision</code>. The query parameters are <code>name</code> with the string value ==<code>xavier</code>== and <code>power</code> with the string value ==<code>vision</code>==. <code>Query</code> parameters by default are strings but can be parsed to other Python types using type hint.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>result_set <span style="color:#f92672">=</span> [{<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;yellow&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Arial&#39;</span>}, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Courier&#39;</span>}]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Case A</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/preferences&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;...&#39;</span>,  response_model<span style="color:#f92672">=</span>GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">list_preferences</span>(skip: int <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, limit: int <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">-&gt;</span> List[UserPreference]:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set[skip:limit])
+</span></span><span style="display:flex;"><span>   
+</span></span></code></pre></div><p>In the example, above (<code>Case A</code>), the result_set is a hypothetical list of mappings having the keys color and font. Let&rsquo;s assume each mapping in the list can be parsed to the <code>UserPreference</code> by the <code>parse_to_schema</code> function. Our query parameter, <code>skip</code> and <code>limit</code> will automatically be injected by FastAPI into the function, <code>list_preferences</code> when a user visits the URL `<a href="http://domain.com/user/preferences?skip=5&amp;limit=10">http://domain.com/user/preferences?skip=5&amp;limit=10</a>. Note that the value in the URL is a string &ldquo;5&rdquo; and not integer 5. However, since a type is specified in the function definition, the string is parsed, and an integer value is passed into the function.</p>
+<p>The parameter value can be set in the URL or in the function definition. If set in the URL, then the default value in the function will be disregarded and the URL value will be parsed and used. If no value was set in the URL, then the function default value will be used. To specify a query parameter as optional, set the default value to <code>None</code>. Alternative approach is to specify a default by using the Query class default keyword.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>result_set <span style="color:#f92672">=</span> [{<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;yellow&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Arial&#39;</span>}, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Courier&#39;</span>}]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Case B</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/preferences&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;...&#39;</span>, response_model<span style="color:#f92672">=</span>GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">list_preferences</span>(skip: int <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, limit: int <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>) <span style="color:#f92672">-&gt;</span> List[UserPreference]:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set[skip:limit])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>result_set <span style="color:#f92672">=</span> [{<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;yellow&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Arial&#39;</span>}, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Courier&#39;</span>}]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Case B</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/preferences&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;...&#39;</span>, response_model<span style="color:#f92672">=</span>GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">list_preferences</span>(skip: int <span style="color:#f92672">=</span> Query(<span style="color:#f92672">...</span>), limit: int <span style="color:#f92672">=</span> Query(default<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>) <span style="color:#f92672">-&gt;</span> List[UserPreference]:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set[skip:limit])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   
+</span></span><span style="display:flex;"><span>result_set <span style="color:#f92672">=</span> [{<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;yellow&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Arial&#39;</span>}, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Courier&#39;</span>}]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Case C</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/preferences&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;...&#39;</span>, response_model<span style="color:#f92672">=</span>GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">list_preferences</span>(skip: int <span style="color:#f92672">=</span> Query(<span style="color:#f92672">...</span>), limit: int <span style="color:#f92672">=</span> Query(<span style="color:#66d9ef">None</span>) <span style="color:#f92672">-&gt;</span> List[UserPreference]:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set[skip:limit])
+</span></span></code></pre></div><p>The value of limit in Case B, and C are equally set to None as both expressions are equivalent.</p>
+<h4 id="ℹ-tips-and-tricks---slicing-result">ℹ️ Tips and Tricks - slicing result</h4>
+<blockquote>
+<p>The slice operation in Python is used to retrieved values from a list or other sequences that supports slicing. This technique allows for selecting from index skip to index limit (values inclusive). A similar technique is used for actual database results when working with ORMs like <code>SQLAlchemy</code> and Django <code>Queryset</code>. When using slicing, ensure the skip and limit values are within range of the sequence. Using values out of range will raise an <code>IndexError</code>.</p>
+</blockquote>
+<p>Query parameters can also be defined as mandatory fields aside being default or optional values. To define a parameter as mandatory, use the ellipsis as the first argument to the Query class initialization. Let’s update our previous example to show this.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>result_set <span style="color:#f92672">=</span> [{<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;yellow&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Arial&#39;</span>}, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Courier&#39;</span>}]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/preferences&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;...&#39;</span>, response_model<span style="color:#f92672">=</span>GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">list_preferences</span>(skip: int <span style="color:#f92672">=</span> Query(<span style="color:#f92672">...</span>), limit: int <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>) <span style="color:#f92672">-&gt;</span> List[UserPreference]:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set[skip:limit])
+</span></span><span style="display:flex;"><span>   
+</span></span></code></pre></div><p>In the updated example, the skip parameter is now mandatory. Every call to the URL must provide a skip parameter. Calling the <code>list_preference</code> function without the skip parameter will raise an error. Another way of making a parameter mandatory or required, is to remove any default value from the function declaration as shown below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>result_set <span style="color:#f92672">=</span> [{<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;yellow&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Arial&#39;</span>}, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Courier&#39;</span>}]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Case B</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/preferences&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;...&#39;</span>, response_model<span style="color:#f92672">=</span>GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">list_preferences</span>(skip: int, limit: int) <span style="color:#f92672">-&gt;</span> List[UserPreference]:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set[skip:limit])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>result_set <span style="color:#f92672">=</span> [{<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;yellow&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Arial&#39;</span>}, {<span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;black&#39;</span>, <span style="color:#e6db74">&#39;font&#39;</span>: <span style="color:#e6db74">&#39;Courier&#39;</span>}]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Case B</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/preferences&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;...&#39;</span>, response_model<span style="color:#f92672">=</span>GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">list_preferences</span>(skip: int <span style="color:#f92672">=</span> Query(<span style="color:#f92672">...</span>), limit: int <span style="color:#f92672">=</span> Query(<span style="color:#f92672">...</span>)) <span style="color:#f92672">-&gt;</span> List[UserPreference]:
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set[skip:limit])
+</span></span></code></pre></div><p>In the above example, the <code>skip</code> and <code>limit</code> parameters are required. Notice the default values for both parameters have been dropped. Both cases shown above will set the <code>skip</code> and <code>limit</code> parameters as required parameters of the <code>list_preference</code> function.</p>
+<p>A URL may define both path and query parameters. In fact, multiple parameters may be defined. Example, <code>http://localhost/user/{user}/order-type/{order}?skip=5&amp;limit=10</code> can be interpreted as a link for requesting for a given user’s order of a specified type with value defined by <code>{order}</code>. The Path parameters <code>{user}</code> and <code>{order}</code> can be used to identify a given user and the type of order. The Query parameters <code>skip</code>, and <code>limit</code> can be used as indices for selecting a range of results.</p>
+<h2 id="fastapi-body-parameters">FastAPI Body parameters</h2>
+<p>Thus far we have been sending data as scalar values to our server or localhost. What if we needed to send a more complex data structure? FastAPI provides the <code>Body</code> parameter for sending data via HTTP requests. The <code>Body</code> class like the <code>Path</code> and <code>Query</code> can be used in function definitions to pass data as Python dictionary by default (where a schema is not specified) or parsed into a specified Pydantic model or schema. This class takes similar keyword arguments like the <code>Query</code> and <code>Path</code> parameter. Also, <code>Body</code> parameters can also be defined as optional or required just like we did with <code>Query</code> parameters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi <span style="color:#f92672">import</span> Body
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">user_signup</span>(request: Request, data: dict <span style="color:#f92672">=</span> Body(<span style="color:#f92672">...</span>, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)) <span style="color:#f92672">-&gt;</span> Any:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># create a new user</span>
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> get_session()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> s<span style="color:#f92672">.</span>begin():
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> (<span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#f92672">in</span> data <span style="color:#f92672">and</span> (<span style="color:#e6db74">&#39;email&#39;</span> <span style="color:#f92672">in</span> data <span style="color:#f92672">or</span> <span style="color:#e6db74">&#39;username&#39;</span> <span style="color:#f92672">in</span> data)):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">raise</span> HTTPException(status_code<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>, detail<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Invalid parameters&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> token <span style="color:#f92672">:=</span> create_user(data, session<span style="color:#f92672">=</span>s):
+</span></span><span style="display:flex;"><span>            timestamp <span style="color:#f92672">=</span> current_timestamp()
+</span></span><span style="display:flex;"><span>            ip <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>client<span style="color:#f92672">.</span>host
+</span></span><span style="display:flex;"><span>            system <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>headers<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;User-Agent&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            EventBus<span style="color:#f92672">.</span>broadcast(key<span style="color:#f92672">=</span>sign_up_signal<span style="color:#f92672">.</span>identity,
+</span></span><span style="display:flex;"><span>                               data<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;ip&#39;</span>: ip, <span style="color:#e6db74">&#39;timestamp&#39;</span>: timestamp, <span style="color:#e6db74">&#39;system&#39;</span>: system, <span style="color:#e6db74">&#39;email&#39;</span>: data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;email&#39;</span>)})
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> token
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div><p>In the example, above, the first parameter to the user_signup function is a request variable of type <code>Request</code>. The <code>Request</code> class can be imported from the FastAPI package or <code>starlette.requests</code> package. Both <code>Request</code> are equivalent as the <code>Request</code> class from FastAPI is of type <code>starlette.requests.Request</code> class. In our example, the request object is used to access data of the user agent (example, the operating system used, the browser agent used and the IP address of the client). When a request object is passed to a function, all request components such as <code>URL</code>, <code>Header</code>, <code>Cookies</code> etc. can be accessed via the object. In the mWallet application, a broadcast mechanism was designed to enable application send events to various functions or classes that exectute some code with the parameters passed to the <code>EventBus.broadcast</code> method. This approach was adopted to decouple router functions from other application level functions that may run a background task or associated operation. In the code snippet above, the <code>EventBus</code> will trigger the <code>sign_up_signal</code> function handler to send an email to the specified recipient email address as provided in <code>data</code> and also log the IP, timestamp, and system information at the time of registration.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi.requests <span style="color:#f92672">import</span> Request
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi.responses <span style="color:#f92672">import</span> Response
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">app</span>(scope, receive, send):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> scope[<span style="color:#e6db74">&#39;type&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;http&#39;</span>
+</span></span><span style="display:flex;"><span>    request <span style="color:#f92672">=</span> Request(scope, receive)
+</span></span><span style="display:flex;"><span>    body <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Some random text to display!&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># To view URL </span>
+</span></span><span style="display:flex;"><span>    url <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>url
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># To view base url</span>
+</span></span><span style="display:flex;"><span>    base_url <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>base_url
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># To view headers</span>
+</span></span><span style="display:flex;"><span>    headers <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>headers
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># To view queries sent in the request</span>
+</span></span><span style="display:flex;"><span>    queries <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>query_params
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># To view path parameters in the request</span>
+</span></span><span style="display:flex;"><span>    path_parameters <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>path_params
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># To view cookies</span>
+</span></span><span style="display:flex;"><span>    cookies <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>cookies
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    response <span style="color:#f92672">=</span> Response(body, media_type<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;text/plain&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">await</span> response(scope, receive, send)
+</span></span></code></pre></div><p>Note that the FastAPI <code>Request</code> class provides a <code>body</code> property which returns a mapping or dictionary. Using the <code>Body</code> parameter and type hinting, the value returned from <code>Request.body</code> parameter can be set to an instance of a specified pydantic model or data type.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pydantic <span style="color:#f92672">import</span> BaseModel
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserLoginData</span>(BaseModel):
+</span></span><span style="display:flex;"><span>    password: str
+</span></span><span style="display:flex;"><span>    username: str
+</span></span><span style="display:flex;"><span>    nonce: int <span style="color:#f92672">|</span> str <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">user_signup</span>(request: Request, data: UserLoginData <span style="color:#f92672">=</span> Body(<span style="color:#f92672">...</span>, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)) <span style="color:#f92672">-&gt;</span> Any:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># create a new user</span>
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> get_session()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> s<span style="color:#f92672">.</span>begin():
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> (<span style="color:#e6db74">&#39;password&#39;</span> <span style="color:#f92672">in</span> data <span style="color:#f92672">and</span> (<span style="color:#e6db74">&#39;email&#39;</span> <span style="color:#f92672">in</span> data <span style="color:#f92672">or</span> <span style="color:#e6db74">&#39;username&#39;</span> <span style="color:#f92672">in</span> data)):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">raise</span> HTTPException(status_code<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>, detail<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Invalid parameters&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> token <span style="color:#f92672">:=</span> create_user(data, session<span style="color:#f92672">=</span>s):
+</span></span><span style="display:flex;"><span>            timestamp <span style="color:#f92672">=</span> current_timestamp()
+</span></span><span style="display:flex;"><span>            ip <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>client<span style="color:#f92672">.</span>host
+</span></span><span style="display:flex;"><span>            system <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>headers<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;User-Agent&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            EventBus<span style="color:#f92672">.</span>broadcast(key<span style="color:#f92672">=</span>sign_up_signal<span style="color:#f92672">.</span>identity,
+</span></span><span style="display:flex;"><span>                               data<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;ip&#39;</span>: ip, <span style="color:#e6db74">&#39;timestamp&#39;</span>: timestamp, <span style="color:#e6db74">&#39;system&#39;</span>: system, <span style="color:#e6db74">&#39;email&#39;</span>: data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;email&#39;</span>)})
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> token
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div><p>When a <code>Body</code> parameter type is specified in function declaration, FastAPI automatically adds this to the web API documentation. If a schema is defined, then the documentation will provide information on data structure and any other information added in the schema by the developer.</p>
+<p><img src="fastapi-schema.png" alt="FastAPI Schema description"> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>Just as we can have Path and Query parameters, we can also have <code>Path</code>, <code>Query</code>, and <code>Body</code> parameters. We can equally have multiple <code>Body</code> parameters in a function declaration. Note that where multiple <code>Body</code> parameters are used, a dictionary is passed to the function with the keys as name of the <code>Body</code> parameters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">approve_payment</span>(token: str <span style="color:#f92672">=</span> Security(get_user_access), schedule: str <span style="color:#f92672">=</span> Path(<span style="color:#f92672">...</span>), approval: Dict <span style="color:#f92672">=</span> Body(<span style="color:#f92672">...</span>), receipt: Dict <span style="color:#f92672">=</span> Body(<span style="color:#f92672">...</span>), confirmation: Dict <span style="color:#f92672">=</span> Body(<span style="color:#f92672">...</span>)) <span style="color:#f92672">-&gt;</span> Any:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> approval_services<span style="color:#f92672">.</span>approve_payment(usid<span style="color:#f92672">=</span>token, schedule<span style="color:#f92672">=</span>schedule, receipt<span style="color:#f92672">=</span>receipt,  approval<span style="color:#f92672">=</span>approval, confirmation<span style="color:#f92672">=</span>confirmation)
+</span></span></code></pre></div><p>The <code>approve_payment</code> function takes multiple parameters using the <code>Path</code> and <code>Body</code> classes. The schedule parameter will be a string passed from the URL path to the function. The <code>approval</code>, <code>receipt</code>, and <code>confirmation</code> variables will be parsed into a dictionary with matching keys and values as dictionaries from the request body as shown below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Result of combined parameter when using multiple Body parameters.</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;approval&#39;</span>: {},
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;receipt&#39;</span>: {},
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;confirmation&#39;</span>: {}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="-further-read--path-query-body-parameters">📚 Further Read – Path, Query, Body parameters</h4>
+<blockquote>
+<p>In the examples of this Chapter, the <code>typing.Annotated</code> class was not used with <code>Query</code>, <code>Path</code>, or <code>Body</code> parameters. The <code>Annotated</code> class was introduced after Python 3.6 and some FastAPI code in the public may still use earlier format without <code>Annotated</code>. These are still equivalent to the functions using <code>Annotated</code> class.
+<strong>FastAPI tutorials</strong>
+📖 <a href="https://fastapi.tiangolo.com/lo/tutorial/path-params/">FastAPI Path parameter tutorial</a>
+📖 <a href="https://fastapi.tiangolo.com/lo/tutorial/query-params/">FastAPI Query parameter tutorial</a>
+📖 <a href="https://fastapi.tiangolo.com/lo/tutorial/body/">FastAPI Body parameter tutorial</a></p>
+</blockquote>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>A sample FastAPI swagger documentation for a defined model&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          
+<div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/chapter3/" title="Identifying Routes"><i class="fas fa-chevron-left p-1"></i>Identifying Routes</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/chapter5/" title="The business domain entities and database layer">The business domain entities and database layer<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="/lib/jquery.min.js"></script> 
+<script src="/lib/popper.min.js"></script> 
+
+<script src="/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+<script type="text/javascript" src="/plugins/favorites.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

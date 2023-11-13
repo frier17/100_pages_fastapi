@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="alternate" type="application/rss+xml" href="/chapter6/index.xml" title="100 Pages to  FastAPI" />
+    <link rel="canonical" href="/chapter6/">
+
+    <title>
+        
+        Middleware in FastAPI | 100 Pages to  FastAPI
+        
+    </title>
+
+    
+    <link href="/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="/css/ace.min.css">
+
+    
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                
+                100 Pages to  FastAPI
+            </a>
+        </div>
+        
+    </div>
+    <div class="feed-icons">
+            <a href="/chapter6/index.xml"><img src="/img/feed-icon.svg" alt="RSS feed" /></a>
+        </div>
+    </nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+
+        
+
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/preface/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/preface/"><h6>Preface</h6></a>
+        
+    </li>
+    <li data-nav-id="/table_of_content/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/table_of_content/"><h6>Table of Content</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter1/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter1/"><h6>Introduction to FastAPI</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter2/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter2/"><h6>The mWallet Project</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter3/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter3/"><h6>Identifying Routes</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter4/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter4/"><h6>Application services</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter5/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter5/"><h6>The business domain entities and database layer</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter6/" class="nav-item my-1 active
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter6/"><h6>Middleware in FastAPI</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter7/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter7/"><h6>Authorization and Authentication</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter8/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter8/"><h6>Testing</h6></a>
+        
+    </li>
+    <li data-nav-id="/chapter9/" class="nav-item my-1
+        ">
+        
+        
+          <a class="nav-link p-0" href="/chapter9/"><h6>Resources</h6></a>
+        
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#standard-middleware">Standard middleware</a></li>
+    <li><a href="#custom-middleware">Custom middleware</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<div class="d-flex flex-column">
+    <h1 class="js-title">Middleware in FastAPI</h1>
+    <div class="d-flex align-items-center">
+        
+    </div>
+</div>
+
+<hr>
+
+
+<p>Middleware is a term used across different web frameworks and cloud base systems. Middleware can be seen as any software or service that allows other systems to communicate of manage data. Middleware can also be seen as a service that acts as an intermediary between two systems. The Starlette framework allows the use of ASGI Middleware which can be used to process requests or responses before passing control to other processes. FastAPI also supports the use of middleware both bespoke and standard middleware included in the Starlette framework.</p>
+<h2 id="standard-middleware">Standard middleware</h2>
+<p>Middleware affects the behaviour of the entire web application. Once applied, all path operations will be modified by the middleware. Using this approach, developers can modify all requests or all responses to meet a given need. As an example, the <code>CORSMiddleware</code> allows application to set the right header parameters to enable cross-origin requests by browsers. Every Starlette application has <code>ServerErrorMiddleware</code> and <code>ExceptionMiddleware</code>. Any other added middleware is processed in the order in which they were registered with the application. FastAPI extends the Starlette framework hence it supports these middlewares (<code>ServerErrorMiddleware</code> and <code>ExceptionMiddleware</code>). Like middleware registered in Starlette application, FastAPI middleware work with every HTTP request before passing it to a path operation and work with every response before returning an actual response. Middleware defined in Starlette can work with FastAPI application seamlessly.</p>
+<p>There are several middleware applications defined for Starlette. The summary table <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> below shows standard middleware for the <code>starlette</code> package.</p>
+<table>
+<thead>
+<tr>
+<th>Middleware</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CORSMiddleware</code></td>
+<td>Manage response of application to ensure appropriate CORS headers are added to allow cross-origin requests.</td>
+</tr>
+<tr>
+<td><code>SessionMiddleware</code></td>
+<td>Adds a signed cookie session that can be accessed as requests.session dictionary. Entries in the session are readable and cannot be modified.</td>
+</tr>
+<tr>
+<td><code>HTTPSRedirectMiddleware</code></td>
+<td>Ensures all incoming requests are directed to HTTPS or WSS. Requests using unsecured schemes (for example, HTTP) are redirected to HTTPS or WSS</td>
+</tr>
+<tr>
+<td><code>TrustedHostMiddleware</code></td>
+<td>Ensures correct Host property is set for all incoming requests. A set of host names can be specified using allowed hosts parameter when registering this middleware.</td>
+</tr>
+<tr>
+<td><code>GZipMiddleware</code></td>
+<td>Manages responses to requests needing the gzip compression or with gzip specified in Accept-Encoding header.</td>
+</tr>
+<tr>
+<td><code>BaseHTTPMiddleware</code></td>
+<td>The base class for defining custom ASGI middleware classes.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#fn1">Table 1</a></p>
+<h2 id="custom-middleware">Custom middleware</h2>
+<p>Users can also write their own middleware to meet their needs. Let us suppose in our P2P system, we do not wish to save client information like IP address or OS as plain text for security reasons. We will want to encrypt certain information and then allow only processes or users with certain access view this information. One approach to use is to define a <code>PrivacyMiddleware</code> which will scramble or encrypt our client information before this data can be saved to the database. With this class, we can manage what aspects of our client is visible or hidden.</p>
+<p>The <code>PrivacyMiddleware</code> is design to implement principles from the work <a href="https://gdpr-info.eu/issues/privacy-by-design/">Privacy by Design</a> by Ann Cavoukian. Details of privacy schemes or techniques are beyond the scope of this book. In this book, we will use middleware to address some user concern and encourage the reader to explore best practises around data security and user privacy. Our design approach is described below.</p>
+<p>A user request is searched for a valid token. If a token exists, then the user is assumed registered, and the authentication process can verify the registered user. If there is no token, then the request is from an unregistered user. For this case, the user details like IP address, OS, location, and other header data are copied to a temporal variable. If the request has a body variable named privacy, or header with privacy, then a dictionary of information that should be passed through the privacy function is retrieved. This dictionary will specify the attribute to be encrypted as keys and the values are the token (nonce) for generating a symmetric key needed to encrypt or decrypt this field. If a key has no corresponding value or its value is set to None, then a key is generated. Once the privacy dictionary has been processed, the system privacy registry is updated. This registry will be a lookup object from which all future requests will be processed for privacy per user for a given session. So future requests will be passed to privacy function that will call the privacy registry for fields to encrypt. If these fields exist in the body or header of the requests, they are copied, and then encrypted. The encrypted values are then used to replace the original request values and then the request is passed on to the path operation or next process.</p>
+<p>Privacy handling middleware to encrypt or parse user data. Data are encrypted and saved as key: (display** data, encrypted data)</p>
+<h4 id="-further-reading---practical-privacy-approach">📚 Further Reading - Practical privacy approach</h4>
+<p>Privacy management is a complex subject that goes beyond just technical components such as cookies management or online tracking. There are legal, technnology, ethical and other aspects when dealing with privacy. A detailed discussion on privacy is beyond the scope of this book, however, it is important for designers to plan for privacy from inception of a system that will interface with users and possibly use data provided by a human user. A gold standard for mananing the technical aspect of privacy is Differential Privacy.</p>
+<p>📖 <a href="https://www.oreilly.com/library/view/practical-data-privacy/9781098129453/">Practical privacy by Katherine Jarmul</a></p>
+<p>📖 <a href="https://desfontain.es/privacy/differential-privacy-awesomeness.html">Introduction to Differential Privacy</a></p>
+<p>📖 <a href="https://desfontain.es/privacy/differential-privacy-in-more-detail.html">More detailed explanation of Differential Privacy</a></p>
+<p>📖 <a href="https://iapp.org/resources/article/oipc-privacy-by-design-resources/">OIPC - Privacy by Design Resources</a></p>
+<p>📖 <a href="https://www.onetrust.com/blog/principles-of-privacy-by-design/">7 Principles of privacy by design</a></p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Standard middleware applications in starlette package&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          
+<div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/chapter5/" title="The business domain entities and database layer"><i class="fas fa-chevron-left p-1"></i>The business domain entities and database layer</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/chapter7/" title="Authorization and Authentication">Authorization and Authentication<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="/lib/jquery.min.js"></script> 
+<script src="/lib/popper.min.js"></script> 
+
+<script src="/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+<script type="text/javascript" src="/plugins/favorites.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

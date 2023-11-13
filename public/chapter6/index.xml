@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Middleware in FastAPI on 100 Pages to  FastAPI</title>
+    <link>/chapter6/</link>
+    <description>Recent content in Middleware in FastAPI on 100 Pages to  FastAPI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 05 Nov 2023 22:01:36 +0100</lastBuildDate>
+    <atom:link href="/chapter6/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

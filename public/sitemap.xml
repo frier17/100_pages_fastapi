@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
+  <url>
+    <loc>/preface/</loc>
+    <lastmod>2023-11-06T21:31:41+01:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2023-11-05T21:25:58+01:00</lastmod>
+  </url><url>
+    <loc>/table_of_content/</loc>
+    <lastmod>2023-11-06T21:33:08+01:00</lastmod>
+  </url><url>
+    <loc>/chapter1/</loc>
+    <lastmod>2023-11-05T21:38:27+01:00</lastmod>
+  </url><url>
+    <loc>/chapter2/</loc>
+    <lastmod>2023-11-05T21:44:39+01:00</lastmod>
+  </url><url>
+    <loc>/chapter3/</loc>
+    <lastmod>2023-11-05T21:48:06+01:00</lastmod>
+  </url><url>
+    <loc>/chapter4/</loc>
+    <lastmod>2023-11-05T21:53:54+01:00</lastmod>
+  </url><url>
+    <loc>/chapter5/</loc>
+    <lastmod>2023-11-05T21:57:05+01:00</lastmod>
+  </url><url>
+    <loc>/chapter6/</loc>
+    <lastmod>2023-11-05T22:01:36+01:00</lastmod>
+  </url><url>
+    <loc>/chapter7/</loc>
+    <lastmod>2023-11-05T22:04:30+01:00</lastmod>
+  </url><url>
+    <loc>/chapter8/</loc>
+    <lastmod>2023-11-05T22:08:25+01:00</lastmod>
+  </url><url>
+    <loc>/chapter9/</loc>
+    <lastmod>2023-11-05T22:24:36+01:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+  </url><url>
+    <loc>/tags/</loc>
+  </url>
 </urlset>

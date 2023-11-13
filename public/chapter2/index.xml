@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The mWallet Project on 100 Pages to  FastAPI</title>
+    <link>/chapter2/</link>
+    <description>Recent content in The mWallet Project on 100 Pages to  FastAPI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 05 Nov 2023 21:44:39 +0100</lastBuildDate>
+    <atom:link href="/chapter2/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>
