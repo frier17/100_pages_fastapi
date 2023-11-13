@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>The business domain entities and database layer on 100 Pages to  FastAPI</title>
-    <link>https://frier17.github.io/hugo_tutorial/chapter5/</link>
+    <link>https://frier17.github.io/100_pages_fastpi/chapter5/</link>
     <description>Recent content in The business domain entities and database layer on 100 Pages to  FastAPI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 05 Nov 2023 21:57:05 +0100</lastBuildDate>
-    <atom:link href="https://frier17.github.io/hugo_tutorial/chapter5/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://frier17.github.io/100_pages_fastpi/chapter5/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
