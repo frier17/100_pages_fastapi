@@ -1,0 +1,4 @@
+baseURL = ''
+languageCode = 'en-us'
+title = '100 Pages to  FastAPI'
+theme = "ace-documentation"
