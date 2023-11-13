@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Testing on 100 Pages to  FastAPI</title>
-    <link>/chapter8/</link>
+    <link>https://frier17.github.io/hugo_tutorial/chapter8/</link>
     <description>Recent content in Testing on 100 Pages to  FastAPI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 05 Nov 2023 22:08:25 +0100</lastBuildDate>
-    <atom:link href="/chapter8/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://frier17.github.io/hugo_tutorial/chapter8/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
