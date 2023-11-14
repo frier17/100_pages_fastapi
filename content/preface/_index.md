@@ -6,7 +6,8 @@ draft = true
 +++
 
 
-This book was produced based on lessons learned while designing products for Bitmast Digital Services Ltd, tutorials for
+This book was produced based on lessons learned while designing products for Bi
+tmast Digital Services Ltd, tutorials for
 Codeskol and Boot camp training, and apps for A17S clients. This book is intended for developers who have some
 experience of Python programming and a background in web application development using frameworks such as Django or
 Flask. An effort will be made to teach FastAPI framework fundamentals and demonstrate alternate techniques to completing
@@ -92,15 +93,15 @@ in the common blue colour with underlined text. See example link below with the 
 
 visit [codeskol](http://www.codeskol.com/blog) directs you to web page at URL http://www.codeskol.com/blog
 
-Quotes in each chapter will normally be provided at the end section of each chapter. Quotes are in italics. Example:
-*FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python
-type hints.*
+Quotes in each chapter will normally be provided at the end section of each chapter. Example:
+> FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python
+type hints.
 
 #### Further Reading
 
 The further reading section will provide links to articles, videos, or other resources which a reader may explore to
-further have a better understanding of a topic. Further Reading may be inserted at different positions of a page but
-more often at the end of the topic to reduce the number of times a reader may leave a page to view more information.
+better understand a topic. Further Reading may be inserted at different positions of a page but
+more often at the end of the topic. This was done to reduce the number of times a reader may leave a page to view more information.
 Sections on further reading are provided as block quotes.
 
 #### Added tips and tricks
