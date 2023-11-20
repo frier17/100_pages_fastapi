@@ -1,4 +1,9 @@
 {{ $style := .Get "style" }}
+{{ $caption := .Get "caption" }}
+{{ $title := .Get "title" }}
 <div class="table {{ $style }}" role="alert">
     {{ print .Inner | markdownify }}
+
+    <h4>{{$title}}</h4>
+    <p>{{$caption | markdownify}}</p>
 </div>

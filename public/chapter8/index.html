@@ -30,17 +30,19 @@
 <body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
     <div class="container">
         <div>
+            
+            <img src="/img/nav_logo.png"/>
+            
+        </div>
+        <div>
             <a class="navbar-brand" href="/100_pages_fastapi">
-                
                 100 Pages to  FastAPI
             </a>
         </div>
         
     </div>
-    <div class="feed-icons">
-            <a href="https://frier17.github.io/100_pages_fastapi/chapter8/index.xml"><img src="/img/feed-icon.svg" alt="RSS feed" /></a>
-        </div>
-    </nav>
+
+</nav>
 <div class="container-fluid">
             <div class="row">
 
@@ -161,147 +163,396 @@
 <hr>
 
 
-<p>In my opinion, the act of testing is one of those good things which a lot of people agree should be done yet it is often not done. I believe this is especially true amongst rookie developers. Testing should not only be encouraged but also needs to be well taught. Too often, the wrong parameters are used for testing and tests may be focused on the wrong things. As an example, certain aspects of FastAPI are thoroughly tested and doesn’t need to be tested again in a web application built on FastAPI. Knowing what area of an application that should be tested is a skill that should be sought after. Also, knowing what tests to write is equally important. The idea of testing is not to have a successful result or passing test. The idea of testing is to have a declaration of what the system does. Tests in this sense should be seen as markers or targets which the developer is working towards. The target should be clearly defined and reasonably static as tests are reference points. As the application requirement changes within reasonable limits, the tests can be modified where applicable. Again, the aim is not to get a passing test but to ensure the right system is being tested and built.</p>
-<p>Let’s consider testing the mWallet application. To demonstrate various test approaches, we will use unit test approach for some aspect of our system. We will adopt the end-to-end approach for testing for selected section of the system that deals with CRUD operations. One of the good testing frameworks to use is the pytest. The pytest package is supported by FastAPI and was used in the examples for this project. Python doctests were also written for functions that provide specific services for our path operations. Using doctests for our functions is a good way of documenting and testing our code. Earlier code samples have minimised or excluded comments and doctest for simplicity before introducing testing. Readers are encouraged to document code and adopt doctest for showing samples of how to use their code. This is a good practise and should be done as much as possible across projects. Lastly, we employed the hypothesis and faker package in generating random values for testing our application and seeding our database. The hypothesis package will be used to see possible values that can cause system failures, while the faker package will be used to generate sample data by which the database records will be dynamically generated. We showed a simple use case of the faker and hypothesis packages for testing later in this Chapter.</p>
+<p>In my opinion, the act of testing is one of those good things which a lot of people agree should be done yet it is often
+not done. I believe this is especially true amongst rookie developers. Testing should not only be encouraged but also
+needs to be well taught. Too often, the wrong parameters are used for testing and tests may be focused on the wrong
+things. As an example, certain aspects of FastAPI are thoroughly tested and doesn’t need to be tested again in a web
+application built on FastAPI. Knowing what area of an application that should be tested is a skill that should be sought
+after. Also, knowing what tests to write is equally important. The idea of testing is not to have a successful result or
+passing test. The idea of testing is to have a declaration of what the system does. Tests in this sense should be seen
+as markers or targets which the developer is working towards. The target should be clearly defined and reasonably static
+as tests are reference points. As the application requirement changes within reasonable limits, the tests can be
+modified where applicable. Again, the aim is not to get a passing test but to ensure the right system is being tested
+and built.</p>
+<p>Let’s consider testing the mWallet application. To demonstrate various test approaches, we will use unit test approach
+for some aspect of our system. We will adopt the end-to-end approach for testing for selected section of the system that
+deals with CRUD operations. One of the good testing frameworks to use is the pytest. The pytest package is supported by
+FastAPI and was used in the examples for this project. Python doctests were also written for functions that provide
+specific services for our path operations. Using doctests for our functions is a good way of documenting and testing our
+code. Earlier code samples have minimised or excluded comments and doctest for simplicity before introducing testing.
+Readers are encouraged to document code and adopt doctest for showing samples of how to use their code. This is a good
+practise and should be done as much as possible across projects. Lastly, we employed the hypothesis and faker package in
+generating random values for testing our application and seeding our database. The hypothesis package will be used to
+see possible values that can cause system failures, while the faker package will be used to generate sample data by
+which the database records will be dynamically generated. We showed a simple use case of the faker and hypothesis
+packages for testing later in this Chapter.</p>
 <h2 id="unit-testing-using-pytest">Unit testing using pytest</h2>
-<p>We had earlier defined the application purpose statement and from this we defined a skeletal test suite. Let us revisit our previous attempt in defining our tests.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> unittest <span style="color:#f92672">import</span> TestCase
+<p>We had earlier defined the application purpose statement and from this we defined a skeletal test suite. Let us revisit
+our previous attempt in defining our tests.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_67d9f5006c">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_67d9f5006c">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestTransaction</span>(TestCase):
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> unittest <span style="color:#fff;font-weight:bold">import</span> TestCase
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDown</span>(self)<span style="color:#f92672">-</span> <span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_place_order</span>(self) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">class</span> TestTransaction(TestCase):
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_satisfy_order</span>(self):
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> setUp(self) -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>        ...
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_transaction_history</span>(self):
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> tearDown(self)- &gt; <span style="color:#fff;font-weight:bold">None</span>:
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_current_orders</span>(self):
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
-</span></span></code></pre></div><p>From the above we define our system limits or targets:</p>
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_place_order(self) -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_satisfy_order(self):
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_transaction_history(self):
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_current_orders(self):
+</span></span><span style="display:flex;"><span>    ...
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>From the above we define our system limits or targets:</p>
 <ul>
 <li>Users can place order</li>
 <li>Users can have other users or agents satisfy an order</li>
 <li>User can view transaction history</li>
 <li>User can view open or current orders</li>
 </ul>
-<p>Each of these features may comprise of one or more sub processes which in turn may need to be tested. Theoretically, testing each of these features would be testing our system from end to end. We would, however, adopt an approach in which selected aspect of our system will be tested as a working unit to ascertain if these units are fit to use while other aspect of the system will be tested from end to end to see overall system performance.</p>
-<p>For example, the <code>test_place_order</code> will require a valid user instance, data to initialize an order, and valid agents (registered users) to be available before a successful pass result can be obtained. We can mock these objects allowing us focus on testing our core processes. Alternatively, we can test selected core services which if they fail, we are certain our place order feature will be non-operational. Using this approach, we test the critical services of our system and not spend limited resources and time on every component, especially repeated components across various features. With this in view, let us expand our tests to cover key processes used in our listed features.</p>
-<p>To manage our different tests, we define a tests package and test files in this package. Each file is prefixed with the test_ word to enable pytest automatically pick these files and run the tests defined in them. This autorun feature can simplify managing and running tests for the developer. To use the pytest for testing, we must first have it installed on our working environment. The package can be installed using the pip command.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pip install -U pytest
-</span></span></code></pre></div><p>Note that although we use the unittest.TestCase class, the test can still be executed using pytest. We can also run our tests using the Python unittest package. With our tests package define, we define a <code>test_task_runner.py</code> script for testing running queries and other operations on separate threads. We can also define a <code>test_crud.py</code> script for testing our CRUD operation functions like <code>model_create</code>, <code>model_retrieve</code>, <code>model_destroy</code>, <code>model_update</code>, and <code>model_list</code>. Having the CRUD operation tests reduces testing of classes such as <code>ManageResource</code> which relies on these functions. We can also expand on our <code>place_order</code> test in our <code>test_order.py</code> script. However, for demonstration purposes, we will show tests for our threaded operations and a sample call to a catalogue endpoint.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> timeit
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> string <span style="color:#f92672">import</span> Template
+<p>Each of these features may comprise one or more sub processes which in turn may need to be tested. Theoretically,
+testing each of these features would be testing our system from end to end. We would, however, adopt an approach in
+which selected aspect of our system will be tested as a working unit to ascertain if these units are fit to use while
+other aspect of the system will be tested from end-to-end to see overall system performance.</p>
+<p>For example, the <code>test_place_order</code> will require a valid user instance, data to initialize an order, and valid agents (
+registered users) to be available before a successful pass result can be obtained. We can mock these objects allowing
+us to focus on testing our core processes. Alternatively, we can test selected core services, that if they fail, we are
+certain our place order feature will be non-operational. Using this approach, we test the critical services of our
+system and not spend limited resources and time on every component, especially repeated components across various
+features. With this in view, let us expand our tests to cover key processes used in our listed features.</p>
+<p>To manage our different tests, we define a tests package and test files in this package. Each file is prefixed with the
+<code>test_</code> word to enable pytest automatically pick these files and run the tests defined in them. This autorun feature can
+simplify managing and running tests for the developer. To use the pytest for testing, we must first have it installed on
+our working environment. The package can be installed using the pip command.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_50968f2e29">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_50968f2e29">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ pip install -U pytest
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Note that although we use the unittest.TestCase class, the test can still be executed using pytest. We can also run our
+tests using the Python unittest package. With our tests package define, we define a <code>test_task_runner.py</code> script for
+testing running queries and other operations on separate threads. We can also define a <code>test_crud.py</code> script for testing
+our CRUD operation functions like <code>model_create</code>, <code>model_retrieve</code>, <code>model_destroy</code>, <code>model_update</code>, and <code>model_list</code>.
+Having the CRUD operation tests reduces testing of classes such as <code>ManageResource</code> which relies on these functions. We
+can also expand on our <code>place_order</code> test in our <code>test_order.py</code> script. However, for demonstration purposes, we will
+show tests for our threaded operations and a sample call to a catalogue endpoint.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a722cd35c8">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a722cd35c8">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">import</span> timeit
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> string <span style="color:#fff;font-weight:bold">import</span> Template
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> faker <span style="color:#f92672">import</span> Faker
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> faker <span style="color:#fff;font-weight:bold">import</span> Faker
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> bhis_claims <span style="color:#f92672">import</span> settings
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> db <span style="color:#f92672">import</span> get_session
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> messages <span style="color:#f92672">import</span> messages
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> models.administration <span style="color:#f92672">import</span> Group, UserType
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> util <span style="color:#f92672">import</span> thread_runner, delegate_task, generate_rsid, current_timestamp
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> util.email <span style="color:#f92672">import</span> SesMailSender, SesDestination
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> bhis_claims <span style="color:#fff;font-weight:bold">import</span> settings
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> db <span style="color:#fff;font-weight:bold">import</span> get_session
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> messages <span style="color:#fff;font-weight:bold">import</span> messages
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> models.administration <span style="color:#fff;font-weight:bold">import</span> Group, UserType
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> util <span style="color:#fff;font-weight:bold">import</span> thread_runner, delegate_task, generate_rsid, current_timestamp
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> util.email <span style="color:#fff;font-weight:bold">import</span> SesMailSender, SesDestination
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>fake <span style="color:#f92672">=</span> Faker()
+</span></span><span style="display:flex;"><span>fake = Faker()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@thread_runner</span>(workers<span style="color:#f92672">=</span>settings<span style="color:#f92672">.</span>DEFAULT_THREAD_WORKERS)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_group</span>():
-</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> [dict(
-</span></span><span style="display:flex;"><span>        scope<span style="color:#f92672">=</span>random<span style="color:#f92672">.</span>choice([x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> UserType<span style="color:#f92672">.</span>get_scopes()]),
-</span></span><span style="display:flex;"><span>        description<span style="color:#f92672">=</span>fake<span style="color:#f92672">.</span>word(),
-</span></span><span style="display:flex;"><span>    ) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5000</span>)]
-</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> get_session()
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> s<span style="color:#f92672">.</span>begin():
-</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>bulk_insert_mappings(Group, data)
-</span></span><span style="display:flex;"><span>        s<span style="color:#f92672">.</span>commit()
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> result
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_thread_fetch</span>():
-</span></span><span style="display:flex;"><span>    start <span style="color:#f92672">=</span> timeit<span style="color:#f92672">.</span>default_timer()
-</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">=</span> add_group()
+</span></span><span style="display:flex;"><span>@thread_runner(workers=settings.DEFAULT_THREAD_WORKERS)
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> add_group():
+</span></span><span style="display:flex;"><span>    data = [<span style="color:#fff;font-weight:bold">dict</span>(
+</span></span><span style="display:flex;"><span>        scope=random.choice([x <span style="color:#fff;font-weight:bold">for</span> x in UserType.get_scopes()]),
+</span></span><span style="display:flex;"><span>        description=fake.word(),
+</span></span><span style="display:flex;"><span>    ) <span style="color:#fff;font-weight:bold">for</span> _ in <span style="color:#fff;font-weight:bold">range</span>(<span style="color:#ff0;font-weight:bold">5000</span>)]
+</span></span><span style="display:flex;"><span>    s = get_session()
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">with</span> s.begin():
+</span></span><span style="display:flex;"><span>        result = s.bulk_insert_mappings(Group, data)
+</span></span><span style="display:flex;"><span>        s.commit()
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">yield</span> result
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    end <span style="color:#f92672">=</span> timeit<span style="color:#f92672">.</span>default_timer()
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> a
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>end <span style="color:#f92672">-</span> start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_delegate_task</span>():
-</span></span><span style="display:flex;"><span>    email <span style="color:#f92672">=</span> settings<span style="color:#f92672">.</span>TEST_EMAIL
-</span></span><span style="display:flex;"><span>    timestamp <span style="color:#f92672">=</span> current_timestamp()
-</span></span><span style="display:flex;"><span>    usid <span style="color:#f92672">=</span> generate_rsid()
-</span></span><span style="display:flex;"><span>    role <span style="color:#f92672">=</span> UserType<span style="color:#f92672">.</span>BASE_USER<span style="color:#f92672">.</span>as_role()
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_thread_fetch():
+</span></span><span style="display:flex;"><span>    start = timeit.default_timer()
+</span></span><span style="display:flex;"><span>    a = add_group()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    destination <span style="color:#f92672">=</span> SesDestination(tos<span style="color:#f92672">=</span>[email])
+</span></span><span style="display:flex;"><span>    end = timeit.default_timer()
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">assert</span> a
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    start <span style="color:#f92672">=</span> timeit<span style="color:#f92672">.</span>default_timer()
-</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">=</span> delegate_task(SesMailSender()<span style="color:#f92672">.</span>send_email, use_max<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, subject<span style="color:#f92672">=</span>messages<span style="color:#f92672">.</span>otp_generated_subject,
-</span></span><span style="display:flex;"><span>                      arn<span style="color:#f92672">=</span>settings<span style="color:#f92672">.</span>AWS_SES_MAILER_ARN,
-</span></span><span style="display:flex;"><span>                      source<span style="color:#f92672">=</span>settings<span style="color:#f92672">.</span>APP_FROM_EMAIL,
-</span></span><span style="display:flex;"><span>                      destination<span style="color:#f92672">=</span>destination,
-</span></span><span style="display:flex;"><span>                      text<span style="color:#f92672">=</span>Template(messages<span style="color:#f92672">.</span>register_officer_text)<span style="color:#f92672">.</span>safe_substitute(rsid<span style="color:#f92672">=</span>usid, email<span style="color:#f92672">=</span>email, timestamp<span style="color:#f92672">=</span>timestamp, role<span style="color:#f92672">=</span>role),
-</span></span><span style="display:flex;"><span>                      html<span style="color:#f92672">=</span>Template(messages<span style="color:#f92672">.</span>register_officer_html)<span style="color:#f92672">.</span>safe_substitute(rsid<span style="color:#f92672">=</span>usid, email<span style="color:#f92672">=</span>email, timestamp<span style="color:#f92672">=</span>timestamp, role<span style="color:#f92672">=</span>role))
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">f</span><span style="color:#0ff;font-weight:bold">&#39;</span><span style="color:#0ff;font-weight:bold">{</span>end - start<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    end <span style="color:#f92672">=</span> timeit<span style="color:#f92672">.</span>default_timer()
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> a
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>end <span style="color:#f92672">-</span> start<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	
-</span></span></code></pre></div><p>The <code>test_task_runner.py</code> script has shown above has a <code>test_thread_fetch</code>, <code>test_delegate_task</code>, and a <code>add_group</code> function which is decorated by the <code>thread_runner</code> decorator. The <code>add_group</code> function simply generate data for initializing <code>Group</code> model. The function returns a generator object which is further process by the <code>thread_runner</code> decorator before returning a result to a caller. The <code>test_thread_fetch</code> measures the time for executing a call to <code>add_group</code> function. The aim of the test is not to compare the time of execution but to validate that the <code>thread_runner</code> decorator operates as designed and measure the duration taken to execute a decorated function. The time measured for a non-decorated function can be compared for analysis, but this is outside the scope of this Chapter, hence is not shown in the example. The reader can explore speed comparison. Time differences above ten percent (10%) can be taken as positive improvement to the function running on multiple threads against function not running on multiple threads. It is important to note the <code>thread_runner</code> decorator is designed for IO bound processes example, processes that read a file or from a network. In our test example, we used the <code>thread_runner</code> for a function that writes to a local database. A similar result should be obtained for a remote database with slight variations obtained from network latency. The <code>test_delegate_task</code> is like the <code>test_thread_fetch</code> in that multiple threads are used to execute a function. In this test scenario, the AWS email service (SES) is initialized and used to send email to a predefined <code>TEST_EMAIL</code> address. This process is also an IO bound process and the duration for executing the code is measured and printed on screen. Test results checked to positive outcome as the <code>SesMailSender.send_email</code> returns a message ID on success or raises an error on failure.</p>
-<p>To run the test suites, we can simply call <code>pytest</code> from a terminal. Ensure the current working directory is set to the project root folder.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ pytest
-</span></span><span style="display:flex;"><span><span style="color:#f92672">===========================</span> test session starts <span style="color:#f92672">============================</span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_delegate_task():
+</span></span><span style="display:flex;"><span>    email = settings.TEST_EMAIL
+</span></span><span style="display:flex;"><span>    timestamp = current_timestamp()
+</span></span><span style="display:flex;"><span>    usid = generate_rsid()
+</span></span><span style="display:flex;"><span>    role = UserType.BASE_USER.as_role()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    destination = SesDestination(tos=[email])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    start = timeit.default_timer()
+</span></span><span style="display:flex;"><span>    a = delegate_task(SesMailSender().send_email, use_max=<span style="color:#fff;font-weight:bold">True</span>, subject=messages.otp_generated_subject,
+</span></span><span style="display:flex;"><span>                      arn=settings.AWS_SES_MAILER_ARN,
+</span></span><span style="display:flex;"><span>                      source=settings.APP_FROM_EMAIL,
+</span></span><span style="display:flex;"><span>                      destination=destination,
+</span></span><span style="display:flex;"><span>                      text=Template(messages.register_officer_text).safe_substitute(rsid=usid, email=email,
+</span></span><span style="display:flex;"><span>                                                                                    timestamp=timestamp, role=role),
+</span></span><span style="display:flex;"><span>                      html=Template(messages.register_officer_html).safe_substitute(rsid=usid, email=email,
+</span></span><span style="display:flex;"><span>                                                                                    timestamp=timestamp, role=role))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    end = timeit.default_timer()
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">assert</span> a
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">f</span><span style="color:#0ff;font-weight:bold">&#39;</span><span style="color:#0ff;font-weight:bold">{</span>end - start<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#39;</span>)
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The <code>test_task_runner.py</code> script has shown above has a <code>test_thread_fetch</code>, <code>test_delegate_task</code>, and a <code>add_group</code>
+function which is decorated by the <code>thread_runner</code> decorator. The <code>add_group</code> function simply generate data for
+initializing <code>Group</code> model. The function returns a generator object which is further process by the <code>thread_runner</code>
+decorator before returning a result to a caller. The <code>test_thread_fetch</code> measures the time for executing a call
+to <code>add_group</code> function. The aim of the test is not to compare the time of execution but to validate that
+the <code>thread_runner</code> decorator operates as designed and measure the duration taken to execute a decorated function. The
+time measured for a non-decorated function can be compared for analysis, but this is outside the scope of this Chapter,
+hence is not shown in the example. The reader can explore speed comparison. Time differences above ten percent (10%) can
+be taken as positive improvement to the function running on multiple threads against function not running on multiple
+threads. It is important to note the <code>thread_runner</code> decorator is designed for IO bound processes example, processes
+that read a file or from a network. In our test example, we used the <code>thread_runner</code> for a function that writes to a
+local database. A similar result should be obtained for a remote database with slight variations obtained from network
+latency. The <code>test_delegate_task</code> is like the <code>test_thread_fetch</code> in that multiple threads are used to execute a
+function. In this test scenario, the AWS email service (SES) is initialized and used to send email to a
+predefined <code>TEST_EMAIL</code> address. This process is also an IO bound process and the duration for executing the code is
+measured and printed on screen. Test results checked to positive outcome as the <code>SesMailSender.send_email</code> returns a
+message ID on success or raises an error on failure.</p>
+<p>To run the test suites, we can simply call <code>pytest</code> from a terminal. Ensure the current working directory is set to the
+project root folder.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_3bf131f24b">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_3bf131f24b">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ pytest
+</span></span><span style="display:flex;"><span>=========================== <span style="color:#fff;font-weight:bold">test</span> session starts ============================
 </span></span><span style="display:flex;"><span>..
-</span></span></code></pre></div><p>Successful tests are represented by a dot (<code>.</code>) while failed test are represented by the <code>F</code> alphabet. Again, the importance of the test is not to have all successfully results. The reader is encouraged to plan their tests and ensure their tests covers important behaviours of their system.</p>
-<p>Our test example focuses on testing aspects of our system and not testing the data flow from the user end. Let us define simple test for showing system behaviour from the user’s perspective. We will perform these tests using the <code>FastAPI.testclient</code> package. The <code>TestClient</code> class is used to initialize a client that is used in making HTTP requests to our endpoints. We will use this client to post or get data for our chosen endpoint in the respective tests covered. From the client calls, we can obtain a corresponding HTTP response. This response will have attributes such as <code>status_code</code>, <code>content</code>, and methods defined in the FastAPI <code>Response</code> class. The <code>TestClient</code> depends on the <code>httpx</code> package. To use the <code>TestClient</code> in our project, we will first install the <code>httpx</code> package.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Successful tests are represented by a dot (<code>.</code>) while failed test are represented by the <code>F</code> alphabet. Again, the
+importance of the test is not to have all successfully results. The reader is encouraged to plan their tests and ensure
+their tests covers important behaviours of their system.</p>
+<p>Our test example focuses on testing aspects of our system and not testing the data flow from the user end. Let us define
+simple test for showing system behaviour from the user’s perspective. We will perform these tests using
+the <code>FastAPI.testclient</code> package. The <code>TestClient</code> class is used to initialize a client that is used in making HTTP
+requests to our endpoints. We will use this client to post or get data for our chosen endpoint in the respective tests
+covered. From the client calls, we can obtain a corresponding HTTP response. This response will have attributes such
+as <code>status_code</code>, <code>content</code>, and methods defined in the FastAPI <code>Response</code> class. The <code>TestClient</code> depends on
+the <code>httpx</code> package. To use the <code>TestClient</code> in our project, we will first install the <code>httpx</code> package.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_34c9ccb7e0">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_34c9ccb7e0">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$ pip install httpx
-</span></span></code></pre></div><p>We install the httpx package using the pip install command. We can then define test functions that uses the TestClient class to evaluate our system.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi.testclient <span style="color:#f92672">import</span> TestClient
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> faker <span style="color:#f92672">import</span> Faker
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> hypothesis <span style="color:#f92672">import</span> given, strategies <span style="color:#66d9ef">as</span> st
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>We install the httpx package using the pip install command. We can then define test functions that uses the TestClient
+class to evaluate our system.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_c3439ea98b">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_c3439ea98b">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> catalogue.services.catalogue <span style="color:#f92672">import</span> basic_search
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> fastapi.testclient <span style="color:#fff;font-weight:bold">import</span> TestClient
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> faker <span style="color:#fff;font-weight:bold">import</span> Faker
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> hypothesis <span style="color:#fff;font-weight:bold">import</span> given, strategies <span style="color:#fff;font-weight:bold">as</span> st
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> .main <span style="color:#f92672">import</span> app
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> catalogue.services.catalogue <span style="color:#fff;font-weight:bold">import</span> basic_search
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>fake <span style="color:#f92672">=</span> Faker()
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> .main <span style="color:#fff;font-weight:bold">import</span> app
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>client <span style="color:#f92672">=</span> TestClient(app)
+</span></span><span style="display:flex;"><span>fake = Faker()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_search</span>():    
-</span></span><span style="display:flex;"><span>    name <span style="color:#f92672">=</span> fake<span style="color:#f92672">.</span>name()
-</span></span><span style="display:flex;"><span>    start <span style="color:#f92672">=</span> fake<span style="color:#f92672">.</span>date_time()    
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>post(<span style="color:#e6db74">&#39;/basic_search&#39;</span>, data<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;name&#39;</span>: name, <span style="color:#e6db74">&#39;period_start&#39;</span>: start})
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> result<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">404</span>
+</span></span><span style="display:flex;"><span>client = TestClient(app)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@given</span>(name<span style="color:#f92672">=</span>st<span style="color:#f92672">.</span>text(), start<span style="color:#f92672">=</span>st<span style="color:#f92672">.</span>datetime())
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_add_catalogue</span>(name, start):    
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>post(<span style="color:#e6db74">&#39;/catalogues&#39;</span>, data<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;name&#39;</span>: name, <span style="color:#e6db74">&#39;period_start&#39;</span>: start})
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_search():
+</span></span><span style="display:flex;"><span>    name = fake.name()
+</span></span><span style="display:flex;"><span>    start = fake.date_time()
+</span></span><span style="display:flex;"><span>    result = client.post(<span style="color:#0ff;font-weight:bold">&#39;/basic_search&#39;</span>, data={<span style="color:#0ff;font-weight:bold">&#39;name&#39;</span>: name, <span style="color:#0ff;font-weight:bold">&#39;period_start&#39;</span>: start})
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> result<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">201</span>
-</span></span></code></pre></div><p>We can also run the tests using <code>TestClient</code> by calling pytest to discover our defined tests and run them like we did for previously. In our <code>test_add_catalogue</code>, we introduced a simple use case for Python <code>hypothesis</code> package. The name and start parameter are initialized from random data generated from the <code>hypothesis</code> <code>strategies.text()</code> and <code>strategies.datetime()</code>. These method call will generate Python instance of the <code>str</code> and <code>datetime</code> classes. Several <code>name</code> and <code>start</code> values will be generated until an exception is raised due to mismatch parameters for our method call. If no failed value is gotten, then our test will simply run and assets the returned <code>status_code</code>. Failing values generated from the strategies can be used to improve error handling, data validation and similar techniques that improves the robustness of our code.</p>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">assert</span> result.status_code == <span style="color:#ff0;font-weight:bold">404</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@given(name=st.text(), start=st.datetime())
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_add_catalogue(name, start):
+</span></span><span style="display:flex;"><span>    result = client.post(<span style="color:#0ff;font-weight:bold">&#39;/catalogues&#39;</span>, data={<span style="color:#0ff;font-weight:bold">&#39;name&#39;</span>: name, <span style="color:#0ff;font-weight:bold">&#39;period_start&#39;</span>: start})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">assert</span> result.status_code == <span style="color:#ff0;font-weight:bold">201</span>
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>We can also run the tests using <code>TestClient</code> by calling pytest to discover our defined tests and run them like we did
+for previously. In our <code>test_add_catalogue</code>, we introduced a simple use case for Python <code>hypothesis</code> package. The name
+and start parameter are initialized from random data generated from the <code>hypothesis</code> <code>strategies.text()</code>
+and <code>strategies.datetime()</code>. These method call will generate Python instance of the <code>str</code> and <code>datetime</code> classes.
+Several <code>name</code> and <code>start</code> values will be generated until an exception is raised due to mismatch parameters for our
+method call. If no failed value is gotten, then our test will simply run and assets the returned <code>status_code</code>. Failing
+values generated from the strategies can be used to improve error handling, data validation and similar techniques that
+improves the robustness of our code.</p>
 <p>🔍</p>
 <blockquote>
-<p>Several methods exist for testing an application. Irrespective of the approach use, tests should be well planned and treated as part of the application itself and not a secondary activity. Sample tests given in this book is only a premier to testing and should not be taken as an exhaustive guide on testing. The reader is encouraged to explore more materials or tutorial on testing.</p>
+<p>Several methods exist for testing an application. Irrespective of the approach use, tests should be well planned and
+treated as part of the application itself and not a secondary activity. Sample tests given in this book is only a
+premier to testing and should not be taken as an exhaustive guide on testing. The reader is encouraged to explore more
+materials or tutorial on testing.</p>
+<ul>
+<li>📖 <a href="https://docs.pytest.org/en/7.3.x/getting-started.html">Pytest tutorial</a></li>
+<li>📖 <a href="https://docs.python.org/3/library/doctest.html">Doctest – Test interactive Python Example</a></li>
+<li>📖 <a href="https://hypothesis.readthedocs.io/en/latest/quickstart.html">Hypothesis – Quick start guide</a></li>
+</ul>
 </blockquote>
-<p>📖 <a href="https://docs.pytest.org/en/7.3.x/getting-started.html">Pytest tutorial</a>
-📖 <a href="https://docs.python.org/3/library/doctest.html">Doctest – Test interactive Python Example</a>
-📖 <a href="https://hypothesis.readthedocs.io/en/latest/quickstart.html">Hypothesis – Quick start guide</a></p>
 
 
     

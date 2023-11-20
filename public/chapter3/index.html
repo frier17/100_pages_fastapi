@@ -30,17 +30,19 @@
 <body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
     <div class="container">
         <div>
+            
+            <img src="/img/nav_logo.png"/>
+            
+        </div>
+        <div>
             <a class="navbar-brand" href="/100_pages_fastapi">
-                
                 100 Pages to  FastAPI
             </a>
         </div>
         
     </div>
-    <div class="feed-icons">
-            <a href="https://frier17.github.io/100_pages_fastapi/chapter3/index.xml"><img src="/img/feed-icon.svg" alt="RSS feed" /></a>
-        </div>
-    </nav>
+
+</nav>
 <div class="container-fluid">
             <div class="row">
 
@@ -149,7 +151,7 @@
         <li></li>
       </ul>
     </li>
-    <li><a href="#classical-way-of-defining-routes-in-fasapi">Classical way of defining routes in FasAPI</a></li>
+    <li><a href="#a-classic-way-of-defining-routes-in-fasapi">A classic way of defining routes in FasAPI</a></li>
     <li><a href="#using-yaml-file-for-defining-routes">Using YAML file for defining routes</a></li>
   </ul>
 </nav>
@@ -168,67 +170,160 @@
 <hr>
 
 
-<p>Before writing any line of code it is important to state or know exactly what the system will do. Defining what the system does in a concise statement not longer than two or three sentences is very important to have clarity of purpose. Programming is a complex psychological act and being precise is a bedrock in building the right system. Added to building the right system is building the system right. This can be achieved by explaining how the system works. Both knowing what the system does and how the system does its tasks are important. Taking our project, mWallet as an example. We can derive the tests cases from knowing &ldquo;what the system does&rdquo; and we can derive our application code base from knowing &ldquo;how the system works&rdquo;.</p>
+<p>Before writing any line of code it is important to state or know exactly what the system will do. Defining what the
+system does in a concise statement not longer than two or three sentences is very important to have clarity of purpose.
+Programming is a complex psychological act and being precise is a bedrock in building the right system. Added to
+building the right system is building the system right. This can be achieved by explaining how the system works. Both
+knowing what the system does and how the system does its tasks are important. Taking our project, mWallet as an example.
+We can derive the tests cases from knowing &ldquo;what the system does&rdquo; and we can derive our application code base from
+knowing &ldquo;how the system works&rdquo;.</p>
 <h2 id="what-the-system-does">What the system does</h2>
 <blockquote>
-<p>mWallet allows users to post their interest in buying or selling cryptocurrencies and allows registered agents (other users) to fill these orders without the requirement for a direct person-to-person exchange or conversation.</p>
+<p>mWallet allows users to post their interest in buying or selling cryptocurrencies and allows registered agents (other
+users) to fill these orders without the requirement for a direct person-to-person exchange or conversation.</p>
 </blockquote>
-<p>The statement above gives a direction on what vital services will be available in the mWallet project. The services identified from the purpose statement are:</p>
+<p>The statement above gives a direction on what vital services will be available in the mWallet project. The services
+identified from the purpose statement are:</p>
 <ol>
 <li>Users can post order to buy or sell cryptocurrency</li>
 <li>Users can satisfy published orders</li>
 </ol>
-<p>Let&rsquo;s name these key functions of our system the functional requirements. In effect, if our system cannot perform these tasks we can say we failed to meet our objectives. Having identified these requirements, we can define test cases that will check if our system can post an order, buy an asset through posted order, sell an asset through posted order, debit the buyer accordingly while equally crediting the seller of the asset.</p>
-<p>Tests can be written as a function prefixed with the word <code>test_</code> or as methods of a class which is often prefixed with the word <code>test</code>. It is good practice to have all tests in a package named tests. We will be using <code>pytest</code> for the project and it can run both tests written as classes that extend <code>unittest.TestCase</code> or functions prefixed with <code>test_</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> unittest <span style="color:#f92672">import</span> TestCase
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestTransaction</span>(TestCase):
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
-</span></span><span style="display:flex;"><span>              
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDown</span>(self) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_place_order</span>(self) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_satisfy_order</span>(self) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_transaction_history</span>(self) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_current_orders</span>(self) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">...</span>
-</span></span></code></pre></div><p>The test above can be written as a collection of functions as shown blow.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_place_order</span>(order: dict) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>	<span style="color:#f92672">...</span>
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_satisfy_order</span>(transaction_id, order, account, wallet, escrow, ) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_transaction_history</span>() <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_current_orders</span>() <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">None</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
-</span></span></code></pre></div><p>Our identified tests will also define the various URLs or Application Programming interfaces (API) endpoints of the system. If our system is interactive, it is expected to give information or some sort of data to the user. Let’s call any valid information given by the system a resource. A resource can be a digital file to download, a record from a database or any web page we wish to share. This resource can be named and accessed via its name. Let us attempt to use intuitive names to identify resources for our API endpoints.</p>
+<p>Let&rsquo;s name these key functions of our system the functional requirements. In effect, if our system cannot perform these
+tasks we can say we failed to meet our objectives. Having identified these requirements, we can define test cases that
+will check if our system can post an order, buy an asset through posted order, sell an asset through posted order, debit
+the buyer accordingly while equally crediting the seller of the asset.</p>
+<p>Tests can be written as a function prefixed with the word <code>test_</code> or as methods of a class which is often prefixed with
+the word <code>test</code>. It is good practice to have all tests in a package named tests. We will be using <code>pytest</code> for the
+project and it can run both tests written as classes that extend <code>unittest.TestCase</code> or functions prefixed with <code>test_</code>.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_3cd475a1a7">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_3cd475a1a7">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> unittest <span style="color:#fff;font-weight:bold">import</span> TestCase
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">class</span> TestTransaction(TestCase):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> setUp(self) -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> tearDown(self) -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> test_place_order(self) -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> test_satisfy_order(self) -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> test_transaction_history(self) -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> test_current_orders(self) -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>        ...
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The test above can be written as a collection of functions as shown blow.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ed5d6849b0">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ed5d6849b0">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_place_order(order: <span style="color:#fff;font-weight:bold">dict</span>) -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_satisfy_order(transaction_id, order, account, wallet, escrow, ) -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_transaction_history() -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> test_current_orders() -&gt; <span style="color:#fff;font-weight:bold">None</span>:
+</span></span><span style="display:flex;"><span>    ...
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Our identified tests will also define the various URLs or Application Programming interfaces (API) endpoints of the
+system. If our system is interactive, it is expected to give information or some sort of data to the user. Let’s call
+any valid information given by the system a resource. A resource can be a digital file to download, a record from a
+database or any web page we wish to share. This resource can be named and accessed via its name. Let us attempt to use
+intuitive names to identify resources for our API endpoints.</p>
 <p>We will name the following resources which can have associated functions for handling HTTP requests from our users.</p>
-<p>$$\textsf{\color{red}Order Resource}$$
-$$\textsf{\color{red}User Resource}$$
-$$\textsf{\color{red}Asset Resource}$$
-$$\textsf{\color{red}Cryptocurrency Wallet Resource}$$</p>
-<p><em>Details regarding designs of RESTful web applications are beyond this book. A good place to get more information on how to design a RESTful application is the <a href="https://swagger.io/resources/articles/best-practices-in-api-design/">swagger documentation</a>.</em></p>
-<p>We now have a collection of tests, a set of resources, but we need to check if these can help us reach our system requirements. To meet our requirements, certain other questions need to be asked. These questions should provide answers to how the system works. We will progress on this in the next section.</p>
+<ul>
+<li><code>Order Resource</code></li>
+<li><code>User Resource</code></li>
+<li><code>Asset Resource</code></li>
+<li><code>Cryptocurrency Wallet Resource</code></li>
+</ul>
+<p>🔍</p>
+<blockquote>
+<p>Details regarding designs of RESTful web applications are beyond this book. A good place to get more information on how
+to design a RESTful application is the <a href="https://swagger.io/resources/articles/best-practices-in-api-design/">swagger documentation</a>.</p>
+</blockquote>
+<p>We now have a collection of tests, a set of resources, but we need to check if these can help us reach our system
+requirements. To meet our requirements, certain other questions need to be asked. These questions should provide answers
+to how the system works. We will progress on this in the next section.</p>
 <h2 id="how-the-system-works">How the system works</h2>
-<p>mWallet is a P2P system designed to satisfy orders both online and offline. To achieve this, orders are posted to users who can then satisfy them as agents. Orders can be fully or partially satisfied, and payments remitted appropriately. Orders are published to the pool of agents via email and in-app messages. Offline transactions are like real time transactions but kept open for a longer period.</p>
-<p>Offline transactions require an authorization token or passcode from an agent before adding them to the order. Transaction keys enforce password-less transactions and limit access to wallets and order system for unauthorized or unregistered agents. Escrow accounts and managed wallets protect users from exposing sensitive banking or wallet information. This approach is used both by the real time and offline payment system. Details on the system encryption, random function for selecting agents from a pool, and generating escrow accounts for payments are beyond the scope of this book. With these guidelines on how the system should work, let us consider how the identified resources can address the system behaviour.</p>
+<p>mWallet is a P2P system designed to satisfy orders both online and offline. To achieve this, orders are posted to users
+who can then satisfy them as agents. Orders can be fully or partially satisfied, and payments remitted appropriately.
+Orders are published to the pool of agents via email and in-app messages. Offline transactions are like real time
+transactions but kept open for a longer period.</p>
+<p>Offline transactions require an authorization token or passcode from an agent before adding them to the order.
+Transaction keys enforce password-less transactions and limit access to wallets and order system for unauthorized or
+unregistered agents. Escrow accounts and managed wallets protect users from exposing sensitive banking or wallet
+information. This approach is used both by the real time and offline payment system. Details on the system encryption,
+random function for selecting agents from a pool, and generating escrow accounts for payments are beyond the scope of
+this book. With these guidelines on how the system should work, let us consider how the identified resources can address
+the system behaviour.</p>
 <ul>
 <li>The Order resource can manage both online and offline requests to buy or sell cryptocurrency.</li>
-<li>The User resource can manage registration of new system users and agents, the user associated transaction keys, the user associated bank accounts and user access control.</li>
+<li>The User resource can manage registration of new system users and agents, the user associated transaction keys, the
+user associated bank accounts and user access control.</li>
 <li>The Asset resource will manage a list of cryptocurrencies that can be bought or sold on the platform.</li>
 <li>The Wallet resource will manage escrow wallets for receiving digital assets.</li>
 </ul>
@@ -272,56 +367,140 @@ $$\textsf{\color{red}Cryptocurrency Wallet Resource}$$</p>
 </ul>
 </li>
 </ul>
-<p><em>The list excludes cryptographic key management, signals or event management, and utility functions to simplify the project.</em></p>
+<p><em>The list excludes cryptographic key management, signals or event management, and utility functions used in the
+project.</em></p>
 <h4 id="ℹ-tips-and-tricks---protecting-the-user-resource">ℹ️ Tips and Tricks - Protecting the user resource</h4>
 <blockquote>
-<p>An alternative design of resource may include a <code>Transaction</code> resource, <code>Bank Account</code> resource, a <code>User Key</code> resource, and a <code>User Preference</code> resource. These will enable users to view transactions associated with their orders and manage various items associated to their profile. In our design approach for this book, user is treated as a special resource which is only added upon sign up and cannot be viewed, edited, deleted, or updated like other resources. Special functions and security checks are used to manage the user resource. This approach can also be adopted in a real-life project to reduce possible cases of updated or deleting a user’s record via unapproved admin users.</p>
+<p>An alternative design of resource may include a <code>Transaction</code> resource, <code>Bank Account</code> resource, a <code>User Key</code>
+resource, and a <code>User Preference</code> resource. These will enable users to view transactions associated with their orders
+and manage various items associated to their profile. In our design approach for this book, user is treated as a special
+resource which is only added upon sign up and cannot be viewed, edited, deleted, or updated like other resources.
+Special functions and security checks are used to manage the user resource. This approach can also be adopted in a
+real-life project to reduce possible cases of updated or deleting a user’s record via unapproved admin users.</p>
 </blockquote>
-<p>The summary above can be modified as we iterate through the system and get feedback from our target users. However, for our example, we will keep things simple – possibly very simple to allow the reader to explore alternatives and expand on the project on their own. From the above list, we can generate a set of URLs. We will save this in a <code>route.yml</code> file which will be used to dynamically load API routes and permissions later in the project.</p>
-<h2 id="classical-way-of-defining-routes-in-fasapi">Classical way of defining routes in FasAPI</h2>
-<p>A Uniform Resource Locator (URL), a subset of Uniform Resource Identifier (URI), is an identifier for  accessing a resource that is on the Internet and specifies what protocol to use in accessing a resource. A resource could be a web page or some other file. For the web application in view, URLs will be used to send or receive information from the system. There are key parts that make up a URL. Some key components of a URL include:</p>
-<p><strong>The protocol or scheme</strong>: This will be HTTP/HTTPS for RESTful applications. The protocol determines how computers communicate. There are several standards like File Transfer Protocol (FTP) for file transfer, Hypertext Transfer Protocol (HTTP) for web communication etc.</p>
-<p><strong>Host name or domain name</strong>: A resource on the internet can be accessed via its unique IP address. However, it is easier to remember readable names than a set of numbers separated by dots <code>.</code>. Domain names provide a human readable name that is mapped to an IP address. Example of a domain name is <code>www.yahoo.com</code>.</p>
-<p><strong>Port number</strong>: In some cases, a URL may specify a port number by which requests to the server are listened for. Default port for HTTP servers is 80. This port number does not need to be specified in URLs. In many cases, other port numbers may be used, example <code>8080</code> or <code>8000</code>.</p>
+<p>The summary above can be modified as we iterate through the system and get feedback from our target users. However, for
+our example, we will keep things simple – possibly very simple to allow the reader to explore alternatives and expand on
+the project on their own. From the above list, we can generate a set of URLs. We will save this in a <code>route.yml</code> file
+which will be used to dynamically load API routes and permissions later in the project.</p>
+<h2 id="a-classic-way-of-defining-routes-in-fasapi">A classic way of defining routes in FasAPI</h2>
+<p>A Uniform Resource Locator (URL), a subset of Uniform Resource Identifier (URI), is an identifier for accessing a
+resource that is on the Internet and specifies what protocol to use in accessing a resource. A resource could be a web
+page or some other file. For the web application in view, URLs will be used to send or receive information from the
+system. There are key parts that make up a URL. Some key components of a URL include:</p>
+<p><strong>The protocol or scheme</strong>: This will be HTTP/HTTPS for RESTful applications. The protocol determines how computers
+communicate. There are several standards like File Transfer Protocol (FTP) for file transfer, Hypertext Transfer
+Protocol (HTTP) for web communication etc.</p>
+<p><strong>Host name or domain name</strong>: A resource on the internet can be accessed via its unique IP address. However, it is
+easier to remember readable names than a set of numbers separated by dots <code>.</code>. Domain names provide a human readable
+name that is mapped to an IP address. Example of a domain name is <code>www.yahoo.com</code>.</p>
+<p><strong>Port number</strong>: In some cases, a URL may specify a port number by which requests to the server are listened for.
+Default port for HTTP servers is 80. This port number does not need to be specified in URLs. In many cases, other port
+numbers may be used, example <code>8080</code> or <code>8000</code>.</p>
 <p><strong>Path</strong>: The path refers to location on a web server.</p>
-<p><strong>Query</strong>. In some cases, extra information may be passed to the web server by using textual fragments. The query component is used to pass data to the server as a key-value pair after a question mark (?). Multiple query parameters can be separated using ampersands (&amp;). Example URL:
+<p><strong>Query</strong>. In some cases, extra information may be passed to the web server by using textual fragments. The query
+component is used to pass data to the server as a key-value pair after a question mark (?). Multiple query parameters
+can be separated using ampersands (&amp;). Example URL:
 <code>https://example.com?name=xavier&amp;power=vision</code>.</p>
-<p>Designing URLs is important to help convey information to developers and other users of the system. For a REST based system, it is advisable to use nouns or noun phrases to describe resource URLs.</p>
-<p>Routing in FastAPI is simple and very effective. A routing table (a defined list of routes) is passed to the application when instantiating it. Each route has a corresponding endpoint. Endpoint argument can be any of the following:</p>
+<p>Designing URLs is important to help convey information to developers and other users of the system. For a REST based
+system, it is advisable to use nouns or noun phrases to describe resource URLs.</p>
+<p>Routing in FastAPI is simple and very effective. A routing table (a defined list of routes) is passed to the application
+when instantiating it. Each route has a corresponding endpoint. Endpoint argument can be any of the following:</p>
 <ul>
 <li>A regular function, async function, or class method which accepts a single request argument and returns as response.</li>
 <li>A class that extends the ASGI interface</li>
 </ul>
-<p>Conventionally, functions are used to handle responses to a given URL path by using selected methods (<code>get</code>, <code>put</code>, <code>post</code>, <code>delete</code>) of an instance of the FastAPI <code>APIRouter</code> class as decorators or by calling one of the routing methods (<code>add_api_route</code>, <code>add_route</code>). The <code>APIRouter</code> class is the base class for handling HTTP requests and this class extends the Starlette <code>routing.Router</code> class.</p>
-<p><img src="router-structure.png" alt="APIRouter class structure"> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Any, List
+<p>Conventionally, functions are used to handle responses to a given URL path by using selected
+methods (<code>get</code>, <code>put</code>, <code>post</code>, <code>delete</code>) of an instance of the FastAPI <code>APIRouter</code> class as decorators or by calling one
+of the routing methods (<code>add_api_route</code>, <code>add_route</code>). The <code>APIRouter</code> class is the base class for handling HTTP
+requests and this class extends the Starlette <code>routing.Router</code> class.</p>
+<figure><img src="router-structure.png"
+         alt="The Router classes used in the mWallet application"/><figcaption>
+            <h4>Figure 1</h4><p>The Router classes used in the mWallet application</p>
+        </figcaption>
+</figure>
+
+<p>The InferringSchemaRouter was designed to extend <code>fastapi_restful.inferring_router.InferringRouter</code> class. This enables the <code>InferringSchemaRouter</code> to automatically convert return types of routing functions to matching Pydantic schemas following the specified database ORM class.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_1096246b4d">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_1096246b4d">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> fastapi <span style="color:#f92672">import</span> Depends, APIRouter
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> starlette.status <span style="color:#f92672">import</span> HTTP_200_OK, HTTP_202_ACCEPTED, HTTP_201_CREATED
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> db.adapters <span style="color:#f92672">import</span> parse_to_schema
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> schemas.user <span style="color:#f92672">import</span> UserPreference, UserDevices
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> schemas.util <span style="color:#f92672">import</span> GenericResponse
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> user <span style="color:#f92672">import</span> services <span style="color:#66d9ef">as</span> user_services
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> typing <span style="color:#fff;font-weight:bold">import</span> Any, List
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>web_user_routes <span style="color:#f92672">=</span> APIRouter()
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> fastapi <span style="color:#fff;font-weight:bold">import</span> Depends, APIRouter
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> starlette.status <span style="color:#fff;font-weight:bold">import</span> HTTP_200_OK, HTTP_202_ACCEPTED, HTTP_201_CREATED
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> db.adapters <span style="color:#fff;font-weight:bold">import</span> parse_to_schema
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> schemas.user <span style="color:#fff;font-weight:bold">import</span> UserPreference, UserDevices
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> schemas.util <span style="color:#fff;font-weight:bold">import</span> GenericResponse
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> user <span style="color:#fff;font-weight:bold">import</span> services <span style="color:#fff;font-weight:bold">as</span> user_services
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.post</span>(<span style="color:#e6db74">&#39;/user/preference&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_200_OK, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;List all notices sent to this user or notices which the selected user subscribes to.&#39;</span>, response_model<span style="color:#f92672">=</span>GenericResponse)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_user_preference</span>(result_set: Any <span style="color:#f92672">=</span> Depends(user_services<span style="color:#f92672">.</span>create_user_preference)) <span style="color:#f92672">-&gt;</span> UserPreference:
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> parse_to_schema(UserPreference, result_set)
+</span></span><span style="display:flex;"><span>web_user_routes = APIRouter()
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@web_user_routes.delete</span>(<span style="color:#e6db74">&#39;/user/preference/</span><span style="color:#e6db74">{preference}</span><span style="color:#e6db74">&#39;</span>, status_code<span style="color:#f92672">=</span>HTTP_202_ACCEPTED, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Delete a selected user’s preference.&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">destroy_user_preference</span>(result_set: Any <span style="color:#f92672">=</span> Depends(user_services<span style="color:#f92672">.</span>destroy_user_preference)) <span style="color:#f92672">-&gt;</span> bool:
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> bool(result_set)
-</span></span><span style="display:flex;"><span>   
-</span></span></code></pre></div><p>The <code>create_user_preference</code> function takes a result_set parameter. This parameter is injected into the function via the FastAPI <code>Depends</code> class. The <code>Depends</code> class is the FastAPI approach in implementing Dependency Injection (a technique in dynamically injecting a code into another code making them loosely coupled). The <code>result_set</code> can be any type of Python data and we do not need to know what type upfront. We will simply pass the <code>result_set</code> to a <code>parse_to_schema</code> function which has been designed to convert a range of data types into a specified Pydantic model class. In this example, the <code>result_set</code> will be converted to the <code>UserPreference</code> data type and returned at the end of the <code>create_user_preference</code> execution cycle. A similar approach is used with the <code>destroy_user_preference</code> which returns a Boolean.</p>
-<p>The server responses to HTTP requests are mapped to corresponding <code>Response</code> objects (classes that extend the Starlette <code>responses.Response</code> class). Various response types are differentiated mainly by the specified media or mime which they handle. For example, the <code>JSONResponse</code> class manages the media type of &lsquo;application/json&rsquo;while the <code>PlainTextResponse</code> manages media type or mime of &lsquo;application/text&rsquo;.  Other media types are mapped to their corresponding <code>Response</code> type or subclass. See Figure <a href="#fnref1">1</a> and <a href="#fnref2">2</a> below for FastAPI response classes and their hierarchy. See Table 1<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> for the various response classes and corresponding mime.</p>
-<p><img src="response-package.png" alt="Response package"></p>
+</span></span><span style="display:flex;"><span>@web_user_routes.post(<span style="color:#0ff;font-weight:bold">&#39;/user/preference&#39;</span>, status_code=HTTP_200_OK,
+</span></span><span style="display:flex;"><span>                      description=<span style="color:#0ff;font-weight:bold">&#39;List all notices sent to this user or notices which the selected user subscribes to.&#39;</span>,
+</span></span><span style="display:flex;"><span>                      response_model=GenericResponse)
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> create_user_preference(result_set: Any = Depends(user_services.create_user_preference)) -&gt; UserPreference:
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">return</span> parse_to_schema(UserPreference, result_set)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@web_user_routes.delete(<span style="color:#0ff;font-weight:bold">&#39;/user/preference/</span><span style="color:#0ff;font-weight:bold">{preference}</span><span style="color:#0ff;font-weight:bold">&#39;</span>, status_code=HTTP_202_ACCEPTED,
+</span></span><span style="display:flex;"><span>                        description=<span style="color:#0ff;font-weight:bold">&#34;Delete a selected user’s preference.&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> destroy_user_preference(result_set: Any = Depends(user_services.destroy_user_preference)) -&gt; <span style="color:#fff;font-weight:bold">bool</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">bool</span>(result_set)
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The <code>create_user_preference</code> function takes a result_set parameter. This parameter is injected into the function via the
+FastAPI <code>Depends</code> class. The <code>Depends</code> class is the FastAPI approach in implementing Dependency Injection (a technique
+in dynamically injecting a code into another code making them loosely coupled). The <code>result_set</code> can be any type of
+Python data and we do not need to know what type upfront. We will simply pass the <code>result_set</code> to a <code>parse_to_schema</code>
+function which has been designed to convert a range of data types into a specified Pydantic model class. In this
+example, the <code>result_set</code> will be converted to the <code>UserPreference</code> data type and returned at the end of
+the <code>create_user_preference</code> execution cycle. A similar approach is used with the <code>destroy_user_preference</code> which
+returns a Boolean.</p>
+<p>The server responses to HTTP requests are mapped to corresponding <code>Response</code> objects (classes that extend the
+Starlette <code>responses.Response</code> class). Various response types are differentiated mainly by the specified media or mime
+which they handle. For example, the <code>JSONResponse</code> class manages the media type of <code>application/json</code> while
+the <code>PlainTextResponse</code> manages media type or mime of <code>application/text</code>. Other media types are mapped to their
+corresponding <code>Response</code> type or subclass. See Figure 2 below for FastAPI response classes and their hierarchy.
+See Table 1 for the various response classes and corresponding mime.</p>
+<figure><img src="response-package.png"
+         alt="Class Hierachy of FastAPI Response classes"/><figcaption>
+            <h4>Figure 2</h4><p>Class Hierachy of FastAPI Response classes</p>
+        </figcaption>
+</figure>
+
+<p>Response classes of the Starlette responses package. FastAPI uses Starlette’s response package internally to
+handle all requests.</p>
 <p>The following response classes can be used to manage server responses.</p>
-<table>
+
+
+
+<div class="table table-hover" role="alert">
+    <table>
 <thead>
 <tr>
 <th>Class</th>
@@ -352,49 +531,145 @@ $$\textsf{\color{red}Cryptocurrency Wallet Resource}$$</p>
 </tr>
 <tr>
 <td>RedirectResponse</td>
-<td>None</td>
+<td><code>None</code></td>
 <td>Specialised class for managing redirects</td>
 </tr>
 <tr>
 <td>StreamingResponse</td>
-<td>typing.Optional[str] or None</td>
+<td><code>typing.Optional[str]</code> or <code>None</code></td>
 <td>Specialised class for managing streaming responses example a live video stream</td>
 </tr>
 <tr>
 <td>FileResponse</td>
-<td>typing.Optional[str] or None</td>
+<td><code>typing.Optional[str]</code> or <code>None</code></td>
 <td>Specialised class for managing file responses example a binary file for download</td>
 </tr>
 </tbody>
 </table>
-<p><a href="#fn2">Table 1</a></p>
+
+
+    <h4>Table 1</h4>
+    <p>FastAPI Response classes with associated MIME</p>
+</div>
+
 <h2 id="using-yaml-file-for-defining-routes">Using YAML file for defining routes</h2>
-<p>When building a web application, thoughts should be given to the design of the URL. FastAPI being built on Starlette allows developers to use URI templating style to capture path components.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/user/</span><span style="color:#e6db74">{id}</span><span style="color:#e6db74">/payment-receipts&#39;</span>
-</span></span></code></pre></div><p>Fragments of the URI template can be converted to native Python data types via convertors. There are default convertors for <code>str</code>, <code>int</code>, <code>float</code>, <code>uuid.UUID</code> data types or a path variable.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>d1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/user/{id: str}/payment-receipts&#39;</span>  <span style="color:#75715e"># converts id to str type</span>
-</span></span><span style="display:flex;"><span>d2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/user/{id: float}/payment-receipts&#39;</span>  <span style="color:#75715e"># converts id to float type</span>
-</span></span><span style="display:flex;"><span>d3 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/user/{id: int}/payment-receipts&#39;</span>  <span style="color:#75715e"># converts id to int type</span>
-</span></span></code></pre></div><p>Customised convertors can be added to a web application but that is outside the focus of this book. In the mWallet application, we will define the various URLs using a YAML file. This file will be dynamically loaded into our application and be used to provide information on each route. Some of the data extracted from the file are shown below.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>- <span style="color:#f92672">route</span>:
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">authentication</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">description:This resource will manage user authentication and associated security services </span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">base</span>: <span style="color:#ae81ff">/authentication</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">endpoints</span>:
-</span></span><span style="display:flex;"><span>     - <span style="color:#f92672">access token</span>:
-</span></span><span style="display:flex;"><span>         <span style="color:#f92672">methods</span>: [ <span style="color:#e6db74">&#39;POST&#39;</span> ]
-</span></span><span style="display:flex;"><span>         <span style="color:#f92672">success</span>: <span style="color:#ae81ff">Access token generated for user with provided credentials</span>
-</span></span><span style="display:flex;"><span>         <span style="color:#f92672">error</span>: <span style="color:#ae81ff">Unable to generated access token for the user with provided credentials</span>
-</span></span><span style="display:flex;"><span>         <span style="color:#f92672">status</span>: <span style="color:#ae81ff">201</span>
-</span></span><span style="display:flex;"><span>         <span style="color:#f92672">path</span>:
-</span></span><span style="display:flex;"><span>           <span style="color:#f92672">url</span>: <span style="color:#ae81ff">/token</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#f92672">description</span>: |<span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">             Provide user access token to application services using credentials such as username and password</span>             
-</span></span></code></pre></div><p>The extract from the YAML file above shows an instance of a registered route for the mWallet application. This example is for a user authentication service. By using  this approach, the development team has a working document that guides what each API endpoint could handle. This approach also enforces the team to have a clearly defined list of URLs in line with agreed system purpose statement. Some of the key terms used in the application <code>routes.yml</code> file are shown below <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. These entries will be used by the custom <code>AppRouter</code> and the FastAPI APIRouter class to pass routes to the application.</p>
-<table>
+<p>When building a web application, thoughts should be given to the design of the URL. FastAPI being built on Starlette
+allows developers to use URI templating style to capture path components.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_fbbde50eab">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_fbbde50eab">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>url = <span style="color:#0ff;font-weight:bold">&#39;/user/</span><span style="color:#0ff;font-weight:bold">{id}</span><span style="color:#0ff;font-weight:bold">/payment-receipts&#39;</span>
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Fragments of the URI template can be converted to native Python data types via convertors. There are default convertors
+for <code>str</code>, <code>int</code>, <code>float</code>, <code>uuid.UUID</code> data types or a path variable.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_9f872219b8">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_9f872219b8">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d1 = <span style="color:#0ff;font-weight:bold">&#39;/user/{id: str}/payment-receipts&#39;</span>  <span style="color:#007f7f"># converts id to str type</span>
+</span></span><span style="display:flex;"><span>d2 = <span style="color:#0ff;font-weight:bold">&#39;/user/{id: float}/payment-receipts&#39;</span>  <span style="color:#007f7f"># converts id to float type</span>
+</span></span><span style="display:flex;"><span>d3 = <span style="color:#0ff;font-weight:bold">&#39;/user/{id: int}/payment-receipts&#39;</span>  <span style="color:#007f7f"># converts id to int type</span>
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Customised convertors can be added to a web application but that is outside the focus of this book. In the mWallet
+application, we will define the various URLs using a YAML file. This file will be dynamically loaded into our
+application and be used to provide information on each route. Some of the data extracted from the file are shown below.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_ab224581a4">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_ab224581a4">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- <span style="font-weight:bold">route</span>:
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">name</span>: authentication
+</span></span><span style="display:flex;"><span>    description:This resource will manage user activities associated with registration, login, logout, and password reset.
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">base</span>: /authentication
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">endpoints</span>:
+</span></span><span style="display:flex;"><span>      - <span style="font-weight:bold">access token</span>:
+</span></span><span style="display:flex;"><span>          <span style="font-weight:bold">methods</span>: [ <span style="color:#0ff;font-weight:bold">&#39;POST&#39;</span> ]
+</span></span><span style="display:flex;"><span>          <span style="font-weight:bold">success</span>: Access token generated for user with provided credentials
+</span></span><span style="display:flex;"><span>          <span style="font-weight:bold">error</span>: Unable to generated access token for the user with provided credentials
+</span></span><span style="display:flex;"><span>          <span style="font-weight:bold">status</span>: <span style="color:#ff0;font-weight:bold">201</span>
+</span></span><span style="display:flex;"><span>          <span style="font-weight:bold">path</span>:
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">url</span>: /token
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">description</span>: |<span style="color:#0ff;font-weight:bold">
+</span></span></span><span style="display:flex;"><span><span style="color:#0ff;font-weight:bold">              Provide user access token to application services using credentials such as username and password</span>              
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The extract from the YAML file above shows an instance of a registered route for the mWallet application. This example
+is for a user authentication service. By using this approach, the development team has a working document that guides
+what each API endpoint could handle. This approach also enforces the team to have a clearly defined list of URLs in line
+with agreed system purpose statement. Some of the key terms used in the application <code>routes.yml</code> file are shown
+below (Table 2). These entries will be used by the custom <code>AppRouter</code> and the FastAPI APIRouter class to pass routes to
+the application.</p>
+
+
+
+<div class="table table-hover" role="alert">
+    <table>
 <thead>
 <tr>
 <th>Route components</th>
@@ -440,332 +715,526 @@ $$\textsf{\color{red}Cryptocurrency Wallet Resource}$$</p>
 </tr>
 </tbody>
 </table>
-<p><a href="#fn3">Table 2</a></p>
-<p>We have seen earlier how to register a route in FastAPI (see Classical way of defining routes in FastAPI). We have also defined a <code>routes.yml</code> file that is used to register a list of routes with their corresponding components. How can we use this YML file to dynamically load routes? To answer this, we will need to discuss the <code>AppRouter</code>, and <code>RouteEntry</code> classes and see how the mWallet uses these in the router package to register all routes of the application.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> re
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> urllib.parse <span style="color:#f92672">import</span> urljoin
+
+
+    <h4>Table 2</h4>
+    <p>The route YML file components and description.</p>
+</div>
+
+<p>We have seen earlier how to register a route in FastAPI (see Classical way of defining routes in FastAPI). We have also
+defined a <code>routes.yml</code> file that is used to register a list of routes with their corresponding components. How can we
+use this YML file to dynamically load routes? To answer this, we will need to discuss the <code>AppRouter</code>, and <code>RouteEntry</code>
+classes and see how the mWallet uses these in the router package to register all routes of the application.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_a815bb5d64">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_a815bb5d64">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> yaml
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Dict, List, Tuple, Any
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pydantic <span style="color:#f92672">import</span> BaseModel
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">import</span> re
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> urllib.parse <span style="color:#fff;font-weight:bold">import</span> urljoin
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> stringcase
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">import</span> yaml
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> typing <span style="color:#fff;font-weight:bold">import</span> Dict, List, Tuple, Any
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> pydantic <span style="color:#fff;font-weight:bold">import</span> BaseModel
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>__all__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;AppRouter&#39;</span>, <span style="color:#e6db74">&#39;app_routes&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">import</span> stringcase
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> util <span style="color:#f92672">import</span> extract_data
+</span></span><span style="display:flex;"><span>__all__ = <span style="color:#0ff;font-weight:bold">&#39;AppRouter&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;app_routes&#39;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AppRouter</span>:
-</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Process routes for the app by loading data from routes.yml</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   __slots__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;_data&#39;</span>, <span style="color:#e6db74">&#39;_named_routes&#39;</span>, <span style="color:#e6db74">&#39;_routes&#39;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> __init__(self, resources: Dict):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;resources&#39;</span> <span style="color:#f92672">in</span> resources:
-</span></span><span style="display:flex;"><span>           data_ <span style="color:#f92672">=</span> extract_data(<span style="color:#e6db74">&#39;resources&#39;</span>, resources)
-</span></span><span style="display:flex;"><span>           <span style="color:#75715e"># get names of all routes. Instantiate RouteEntry for each route.</span>
-</span></span><span style="display:flex;"><span>           self<span style="color:#f92672">.</span>_data <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>           self<span style="color:#f92672">.</span>_named_routes <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>           self<span style="color:#f92672">.</span>_routes <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>           self<span style="color:#f92672">.</span>_data <span style="color:#f92672">=</span> data_<span style="color:#f92672">.</span>copy()
-</span></span><span style="display:flex;"><span>           self<span style="color:#f92672">.</span>_named_routes <span style="color:#f92672">=</span> [stringcase<span style="color:#f92672">.</span>spinalcase(stringcase<span style="color:#f92672">.</span>lowercase(v)) <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_data
-</span></span><span style="display:flex;"><span>                                 <span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> y<span style="color:#f92672">.</span>items() <span style="color:#66d9ef">if</span> k <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;name&#39;</span>]
-</span></span><span style="display:flex;"><span>           result <span style="color:#f92672">=</span> {}
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_data:
-</span></span><span style="display:flex;"><span>               name <span style="color:#f92672">=</span> extract_data(<span style="color:#e6db74">&#39;name&#39;</span>, entry)
-</span></span><span style="display:flex;"><span>               description <span style="color:#f92672">=</span> extract_data(<span style="color:#e6db74">&#39;description&#39;</span>, entry)
-</span></span><span style="display:flex;"><span>               resource <span style="color:#f92672">=</span> extract_data(<span style="color:#e6db74">&#39;resource&#39;</span>, entry)
-</span></span><span style="display:flex;"><span>               base_path <span style="color:#f92672">=</span> extract_data(<span style="color:#e6db74">&#39;base&#39;</span>, entry)
-</span></span><span style="display:flex;"><span>               self<span style="color:#f92672">.</span>_named_routes<span style="color:#f92672">.</span>append(name)
-</span></span><span style="display:flex;"><span>               endpoints <span style="color:#f92672">=</span> extract_data(<span style="color:#e6db74">&#39;endpoints&#39;</span>, entry)
-</span></span><span style="display:flex;"><span>               <span style="color:#66d9ef">for</span> e <span style="color:#f92672">in</span> endpoints:
-</span></span><span style="display:flex;"><span>                   <span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> e<span style="color:#f92672">.</span>items():
-</span></span><span style="display:flex;"><span>                       endpoint_name <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>stringcase<span style="color:#f92672">.</span>snakecase(k)<span style="color:#e6db74">}</span><span style="color:#e6db74">@</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
-</span></span><span style="display:flex;"><span>                       result<span style="color:#f92672">.</span>update(dict(
-</span></span><span style="display:flex;"><span>                           endpoint<span style="color:#f92672">=</span>endpoint_name,
-</span></span><span style="display:flex;"><span>                           operation<span style="color:#f92672">=</span>extract_data(<span style="color:#e6db74">&#39;crud&#39;</span>, e),
-</span></span><span style="display:flex;"><span>                           url_path<span style="color:#f92672">=</span>extract_data(<span style="color:#e6db74">&#39;path&#39;</span>, e),
-</span></span><span style="display:flex;"><span>                           methods<span style="color:#f92672">=</span>extract_data(<span style="color:#e6db74">&#39;methods&#39;</span>, e),
-</span></span><span style="display:flex;"><span>                           success<span style="color:#f92672">=</span>extract_data(<span style="color:#e6db74">&#39;success&#39;</span>, e),
-</span></span><span style="display:flex;"><span>                           error<span style="color:#f92672">=</span>extract_data(<span style="color:#e6db74">&#39;error&#39;</span>, e),
-</span></span><span style="display:flex;"><span>                           status<span style="color:#f92672">=</span>extract_data(<span style="color:#e6db74">&#39;status&#39;</span>, e),
-</span></span><span style="display:flex;"><span>                           payload<span style="color:#f92672">=</span>extract_data(<span style="color:#e6db74">&#39;payload&#39;</span>, e)))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                       route_entry <span style="color:#f92672">=</span> RouteEntry(name<span style="color:#f92672">=</span>name, path<span style="color:#f92672">=</span>base_path, resource<span style="color:#f92672">=</span>resource, description<span style="color:#f92672">=</span>description,
-</span></span><span style="display:flex;"><span>                                                <span style="color:#f92672">**</span>result)
-</span></span><span style="display:flex;"><span>                       self<span style="color:#f92672">.</span>_routes<span style="color:#f92672">.</span>append(route_entry)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find</span>(self, name: str <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>, endpoint: str <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>):
-</span></span><span style="display:flex;"><span>       route_search <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>       endpoint_search <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">if</span> name <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> endpoint:
-</span></span><span style="display:flex;"><span>           route_search <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_routes <span style="color:#66d9ef">if</span> x<span style="color:#f92672">.</span>name <span style="color:#f92672">==</span> name]
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">elif</span> name <span style="color:#f92672">and</span> endpoint:
-</span></span><span style="display:flex;"><span>           route_search <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_routes <span style="color:#66d9ef">if</span> x<span style="color:#f92672">.</span>name <span style="color:#f92672">==</span> name <span style="color:#f92672">and</span> endpoint <span style="color:#f92672">in</span> x<span style="color:#f92672">.</span>endpoint]
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">if</span> endpoint <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> name:
-</span></span><span style="display:flex;"><span>           endpoint_search <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_routes <span style="color:#66d9ef">if</span> x<span style="color:#f92672">.</span>endpoint <span style="color:#f92672">==</span> endpoint <span style="color:#f92672">or</span> endpoint <span style="color:#f92672">in</span> x<span style="color:#f92672">.</span>endpoint]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">if</span> route_search <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> endpoint_search:
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">return</span> route_search[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">elif</span> endpoint_search <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> route_search:
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">return</span> endpoint_search[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">elif</span> route_search <span style="color:#f92672">and</span> endpoint_search:
-</span></span><span style="display:flex;"><span>           rsc_1 <span style="color:#f92672">=</span> endpoint_search[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>           rsc_2 <span style="color:#f92672">=</span> route_search[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">if</span> rsc_1<span style="color:#f92672">.</span>endpoint <span style="color:#f92672">==</span> rsc_2<span style="color:#f92672">.</span>endpoint:
-</span></span><span style="display:flex;"><span>               <span style="color:#66d9ef">return</span> rsc_1
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">routes</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       Instance property of the list of routes registered in the application.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       :return: A list of instances of RouteEntry for each registered route
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_routes
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">keys</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       Instance property of the list of base routes registered in the application
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       :return: list of named base routes
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_named_routes
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resources</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       Provide a set of all named resources registered with the application routes
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       :return: a set of registered Resource names.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>       rsc <span style="color:#f92672">=</span> (a<span style="color:#f92672">.</span>resource <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_routes <span style="color:#66d9ef">if</span> a<span style="color:#f92672">.</span>resource <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>)
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> set(rsc)
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> util <span style="color:#fff;font-weight:bold">import</span> extract_data
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RouteEntry</span>:
-</span></span><span style="display:flex;"><span>   __slots__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;_path&#39;</span>, <span style="color:#e6db74">&#39;_methods&#39;</span>, <span style="color:#e6db74">&#39;_name&#39;</span>, <span style="color:#e6db74">&#39;_success&#39;</span>, <span style="color:#e6db74">&#39;_error&#39;</span>, <span style="color:#e6db74">&#39;_status&#39;</span>, <span style="color:#e6db74">&#39;_url_path&#39;</span>, <span style="color:#e6db74">&#39;_payload&#39;</span>, \
-</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#39;_url_query&#39;</span>, <span style="color:#e6db74">&#39;_endpoint&#39;</span>, <span style="color:#e6db74">&#39;_resource&#39;</span>, <span style="color:#e6db74">&#39;_description&#39;</span>, <span style="color:#e6db74">&#39;_tags&#39;</span>, <span style="color:#e6db74">&#39;_operation&#39;</span>, <span style="color:#e6db74">&#39;_schema&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">class</span> AppRouter:
+</span></span><span style="display:flex;"><span>    <span style="color:#007f7f"># Process routes for the app by loading data from routes.yml</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> __init__(self, endpoint: str, path: str, methods: List, name: str, success: str, error: str, status: int <span style="color:#f92672">|</span> str,
-</span></span><span style="display:flex;"><span>                url_path: str, payload: Dict <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>, resource: str <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>, description: str <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>, tags: List <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>,
-</span></span><span style="display:flex;"><span>                operation: str <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>, schema: Any <span style="color:#f92672">|</span> BaseModel <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_validate_status</span>(s):
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">if</span> isinstance(s, int <span style="color:#f92672">|</span> str):
-</span></span><span style="display:flex;"><span>               <span style="color:#66d9ef">if</span> str(s)<span style="color:#f92672">.</span>isnumeric() <span style="color:#f92672">and</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">&lt;=</span> int(s) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">600</span>:
-</span></span><span style="display:flex;"><span>                   <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    __slots__ = <span style="color:#0ff;font-weight:bold">&#39;_data&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_named_routes&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_routes&#39;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_validate_payload</span>(p):
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">if</span> isinstance(p, List <span style="color:#f92672">|</span> Tuple):
-</span></span><span style="display:flex;"><span>               <span style="color:#66d9ef">return</span> [z <span style="color:#66d9ef">for</span> z <span style="color:#f92672">in</span> p <span style="color:#66d9ef">for</span> x, _ <span style="color:#f92672">in</span> z<span style="color:#f92672">.</span>items() <span style="color:#66d9ef">if</span> x <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;name&#39;</span>, <span style="color:#e6db74">&#39;description&#39;</span>]]
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> __init__(self, resources: Dict):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">if</span> <span style="color:#0ff;font-weight:bold">&#39;resources&#39;</span> in resources:
+</span></span><span style="display:flex;"><span>            data_ = extract_data(<span style="color:#0ff;font-weight:bold">&#39;resources&#39;</span>, resources)
+</span></span><span style="display:flex;"><span>            <span style="color:#007f7f"># get names of all routes. Instantiate RouteEntry for each route.</span>
+</span></span><span style="display:flex;"><span>            self._data = []
+</span></span><span style="display:flex;"><span>            self._named_routes = []
+</span></span><span style="display:flex;"><span>            self._routes = []
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_validate_methods</span>(m):
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">if</span> isinstance(m, List <span style="color:#f92672">|</span> Tuple):
-</span></span><span style="display:flex;"><span>               <span style="color:#66d9ef">return</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> m <span style="color:#66d9ef">if</span> x <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>, <span style="color:#e6db74">&#39;PUT&#39;</span>, <span style="color:#e6db74">&#39;DELETE&#39;</span>, <span style="color:#e6db74">&#39;HEAD&#39;</span>]]
+</span></span><span style="display:flex;"><span>            self._data = data_.copy()
+</span></span><span style="display:flex;"><span>            self._named_routes = [stringcase.spinalcase(stringcase.lowercase(v)) <span style="color:#fff;font-weight:bold">for</span> y in self._data
+</span></span><span style="display:flex;"><span>                                  <span style="color:#fff;font-weight:bold">for</span> k, v in y.items() <span style="color:#fff;font-weight:bold">if</span> k == <span style="color:#0ff;font-weight:bold">&#39;name&#39;</span>]
+</span></span><span style="display:flex;"><span>            result = {}
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">for</span> entry in self._data:
+</span></span><span style="display:flex;"><span>                name = extract_data(<span style="color:#0ff;font-weight:bold">&#39;name&#39;</span>, entry)
+</span></span><span style="display:flex;"><span>                description = extract_data(<span style="color:#0ff;font-weight:bold">&#39;description&#39;</span>, entry)
+</span></span><span style="display:flex;"><span>                resource = extract_data(<span style="color:#0ff;font-weight:bold">&#39;resource&#39;</span>, entry)
+</span></span><span style="display:flex;"><span>                base_path = extract_data(<span style="color:#0ff;font-weight:bold">&#39;base&#39;</span>, entry)
+</span></span><span style="display:flex;"><span>                self._named_routes.append(name)
+</span></span><span style="display:flex;"><span>                endpoints = extract_data(<span style="color:#0ff;font-weight:bold">&#39;endpoints&#39;</span>, entry)
+</span></span><span style="display:flex;"><span>                <span style="color:#fff;font-weight:bold">for</span> e in endpoints:
+</span></span><span style="display:flex;"><span>                    <span style="color:#fff;font-weight:bold">for</span> k, v in e.items():
+</span></span><span style="display:flex;"><span>                        endpoint_name = <span style="color:#0ff;font-weight:bold">f</span><span style="color:#0ff;font-weight:bold">&#39;</span><span style="color:#0ff;font-weight:bold">{</span>stringcase.snakecase(k)<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">@</span><span style="color:#0ff;font-weight:bold">{</span>name<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#39;</span>
+</span></span><span style="display:flex;"><span>                        result.update(<span style="color:#fff;font-weight:bold">dict</span>(
+</span></span><span style="display:flex;"><span>                            endpoint=endpoint_name,
+</span></span><span style="display:flex;"><span>                            operation=extract_data(<span style="color:#0ff;font-weight:bold">&#39;crud&#39;</span>, e),
+</span></span><span style="display:flex;"><span>                            url_path=extract_data(<span style="color:#0ff;font-weight:bold">&#39;path&#39;</span>, e),
+</span></span><span style="display:flex;"><span>                            methods=extract_data(<span style="color:#0ff;font-weight:bold">&#39;methods&#39;</span>, e),
+</span></span><span style="display:flex;"><span>                            success=extract_data(<span style="color:#0ff;font-weight:bold">&#39;success&#39;</span>, e),
+</span></span><span style="display:flex;"><span>                            error=extract_data(<span style="color:#0ff;font-weight:bold">&#39;error&#39;</span>, e),
+</span></span><span style="display:flex;"><span>                            status=extract_data(<span style="color:#0ff;font-weight:bold">&#39;status&#39;</span>, e),
+</span></span><span style="display:flex;"><span>                            payload=extract_data(<span style="color:#0ff;font-weight:bold">&#39;payload&#39;</span>, e)))
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_validate_url_path</span>(base_url, up):
+</span></span><span style="display:flex;"><span>                        route_entry = RouteEntry(name=name, path=base_path, resource=resource, description=description,
+</span></span><span style="display:flex;"><span>                                                 **result)
+</span></span><span style="display:flex;"><span>                        self._routes.append(route_entry)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>           url <span style="color:#f92672">=</span> extract_data(<span style="color:#e6db74">&#39;url&#39;</span>, up)
-</span></span><span style="display:flex;"><span>           params <span style="color:#f92672">=</span> extract_data(<span style="color:#e6db74">&#39;params&#39;</span>, up)
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> base_url:
-</span></span><span style="display:flex;"><span>               <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#39;Invalid base URL provided&#39;</span>)
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> url:
-</span></span><span style="display:flex;"><span>               rsc <span style="color:#f92672">=</span> base_url
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>               rsc <span style="color:#f92672">=</span> base_url <span style="color:#f92672">+</span> url
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> find(self, name: <span style="color:#fff;font-weight:bold">str</span> = <span style="color:#fff;font-weight:bold">None</span>, endpoint: <span style="color:#fff;font-weight:bold">str</span> = <span style="color:#fff;font-weight:bold">None</span>):
+</span></span><span style="display:flex;"><span>        route_search = []
+</span></span><span style="display:flex;"><span>        endpoint_search = []
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">if</span> name and not endpoint:
+</span></span><span style="display:flex;"><span>            route_search = [x <span style="color:#fff;font-weight:bold">for</span> x in self._routes <span style="color:#fff;font-weight:bold">if</span> x.name == name]
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">elif</span> name and endpoint:
+</span></span><span style="display:flex;"><span>            route_search = [x <span style="color:#fff;font-weight:bold">for</span> x in self._routes <span style="color:#fff;font-weight:bold">if</span> x.name == name and endpoint in x.endpoint]
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">if</span> endpoint and not name:
+</span></span><span style="display:flex;"><span>            endpoint_search = [x <span style="color:#fff;font-weight:bold">for</span> x in self._routes <span style="color:#fff;font-weight:bold">if</span> x.endpoint == endpoint or endpoint in x.endpoint]
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">if</span> params <span style="color:#f92672">and</span> isinstance(params, List <span style="color:#f92672">|</span> Tuple):
-</span></span><span style="display:flex;"><span>               pattern <span style="color:#f92672">=</span> <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;{(.*)}&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">if</span> route_search and not endpoint_search:
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">return</span> route_search[<span style="color:#ff0;font-weight:bold">0</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">elif</span> endpoint_search and not route_search:
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">return</span> endpoint_search[<span style="color:#ff0;font-weight:bold">0</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">elif</span> route_search and endpoint_search:
+</span></span><span style="display:flex;"><span>            rsc_1 = endpoint_search[<span style="color:#ff0;font-weight:bold">0</span>]
+</span></span><span style="display:flex;"><span>            rsc_2 = route_search[<span style="color:#ff0;font-weight:bold">0</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">if</span> rsc_1.endpoint == rsc_2.endpoint:
+</span></span><span style="display:flex;"><span>                <span style="color:#fff;font-weight:bold">return</span> rsc_1
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">False</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>               <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> params:
-</span></span><span style="display:flex;"><span>                   path_variable <span style="color:#f92672">=</span> extract_data(<span style="color:#e6db74">&#39;path&#39;</span>, p)
-</span></span><span style="display:flex;"><span>                   <span style="color:#66d9ef">if</span> path_variable <span style="color:#f92672">and</span> isinstance(path_variable, List <span style="color:#f92672">|</span> Tuple):
-</span></span><span style="display:flex;"><span>                       <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> path_variable:
-</span></span><span style="display:flex;"><span>                           <span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> x<span style="color:#f92672">.</span>items():
-</span></span><span style="display:flex;"><span>                               <span style="color:#66d9ef">if</span> k <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;name&#39;</span> <span style="color:#f92672">and</span> v:
-</span></span><span style="display:flex;"><span>                                   <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search(pattern, rsc):
-</span></span><span style="display:flex;"><span>                                       re<span style="color:#f92672">.</span>sub(pattern, <span style="color:#e6db74">&#39;{</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">}&#39;</span> <span style="color:#f92672">%</span> v, rsc)
-</span></span><span style="display:flex;"><span>                                   <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>                                       rsc <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;/{</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">}&#39;</span> <span style="color:#f92672">%</span> v
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">return</span> rsc
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> routes(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0ff;font-weight:bold">        Instance property of the list of routes registered in the application.
+</span></span></span><span style="display:flex;"><span><span style="color:#0ff;font-weight:bold">        :return: A list of instances of RouteEntry for each registered route
+</span></span></span><span style="display:flex;"><span><span style="color:#0ff;font-weight:bold">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._routes
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_validate_tags</span>(t: List):
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">if</span> t:
-</span></span><span style="display:flex;"><span>               <span style="color:#66d9ef">return</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> t <span style="color:#66d9ef">if</span> isinstance(x, str)]
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> keys(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0ff;font-weight:bold">        Instance property of the list of base routes registered in the application
+</span></span></span><span style="display:flex;"><span><span style="color:#0ff;font-weight:bold">        :return: list of named base routes
+</span></span></span><span style="display:flex;"><span><span style="color:#0ff;font-weight:bold">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._named_routes
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_validate_operation</span>(op: str):
-</span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">if</span> op <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;add&#39;</span>, <span style="color:#e6db74">&#39;edit&#39;</span>, <span style="color:#e6db74">&#39;delete&#39;</span>, <span style="color:#e6db74">&#39;view&#39;</span>, <span style="color:#e6db74">&#39;list&#39;</span>]:
-</span></span><span style="display:flex;"><span>               <span style="color:#66d9ef">return</span> op
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> resources(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0ff;font-weight:bold">        Provide a set of all named resources registered with the application routes
+</span></span></span><span style="display:flex;"><span><span style="color:#0ff;font-weight:bold">        :return: a set of registered Resource names.
+</span></span></span><span style="display:flex;"><span><span style="color:#0ff;font-weight:bold">        &#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_endpoint <span style="color:#f92672">=</span> endpoint <span style="color:#66d9ef">if</span> isinstance(endpoint, str) <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">None</span>
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_path <span style="color:#f92672">=</span> path <span style="color:#66d9ef">if</span> isinstance(path, str) <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">None</span>
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_methods <span style="color:#f92672">=</span> _validate_methods(methods)
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_name <span style="color:#f92672">=</span> name <span style="color:#66d9ef">if</span> isinstance(name, str) <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">None</span>
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_success <span style="color:#f92672">=</span> success <span style="color:#66d9ef">if</span> isinstance(success, str) <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">None</span>
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_error <span style="color:#f92672">=</span> error <span style="color:#66d9ef">if</span> isinstance(error, str) <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">None</span>
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_status <span style="color:#f92672">=</span> status <span style="color:#66d9ef">if</span> _validate_status(status) <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">None</span>
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_url_path <span style="color:#f92672">=</span> _validate_url_path(urljoin(name, self<span style="color:#f92672">.</span>_path), url_path)
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_payload <span style="color:#f92672">=</span> _validate_payload(payload)
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_resource <span style="color:#f92672">=</span> resource <span style="color:#66d9ef">if</span> isinstance(resource, str) <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">None</span>
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_description <span style="color:#f92672">=</span> description <span style="color:#66d9ef">if</span> isinstance(description, str) <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">None</span>
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_tags <span style="color:#f92672">=</span> _validate_tags(tags)
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_operation <span style="color:#f92672">=</span> _validate_operation(operation)
-</span></span><span style="display:flex;"><span>       self<span style="color:#f92672">.</span>_schema <span style="color:#f92672">=</span> schema
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">path</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_path
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">methods</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_methods
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">name</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_name
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">success</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_success
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">error</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_error
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">status</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_status
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">url_path</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_url_path
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">payload</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_payload
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">endpoint</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_endpoint
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resource</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_resource
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">description</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_description
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tags</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_tags
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">crud_type</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_operation
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@property</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">schema</span>(self):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_schema
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">@schema.setter</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">schema</span>(self, value):
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">if</span> isinstance(value, (Dict, BaseModel)):
-</span></span><span style="display:flex;"><span>           self<span style="color:#f92672">.</span>_schema <span style="color:#f92672">=</span> value
+</span></span><span style="display:flex;"><span>        rsc = (a.resource <span style="color:#fff;font-weight:bold">for</span> a in self._routes <span style="color:#fff;font-weight:bold">if</span> a.resource is not <span style="color:#fff;font-weight:bold">None</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">set</span>(rsc)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>base <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>getcwd()
-</span></span><span style="display:flex;"><span>route_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(base, <span style="color:#e6db74">&#39;routers&#39;</span>, <span style="color:#e6db74">&#39;routers.yml&#39;</span>)
-</span></span><span style="display:flex;"><span>app_routes <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">class</span> RouteEntry:
+</span></span><span style="display:flex;"><span>    __slots__ = <span style="color:#0ff;font-weight:bold">&#39;_path&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_methods&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_name&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_success&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_error&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_status&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_url_path&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_payload&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#0ff;font-weight:bold">&#39;_url_query&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_endpoint&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_resource&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_description&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_tags&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_operation&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;_schema&#39;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(route_path, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> fh:
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>       data <span style="color:#f92672">=</span> yaml<span style="color:#f92672">.</span>safe_load(fh)
-</span></span><span style="display:flex;"><span>       app_routes <span style="color:#f92672">=</span> AppRouter(data)
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">except</span> yaml<span style="color:#f92672">.</span>YAMLError:
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">raise</span>
-</span></span></code></pre></div><p>The <code>AppRouter</code> class serves as a registry of all API endpoints for the system. This class defines three parameters: <code>routes</code>, <code>keys</code>, and <code>resources</code>. The routes parameter returns a list of <code>RouteEntry</code> objects that holds information (example name, URL, description etc.) about each route. The <code>keys</code> parameter gives a list of names that are mapped to each route. The <code>resource</code> parameter provides a set of named resources (example <code>Order</code>) which are registered in the system. The <code>__init__</code> function of the <code>AppRouter</code> class is where data read from <code>routes.yml</code> is parsed and added to an internal list called <code>_data</code>.  Each entry from the <code>routes.yml</code> file is parsed into an instance of <code>RouteEntry</code> by extracting attributes (<code>description</code>, <code>resource</code>, <code>base</code>, <code>endpoints</code>, <code>name</code>) from the <code>routes.yml</code> data.</p>
-<p>The find method of the <code>AppRouter</code> class is used to verify if a given named route exists within the defined list of routes. This function can take a name or <code>endpoint</code> parameter. If only the <code>name</code> is given, then the search is based only on the <code>name</code> assigned to a route as defined in <code>routes.yml</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>- <span style="color:#f92672">route</span>:
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">authentication</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">description:This resource will manage user authentication and associated </span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt;&gt;&gt; app_routes.find<span style="color:#f92672">(</span>name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;authentication&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> __init__(self, endpoint: <span style="color:#fff;font-weight:bold">str</span>, path: <span style="color:#fff;font-weight:bold">str</span>, methods: List, name: <span style="color:#fff;font-weight:bold">str</span>, success: <span style="color:#fff;font-weight:bold">str</span>, error: <span style="color:#fff;font-weight:bold">str</span>, status: <span style="color:#fff;font-weight:bold">int</span> | <span style="color:#fff;font-weight:bold">str</span>,
+</span></span><span style="display:flex;"><span>                 url_path: <span style="color:#fff;font-weight:bold">str</span>, payload: Dict = <span style="color:#fff;font-weight:bold">None</span>, resource: <span style="color:#fff;font-weight:bold">str</span> = <span style="color:#fff;font-weight:bold">None</span>, description: <span style="color:#fff;font-weight:bold">str</span> = <span style="color:#fff;font-weight:bold">None</span>, tags: List = <span style="color:#fff;font-weight:bold">None</span>,
+</span></span><span style="display:flex;"><span>                 operation: <span style="color:#fff;font-weight:bold">str</span> = <span style="color:#fff;font-weight:bold">None</span>, schema: Any | BaseModel = <span style="color:#fff;font-weight:bold">None</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">def</span> _validate_status(s):
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(s, <span style="color:#fff;font-weight:bold">int</span> | <span style="color:#fff;font-weight:bold">str</span>):
+</span></span><span style="display:flex;"><span>                <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">str</span>(s).isnumeric() and <span style="color:#ff0;font-weight:bold">100</span> &lt;= <span style="color:#fff;font-weight:bold">int</span>(s) &lt;= <span style="color:#ff0;font-weight:bold">600</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">def</span> _validate_payload(p):
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(p, List | Tuple):
+</span></span><span style="display:flex;"><span>                <span style="color:#fff;font-weight:bold">return</span> [z <span style="color:#fff;font-weight:bold">for</span> z in p <span style="color:#fff;font-weight:bold">for</span> x, _ in z.items() <span style="color:#fff;font-weight:bold">if</span> x in [<span style="color:#0ff;font-weight:bold">&#39;name&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;description&#39;</span>]]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">def</span> _validate_methods(m):
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(m, List | Tuple):
+</span></span><span style="display:flex;"><span>                <span style="color:#fff;font-weight:bold">return</span> [x <span style="color:#fff;font-weight:bold">for</span> x in m <span style="color:#fff;font-weight:bold">if</span> x in [<span style="color:#0ff;font-weight:bold">&#39;GET&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;POST&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;PUT&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;DELETE&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;HEAD&#39;</span>]]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">def</span> _validate_url_path(base_url, up):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            url = extract_data(<span style="color:#0ff;font-weight:bold">&#39;url&#39;</span>, up)
+</span></span><span style="display:flex;"><span>            params = extract_data(<span style="color:#0ff;font-weight:bold">&#39;params&#39;</span>, up)
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">if</span> not base_url:
+</span></span><span style="display:flex;"><span>                <span style="color:#fff;font-weight:bold">raise</span> ValueError(<span style="color:#0ff;font-weight:bold">&#39;Invalid base URL provided&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">if</span> not url:
+</span></span><span style="display:flex;"><span>                rsc = base_url
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>                rsc = base_url + url
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">if</span> params and <span style="color:#fff;font-weight:bold">isinstance</span>(params, List | Tuple):
+</span></span><span style="display:flex;"><span>                pattern = <span style="color:#0ff;font-weight:bold">r</span><span style="color:#0ff;font-weight:bold">&#39;{(.*)}&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#fff;font-weight:bold">for</span> p in params:
+</span></span><span style="display:flex;"><span>                    path_variable = extract_data(<span style="color:#0ff;font-weight:bold">&#39;path&#39;</span>, p)
+</span></span><span style="display:flex;"><span>                    <span style="color:#fff;font-weight:bold">if</span> path_variable and <span style="color:#fff;font-weight:bold">isinstance</span>(path_variable, List | Tuple):
+</span></span><span style="display:flex;"><span>                        <span style="color:#fff;font-weight:bold">for</span> x in path_variable:
+</span></span><span style="display:flex;"><span>                            <span style="color:#fff;font-weight:bold">for</span> k, v in x.items():
+</span></span><span style="display:flex;"><span>                                <span style="color:#fff;font-weight:bold">if</span> k == <span style="color:#0ff;font-weight:bold">&#39;name&#39;</span> and v:
+</span></span><span style="display:flex;"><span>                                    <span style="color:#fff;font-weight:bold">if</span> re.search(pattern, rsc):
+</span></span><span style="display:flex;"><span>                                        re.sub(pattern, <span style="color:#0ff;font-weight:bold">&#39;{</span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">}&#39;</span> % v, rsc)
+</span></span><span style="display:flex;"><span>                                    <span style="color:#fff;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>                                        rsc += <span style="color:#0ff;font-weight:bold">&#39;/{</span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">}&#39;</span> % v
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">return</span> rsc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">def</span> _validate_tags(t: List):
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">if</span> t:
+</span></span><span style="display:flex;"><span>                <span style="color:#fff;font-weight:bold">return</span> [x <span style="color:#fff;font-weight:bold">for</span> x in t <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(x, <span style="color:#fff;font-weight:bold">str</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">def</span> _validate_operation(op: <span style="color:#fff;font-weight:bold">str</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">if</span> op in [<span style="color:#0ff;font-weight:bold">&#39;add&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;edit&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;delete&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;view&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;list&#39;</span>]:
+</span></span><span style="display:flex;"><span>                <span style="color:#fff;font-weight:bold">return</span> op
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        self._endpoint = endpoint <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(endpoint, <span style="color:#fff;font-weight:bold">str</span>) <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        self._path = path <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(path, <span style="color:#fff;font-weight:bold">str</span>) <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        self._methods = _validate_methods(methods)
+</span></span><span style="display:flex;"><span>        self._name = name <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(name, <span style="color:#fff;font-weight:bold">str</span>) <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        self._success = success <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(success, <span style="color:#fff;font-weight:bold">str</span>) <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        self._error = error <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(error, <span style="color:#fff;font-weight:bold">str</span>) <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        self._status = status <span style="color:#fff;font-weight:bold">if</span> _validate_status(status) <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        self._url_path = _validate_url_path(urljoin(name, self._path), url_path)
+</span></span><span style="display:flex;"><span>        self._payload = _validate_payload(payload)
+</span></span><span style="display:flex;"><span>        self._resource = resource <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(resource, <span style="color:#fff;font-weight:bold">str</span>) <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        self._description = description <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(description, <span style="color:#fff;font-weight:bold">str</span>) <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>        self._tags = _validate_tags(tags)
+</span></span><span style="display:flex;"><span>        self._operation = _validate_operation(operation)
+</span></span><span style="display:flex;"><span>        self._schema = schema
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> path(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._path
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> methods(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._methods
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> name(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._name
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> success(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._success
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> error(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._error
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> status(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._status
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> url_path(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._url_path
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> payload(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._payload
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> endpoint(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._endpoint
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> resource(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._resource
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> description(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._description
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> tags(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._tags
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> crud_type(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._operation
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @property
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> schema(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> self._schema
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @schema.setter
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> schema(self, value):
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(value, (Dict, BaseModel)):
+</span></span><span style="display:flex;"><span>            self._schema = value
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>base = os.getcwd()
+</span></span><span style="display:flex;"><span>route_path = os.path.join(base, <span style="color:#0ff;font-weight:bold">&#39;routers&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;routers.yml&#39;</span>)
+</span></span><span style="display:flex;"><span>app_routes = <span style="color:#fff;font-weight:bold">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">with</span> <span style="color:#fff;font-weight:bold">open</span>(route_path, <span style="color:#0ff;font-weight:bold">&#39;r&#39;</span>) <span style="color:#fff;font-weight:bold">as</span> fh:
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">try</span>:
+</span></span><span style="display:flex;"><span>        data = yaml.safe_load(fh)
+</span></span><span style="display:flex;"><span>        app_routes = AppRouter(data)
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">except</span> yaml.YAMLError:
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">raise</span>
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The <code>AppRouter</code> class serves as a registry of all API endpoints for the system. This class defines three
+parameters: <code>routes</code>, <code>keys</code>, and <code>resources</code>. The routes parameter returns a list of <code>RouteEntry</code> objects that holds
+information (example name, URL, description etc.) about each route. The <code>keys</code> parameter gives a list of names that are
+mapped to each route. The <code>resource</code> parameter provides a set of named resources (example <code>Order</code>) which are registered
+in the system. The <code>__init__</code> function of the <code>AppRouter</code> class is where data read from <code>routes.yml</code> is parsed and added
+to an internal list called <code>_data</code>. Each entry from the <code>routes.yml</code> file is parsed into an instance of <code>RouteEntry</code> by
+extracting attributes (<code>description</code>, <code>resource</code>, <code>base</code>, <code>endpoints</code>, <code>name</code>) from the <code>routes.yml</code> data.</p>
+<p>The find method of the <code>AppRouter</code> class is used to verify if a given named route exists within the defined list of
+routes. This function can take a name or <code>endpoint</code> parameter. If only the <code>name</code> is given, then the search is based
+only on the <code>name</code> assigned to a route as defined in <code>routes.yml</code>.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_28a9b90473">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_28a9b90473">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- <span style="font-weight:bold">route</span>:
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">name</span>: authentication
+</span></span><span style="display:flex;"><span>    description:This resource will manage user activities associated with registration, login, logout, and password reset.
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_df4d2b1671">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_df4d2b1671">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; app_routes.find(name=<span style="color:#0ff;font-weight:bold">&#39;authentication&#39;</span>)
 </span></span><span style="display:flex;"><span>&lt;routers.RouteEntry object at 0x7f45e52d4860&gt;
-</span></span></code></pre></div><p>If only the endpoint is given then the search is based on the name of the function registered against the route.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>- <span style="color:#f92672">route</span>:
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">name</span>: <span style="color:#ae81ff">authentication</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">description:This resource will manage … </span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">base</span>: <span style="color:#ae81ff">/authentication</span>
-</span></span><span style="display:flex;"><span>   <span style="color:#f92672">endpoints</span>:
-</span></span><span style="display:flex;"><span>     - <span style="color:#f92672">access token</span>:         
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt;&gt;&gt; app_routes.find<span style="color:#f92672">(</span>endpoint<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;access_token&#39;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>If only the endpoint is given then the search is based on the name of the function registered against the route.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_8c7f02a0c0">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_8c7f02a0c0">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- <span style="font-weight:bold">route</span>:
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">name</span>: authentication
+</span></span><span style="display:flex;"><span>    description:This resource will manage user activities associated with registration, login, logout, and password reset.
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">base</span>: /authentication
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">endpoints</span>:
+</span></span><span style="display:flex;"><span>      - <span style="font-weight:bold">access token</span>: 
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">methods</span>: [<span style="color:#0ff;font-weight:bold">&#39;POST&#39;</span>]
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_5658559487">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_5658559487">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; app_routes.find(endpoint=<span style="color:#0ff;font-weight:bold">&#39;access_token&#39;</span>)
 </span></span><span style="display:flex;"><span>&lt;routers.RouteEntry object at 0x7f45e52d4860&gt;
-</span></span></code></pre></div><p>Notice that the endpoint is specified without spaces as this closely matches a function name in Python. Searches can also be done by specifying the named route to which the function is assigned using the <code>@</code> symbol.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt;&gt;&gt; app_routes.find<span style="color:#f92672">(</span>endpoint<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;access_token@otp&#39;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>Notice that the endpoint is specified without spaces as this closely matches a function name in Python. Searches can
+also be done by specifying the named route to which the function is assigned using the <code>@</code> symbol.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_eae6bf5770">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_eae6bf5770">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; app_routes.find(endpoint=<span style="color:#0ff;font-weight:bold">&#39;access_token@otp&#39;</span>)
 </span></span><span style="display:flex;"><span>&lt;routers.RouteEntry object at 0x7f45e52d4860&gt;
-</span></span></code></pre></div><p>From the returned RouteEntry object, we can access information such as HTTP methods supported by calling property methods; the name of the route by calling name; the type of CRUD (Create Read Update Delete) operation supported at this API endpoint by calling <code>crud_type</code>; the description; the path and many other properties as defined in <code>RouteEntry</code>. More importantly, we can register routes in logical groups without the need of typing all entries manually.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> authentication.services.jwt_handler <span style="color:#f92672">import</span> user_login, user_logout, user_signup
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> authentication.services.otp <span style="color:#f92672">import</span> verify_login_otp, generate_login_otp
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> permissions <span style="color:#f92672">import</span> Permission
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> routers <span style="color:#f92672">import</span> app_routes
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> routers.api <span style="color:#f92672">import</span> InferringSchemaRouter
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>From the returned RouteEntry object, we can access information such as HTTP methods supported by calling property
+methods; the name of the route by calling name; the type of CRUD (Create Read Update Delete) operation supported at this
+API endpoint by calling <code>crud_type</code>; the description; the path and many other properties as defined in <code>RouteEntry</code>.
+More importantly, we can register routes in logical groups without the need of typing all entries manually.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_8cfbcb34a9">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_8cfbcb34a9">
+    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> authentication.services.jwt_handler <span style="color:#fff;font-weight:bold">import</span> user_login, user_logout, user_signup
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> authentication.services.otp <span style="color:#fff;font-weight:bold">import</span> verify_login_otp, generate_login_otp
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> permissions <span style="color:#fff;font-weight:bold">import</span> Permission
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> routers <span style="color:#fff;font-weight:bold">import</span> app_routes
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">from</span> routers.api <span style="color:#fff;font-weight:bold">import</span> InferringSchemaRouter
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define the various ACL for catalogue services as scopes.</span>
+</span></span><span style="display:flex;"><span><span style="color:#007f7f"># Define the various ACL for catalogue services as scopes.</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>acl <span style="color:#f92672">=</span> Permission()
+</span></span><span style="display:flex;"><span>acl = Permission()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>service <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Services&#39;</span>
-</span></span><span style="display:flex;"><span>prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;organization&#39;</span>
+</span></span><span style="display:flex;"><span>service = <span style="color:#0ff;font-weight:bold">&#39;Services&#39;</span>
+</span></span><span style="display:flex;"><span>prefix = <span style="color:#0ff;font-weight:bold">&#39;organization&#39;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>auth_router <span style="color:#f92672">=</span> InferringSchemaRouter()
+</span></span><span style="display:flex;"><span>auth_router = InferringSchemaRouter()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>r1 <span style="color:#f92672">=</span> app_routes<span style="color:#f92672">.</span>find(endpoint<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;user_login&#39;</span>)
-</span></span><span style="display:flex;"><span>r2 <span style="color:#f92672">=</span> app_routes<span style="color:#f92672">.</span>find(endpoint<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;user_logout&#39;</span>)
-</span></span><span style="display:flex;"><span>r3 <span style="color:#f92672">=</span> app_routes<span style="color:#f92672">.</span>find(endpoint<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;user_signup&#39;</span>)
-</span></span><span style="display:flex;"><span>r4 <span style="color:#f92672">=</span> app_routes<span style="color:#f92672">.</span>find(endpoint<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;verify_login_otp&#39;</span>)
-</span></span><span style="display:flex;"><span>r5 <span style="color:#f92672">=</span> app_routes<span style="color:#f92672">.</span>find(endpoint<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;generate_login_otp&#39;</span>)
+</span></span><span style="display:flex;"><span>r1 = app_routes.find(endpoint=<span style="color:#0ff;font-weight:bold">&#39;user_login&#39;</span>)
+</span></span><span style="display:flex;"><span>r2 = app_routes.find(endpoint=<span style="color:#0ff;font-weight:bold">&#39;user_logout&#39;</span>)
+</span></span><span style="display:flex;"><span>r3 = app_routes.find(endpoint=<span style="color:#0ff;font-weight:bold">&#39;user_signup&#39;</span>)
+</span></span><span style="display:flex;"><span>r4 = app_routes.find(endpoint=<span style="color:#0ff;font-weight:bold">&#39;verify_login_otp&#39;</span>)
+</span></span><span style="display:flex;"><span>r5 = app_routes.find(endpoint=<span style="color:#0ff;font-weight:bold">&#39;generate_login_otp&#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Match routes to functions </span>
-</span></span><span style="display:flex;"><span>add_auth_routes <span style="color:#f92672">=</span> [
-</span></span><span style="display:flex;"><span>   (r1, user_login),
-</span></span><span style="display:flex;"><span>   (r2, user_logout),
-</span></span><span style="display:flex;"><span>   (r3, user_signup),
-</span></span><span style="display:flex;"><span>   (r4, verify_login_otp),
-</span></span><span style="display:flex;"><span>   (r5, generate_login_otp)
+</span></span><span style="display:flex;"><span><span style="color:#007f7f"># Match routes to functions </span>
+</span></span><span style="display:flex;"><span>add_auth_routes = [
+</span></span><span style="display:flex;"><span>    (r1, user_login),
+</span></span><span style="display:flex;"><span>    (r2, user_logout),
+</span></span><span style="display:flex;"><span>    (r3, user_signup),
+</span></span><span style="display:flex;"><span>    (r4, verify_login_otp),
+</span></span><span style="display:flex;"><span>    (r5, generate_login_otp)
 </span></span><span style="display:flex;"><span>]
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># dynamically add routes to instance of APIRouter using loaded RouteEntry objects</span>
+</span></span><span style="display:flex;"><span><span style="color:#007f7f"># dynamically add routes to instance of APIRouter using loaded RouteEntry objects</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> add_auth_routes:
-</span></span><span style="display:flex;"><span>   r, e <span style="color:#f92672">=</span> entry
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> r:
-</span></span><span style="display:flex;"><span>       auth_router<span style="color:#f92672">.</span>add_api_route(r<span style="color:#f92672">.</span>url_path, endpoint<span style="color:#f92672">=</span>e, description<span style="color:#f92672">=</span>r<span style="color:#f92672">.</span>description,
-</span></span><span style="display:flex;"><span>                                 status_code<span style="color:#f92672">=</span>r<span style="color:#f92672">.</span>status, methods<span style="color:#f92672">=</span>r<span style="color:#f92672">.</span>methods, response_description<span style="color:#f92672">=</span>r<span style="color:#f92672">.</span>success,
-</span></span><span style="display:flex;"><span>                                 name<span style="color:#f92672">=</span>r<span style="color:#f92672">.</span>endpoint)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>								 
-</span></span></code></pre></div><p>The routes <code>r1</code> to <code>r5</code> are mapped to functions <code>user_login</code>, <code>user_logout</code>, <code>user_signup</code>, <code>verify_login_otp</code>, and <code>generate_login_otp</code> as a list of tuples. This list is then iterated and each route and entry added to the specified <code>APIRouter</code> instance. This way, defined routes can be managed from a centralised <code>routes.yml</code> file and changes to the routes or associated parameter is automatically reflected in the system on reboot or start up.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>The Router classes used in the mWallet application. The InferringSchemaRouter was designed to extend <code>fastapi_restful.inferring_router.InferringRouter</code> class. This enables the <code>InferringSchemaRouter</code> to automatically convert return types of routing functions to matching Pydantic schemas following the specified database ORM class.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>Response classes of Starlette responses package used in FastAPI&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>The route YML file components and description.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">for</span> entry in add_auth_routes:
+</span></span><span style="display:flex;"><span>    r, e = entry
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">if</span> r:
+</span></span><span style="display:flex;"><span>        auth_router.add_api_route(r.url_path, endpoint=e, description=r.description,
+</span></span><span style="display:flex;"><span>                                  status_code=r.status, methods=r.methods, response_description=r.success,
+</span></span><span style="display:flex;"><span>                                  name=r.endpoint)
+</span></span></code></pre></div>
+    </div>
 </div>
+
+
+
+
+<p>The routes <code>r1</code> to <code>r5</code> are mapped to functions <code>user_login</code>, <code>user_logout</code>, <code>user_signup</code>, <code>verify_login_otp</code>,
+and <code>generate_login_otp</code> as a list of tuples. This list is then iterated and each route and entry added to the
+specified <code>APIRouter</code> instance. This way, defined routes can be managed from a centralised <code>routes.yml</code> file and changes
+to the routes or associated parameter is automatically reflected in the system on reboot or start up.</p>
 
 
     

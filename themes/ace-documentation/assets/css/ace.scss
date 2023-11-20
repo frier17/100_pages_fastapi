@@ -82,18 +82,27 @@ $docs_toc_position_top: 4rem;
     .docs-sidenav .nav-link > span.badge.badge-primary, .docs-toc li a > span.badge.badge-primary{
         margin-top: 5px;
     }
+    #book-cover {
+    width: auto;
+}
 }
 
 @media (min-width: 1200px) {
     .docs-toc.large{
         height: calc(100vh - $docs_toc_position_top - $docs_toc_padding_top);
     }
+    #book-cover {
+    width: 75%;
+}
 }
 
 @media (max-width: 1200px) {
     .docs-toc.large{
         display:none;
     }
+    #book-cover {
+    width: 75%;
+}
 }
 
 .docs-toc{
@@ -130,22 +139,100 @@ table > tbody > tr > td, .bd-content > table > tbody > tr > th, .bd-content > ta
     border: 1px solid #dee2e6;
 }
 
+
+/* Modifications **/
 #book-cover {
-    width: 85%;
-    margin: 1em auto;
+    margin: 8em auto 0;
     padding: 0;
+    font-family: "Arial Narrow";
+    font-size: 20px;
 }
+
 #book-cover div.cover-strip {
     background-color: #e9edf8;
+    padding: 3rem 10rem;
 }
 #book-cover div.cover-strip h2 {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 38px;
+    font-weight: 550;
 }
 #book-cover div.cover-strip h2 span {
     text-transform: uppercase;
 }
-#book-cover div.cover-strip h4 {
+#book-cover h4 {
     text-align: center !important;
-    font-size: 16px;
+    font-size: 1.2em;
+    font-weight: 550;
+    margin-top: 3.2rem;
+}
+
+.btn {
+    border-radius: 0rem !important;
+}
+figcaption {
+    font-size: 0.85rem;
+    font-family: "Times New Romans";
+    margin: 12px auto 45px;
+    text-align: left;
+    color: #007bff;
+}
+figcaption h4 {
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: inline;
+    margin-right: 1rem;
+}
+figcaption p {
+    display: inline;
+    margin: 0;
+    padding: 0 !important;
+}
+blockquote {
+    display: block;
+    margin: 16px auto;
+    background-color: #efefef;
+    padding: 1rem 0;
+
+}
+
+blockquote p {
+    padding: 0.5rem 3rem;
+    margin-bottom: 0;
+}
+blockquote .table p {
+    padding: 0;
+    margin: 0;
+}
+blockquote ul {
+    margin: 0;
+
+}
+blockquote ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.table p, h4 {
+    font-family: "Times New Romans";
+    color: #007bff;
+}
+.table h4 {
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: inline;
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+.table h4:before {
+    content: "";
+    margin-top: 1rem;
+    display: block;
+}
+
+.table p {
+    font-size: 0.85rem;
+    display: inline;
+}
+.table-padded {
+    padding-left: 2rem;
 }

@@ -30,17 +30,19 @@
 <body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
     <div class="container">
         <div>
+            
+            <img src="/img/nav_logo.png"/>
+            
+        </div>
+        <div>
             <a class="navbar-brand" href="/100_pages_fastapi">
-                
                 100 Pages to  FastAPI
             </a>
         </div>
         
     </div>
-    <div class="feed-icons">
-            <a href="https://frier17.github.io/100_pages_fastapi/chapter6/index.xml"><img src="/img/feed-icon.svg" alt="RSS feed" /></a>
-        </div>
-    </nav>
+
+</nav>
 <div class="container-fluid">
             <div class="row">
 
@@ -166,11 +168,28 @@
 <hr>
 
 
-<p>Middleware is a term used across different web frameworks and cloud base systems. Middleware can be seen as any software or service that allows other systems to communicate of manage data. Middleware can also be seen as a service that acts as an intermediary between two systems. The Starlette framework allows the use of ASGI Middleware which can be used to process requests or responses before passing control to other processes. FastAPI also supports the use of middleware both bespoke and standard middleware included in the Starlette framework.</p>
+<p>Middleware is a term used across different web frameworks and cloud base systems. Middleware can be seen as any software
+or service that allows other systems to communicate of manage data. Middleware can also be seen as a service that acts
+as an intermediary between two systems. The Starlette framework allows the use of Asynchronous Server Gateway Interface
+(ASGI) Middleware which can be used to process requests or responses before passing control to other processes.
+FastAPI also supports the use of middleware both bespoke and standard middleware included in the Starlette framework.</p>
 <h2 id="standard-middleware">Standard middleware</h2>
-<p>Middleware affects the behaviour of the entire web application. Once applied, all path operations will be modified by the middleware. Using this approach, developers can modify all requests or all responses to meet a given need. As an example, the <code>CORSMiddleware</code> allows application to set the right header parameters to enable cross-origin requests by browsers. Every Starlette application has <code>ServerErrorMiddleware</code> and <code>ExceptionMiddleware</code>. Any other added middleware is processed in the order in which they were registered with the application. FastAPI extends the Starlette framework hence it supports these middlewares (<code>ServerErrorMiddleware</code> and <code>ExceptionMiddleware</code>). Like middleware registered in Starlette application, FastAPI middleware work with every HTTP request before passing it to a path operation and work with every response before returning an actual response. Middleware defined in Starlette can work with FastAPI application seamlessly.</p>
-<p>There are several middleware applications defined for Starlette. The summary table <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> below shows standard middleware for the <code>starlette</code> package.</p>
-<table>
+<p>Middleware affects the behaviour of the entire web application. Once applied, all path operations will be modified by
+the middleware. Using this approach, developers can modify all requests or all responses to meet a given need. As an
+example, the <code>CORSMiddleware</code> allows application to set the right header parameters to enable cross-origin requests by
+browsers. Every Starlette application has <code>ServerErrorMiddleware</code> and <code>ExceptionMiddleware</code>. Any other added middleware
+is processed in the order in which they were registered with the application. FastAPI extends the Starlette framework
+hence it supports these middlewares (<code>ServerErrorMiddleware</code> and <code>ExceptionMiddleware</code>). Like middleware registered in
+Starlette application, FastAPI middleware work with every HTTP request before passing it to a path operation and work
+with every response before returning an actual response. Middleware defined in Starlette can work with FastAPI
+application seamlessly.</p>
+<p>There are several middleware applications defined for Starlette. The summary table (Table 1) below shows standard
+middleware for the <code>starlette</code> package.</p>
+
+
+
+<div class="table table-hover" role="alert">
+    <table>
 <thead>
 <tr>
 <th>Middleware</th>
@@ -184,7 +203,7 @@
 </tr>
 <tr>
 <td><code>SessionMiddleware</code></td>
-<td>Adds a signed cookie session that can be accessed as requests.session dictionary. Entries in the session are readable and cannot be modified.</td>
+<td>Adds a signed cookie session that can be accessed as <code>requests.session</code> dictionary. Entries in the session are readable and cannot be modified.</td>
 </tr>
 <tr>
 <td><code>HTTPSRedirectMiddleware</code></td>
@@ -204,27 +223,57 @@
 </tr>
 </tbody>
 </table>
-<p><a href="#fn1">Table 1</a></p>
-<h2 id="custom-middleware">Custom middleware</h2>
-<p>Users can also write their own middleware to meet their needs. Let us suppose in our P2P system, we do not wish to save client information like IP address or OS as plain text for security reasons. We will want to encrypt certain information and then allow only processes or users with certain access view this information. One approach to use is to define a <code>PrivacyMiddleware</code> which will scramble or encrypt our client information before this data can be saved to the database. With this class, we can manage what aspects of our client is visible or hidden.</p>
-<p>The <code>PrivacyMiddleware</code> is design to implement principles from the work <a href="https://gdpr-info.eu/issues/privacy-by-design/">Privacy by Design</a> by Ann Cavoukian. Details of privacy schemes or techniques are beyond the scope of this book. In this book, we will use middleware to address some user concern and encourage the reader to explore best practises around data security and user privacy. Our design approach is described below.</p>
-<p>A user request is searched for a valid token. If a token exists, then the user is assumed registered, and the authentication process can verify the registered user. If there is no token, then the request is from an unregistered user. For this case, the user details like IP address, OS, location, and other header data are copied to a temporal variable. If the request has a body variable named privacy, or header with privacy, then a dictionary of information that should be passed through the privacy function is retrieved. This dictionary will specify the attribute to be encrypted as keys and the values are the token (nonce) for generating a symmetric key needed to encrypt or decrypt this field. If a key has no corresponding value or its value is set to None, then a key is generated. Once the privacy dictionary has been processed, the system privacy registry is updated. This registry will be a lookup object from which all future requests will be processed for privacy per user for a given session. So future requests will be passed to privacy function that will call the privacy registry for fields to encrypt. If these fields exist in the body or header of the requests, they are copied, and then encrypted. The encrypted values are then used to replace the original request values and then the request is passed on to the path operation or next process.</p>
-<p>Privacy handling middleware to encrypt or parse user data. Data are encrypted and saved as key: (display** data, encrypted data)</p>
-<h4 id="-further-reading---practical-privacy-approach">📚 Further Reading - Practical privacy approach</h4>
-<p>Privacy management is a complex subject that goes beyond just technical components such as cookies management or online tracking. There are legal, technnology, ethical and other aspects when dealing with privacy. A detailed discussion on privacy is beyond the scope of this book, however, it is important for designers to plan for privacy from inception of a system that will interface with users and possibly use data provided by a human user. A gold standard for mananing the technical aspect of privacy is Differential Privacy.</p>
-<p>📖 <a href="https://www.oreilly.com/library/view/practical-data-privacy/9781098129453/">Practical privacy by Katherine Jarmul</a></p>
-<p>📖 <a href="https://desfontain.es/privacy/differential-privacy-awesomeness.html">Introduction to Differential Privacy</a></p>
-<p>📖 <a href="https://desfontain.es/privacy/differential-privacy-in-more-detail.html">More detailed explanation of Differential Privacy</a></p>
-<p>📖 <a href="https://iapp.org/resources/article/oipc-privacy-by-design-resources/">OIPC - Privacy by Design Resources</a></p>
-<p>📖 <a href="https://www.onetrust.com/blog/principles-of-privacy-by-design/">7 Principles of privacy by design</a></p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Standard middleware applications in starlette package&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
+
+
+    <h4>Table 1</h4>
+    <p>Standard middleware applications in starlette package</p>
 </div>
+
+<h2 id="custom-middleware">Custom middleware</h2>
+<p>Users can also write their own middleware to meet their needs. Let us suppose in our P2P system, we do not wish to save
+client information like IP address or OS as plain text for security reasons. We will want to encrypt certain information
+and then allow only processes or users with certain access view this information. One approach to use is to define
+a <code>PrivacyMiddleware</code> which will scramble or encrypt our client information before this data can be saved to the
+database. With this class, we can manage what aspects of our client is visible or hidden.</p>
+<p>The <code>PrivacyMiddleware</code> is design to implement principles from the
+work <a href="https://gdpr-info.eu/issues/privacy-by-design/">Privacy by Design</a> by Ann Cavoukian. Details of privacy schemes or
+techniques are beyond the scope of this book. In this book, we will use middleware to address some user concern and
+encourage the reader to explore best practises around data security and user privacy. Our design approach is described
+below.</p>
+<p>A user request is searched for a valid token. If a token exists, then the user is assumed registered, and the
+authentication process can verify the registered user. If there is no token, then the request is from an unregistered
+user. For this case, the user details like IP address, OS, location, and other header data are copied to a temporal
+variable. If the request has a body variable named privacy, or header with privacy, then a dictionary of information
+that should be passed through the privacy function is retrieved. This dictionary will specify the attribute to be
+encrypted as keys and the values are the token (nonce) for generating a symmetric key needed to encrypt or decrypt this
+field. If a key has no corresponding value or its value is set to None, then a key is generated. Once the privacy
+dictionary has been processed, the system privacy registry is updated. This registry will be a lookup object from which
+all future requests will be processed for privacy per user for a given session. So future requests will be passed to
+privacy function that will call the privacy registry for fields to encrypt. If these fields exist in the body or header
+of the requests, they are copied, and then encrypted. The encrypted values are then used to replace the original request
+values and then the request is passed on to the path operation or next process.</p>
+<p>Privacy handling middleware to encrypt or parse user data.
+<figure><img src="privacy.png"
+         alt="Sample screenshot of PrivacyMiddleware encrypting user data as a measure of improving user&amp;rsquo;s privacy"/><figcaption>
+            <h4>Figure 1</h4><p>Sample screenshot of PrivacyMiddleware encrypting user data as a measure of improving user&rsquo;s privacy</p>
+        </figcaption>
+</figure>
+</p>
+<h4 id="-further-reading---practical-privacy-approach">📚 Further Reading - Practical privacy approach</h4>
+<blockquote>
+<p>Privacy management is a complex subject that goes beyond just technical components such as cookies management or online
+tracking. There are legal, technology, ethical and other aspects when dealing with privacy. A detailed discussion on
+privacy is beyond the scope of this book, however, it is important for designers to plan for privacy from inception of a
+system that will interface with users and possibly use data provided by a human user. A gold standard for managing the
+technical aspect of privacy is Differential Privacy.</p>
+<ul>
+<li>📖 <a href="https://www.oreilly.com/library/view/practical-data-privacy/9781098129453/">Practical privacy by Katherine Jarmul</a></li>
+<li>📖 <a href="https://desfontain.es/privacy/differential-privacy-awesomeness.html">Introduction to Differential Privacy</a></li>
+<li>📖 <a href="https://desfontain.es/privacy/differential-privacy-in-more-detail.html">More detailed explanation of Differential Privacy</a></li>
+<li>📖 <a href="https://iapp.org/resources/article/oipc-privacy-by-design-resources/">OIPC - Privacy by Design Resources</a></li>
+<li>📖 <a href="https://www.onetrust.com/blog/principles-of-privacy-by-design/">7 Principles of privacy by design</a></li>
+</ul>
+</blockquote>
 
 
     

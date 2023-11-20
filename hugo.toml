@@ -2,3 +2,8 @@ baseURL = 'https://frier17.github.io/100_pages_fastapi/'
 languageCode = 'en-us'
 title = '100 Pages to  FastAPI'
 theme = "ace-documentation"
+pygmentsCodeFences = true
+pygmentsStyle = "monokaidark"
+
+[params]
+site_logo = "/img/nav_logo.png"

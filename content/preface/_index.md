@@ -6,8 +6,7 @@ draft = true
 +++
 
 
-This book was produced based on lessons learned while designing products for Bi
-tmast Digital Services Ltd, tutorials for
+This book was produced based on lessons learned while designing products for Bitmast Digital Services Ltd, tutorials for
 Codeskol and Boot camp training, and apps for A17S clients. This book is intended for developers who have some
 experience of Python programming and a background in web application development using frameworks such as Django or
 Flask. An effort will be made to teach FastAPI framework fundamentals and demonstrate alternate techniques to completing
@@ -76,17 +75,14 @@ The convention used in this book are as follows:
 
 Names of variables or snippets of code are in red and with Courier New font type. Example:
 
-~~~python
-
+{{< code lang="python" >}}
 from wallet import services
-
 
 async def generate_wallet(user: str | uuid.UUID) -> Any:
 
-
     return services.generate_wallet(user)
 
-~~~
+{{< /code >}}
 
 As this book was generated using markdown, links to resources may be formatted using my default rendering engine and not
 in the common blue colour with underlined text. See example link below with the word "codeskol" as a link:
