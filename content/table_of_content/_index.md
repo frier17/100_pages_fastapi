@@ -11,7 +11,7 @@ draft = true
 ## TABLE OF CONTENT
 1.	[Introduction to FastAPI](/chapter1/)
 
-		a.	Modern Python with AsyncIO (add further reading on generators, coroutine, concurrency. Add video links to these topics)
+		a.	Modern Python with AsyncIO
 		b.	JSON and API data
 		c.	Type hints
 		d.	Framework Structure
@@ -23,7 +23,7 @@ draft = true
 		d.	The mWallet application file structure
 3.	[Identifying Routes](/chapter3/) 
 
-		a.	RESTful API Design (add further reading on REST design here)
+		a.	RESTful API Design
 		b.	Classical way of defining routes in FastAPI
 		c.	Using YAML file for defining routes
 4.	[Application services](/chapter4/) 
@@ -33,17 +33,17 @@ draft = true
 		c.	Body
 5.	[The Business domain entities and Database layer](/chapter5/)
 
-		a.	Defining and Generating schemas (add tips on make_data, make_schema)
-		b.	SQLAlchemy and database management (Add further reading for PyMongo, SQLAlchemy, SQLModel)
+		a.	Defining and Generating schemas
+		b.	SQLAlchemy and database management
 		c.	Eloquent SQLAlchemy queries
-		d.	Database transactions (Add tips on delegated_task, generator for session, thread runners)
+		d.	Database transactions
 6.	[Middleware in FastAPI](/chapter6/)
 
 		a.	Standard middleware – CORS, Gzip, etc.
 		b.	Custom middleware 
 7.	[Authorization and Authentication](/chapter7/)
 
-		a.	Authentication (add further reading on JWT, OAuth, HTTP and Key access)
+		a.	Authentication
 		b.	Permission based on scopes
 		c.	API Permission class
 8.	[Testing](/chapter8/)
@@ -54,8 +54,8 @@ draft = true
 9.	[Resources](/chapter9/)
 
 		a.	APPENDIX 1: Some technical considerations with FastAPI
-			i. Python Async framework (consider uv-loop, async web servers)
-			ii. Managing Errors and Exception - Logs and more
+			i. Python Async framework
+			ii. Managing Errors and Exception
 			iii. Deployment of FastAPI on RailApp or AWS servers
 		b.	APPENDIX 2: SOME GENERAL TIPS ON WEB DEVELOPMENT 
 				i. Designing for constraints
