@@ -28,19 +28,25 @@
 
 </head>
 <body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
-    <div class="container">
-        <div>
-            
-            <img src="https://frier17.github.io/100_pages_fastapi/img/nav_logo.png"/>
-            
-        </div>
+    <div class="container d-md-flex d-lg-flex d-xl-flex flex-row d-sm-flex">
         <div>
             <a class="navbar-brand" href="/100_pages_fastapi">
                 100 Pages to  FastAPI
             </a>
         </div>
+        <div class="logo ">
+            
+            <a href="#" target="_blank"><img src="https://frier17.github.io/100_pages_fastapi/img/nav_logo.png"/></a>
+            
+        </div>
+    </div>
+
+    <div >
+
+
         
     </div>
+
 
 </nav>
 <div class="container-fluid">
@@ -173,10 +179,28 @@
 <hr>
 
 
-<p><em>FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.</em></p>
+<p><em>FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python
+type hints.</em></p>
 <h2 id="modern-python-with-asyncio">Modern Python with AsyncIO</h2>
-<p>Python as a programming language has evolved over time with support for features like multiprocessing, asynchronous task, generators, concurrency, and type hinting. One of the beautiful things about Python language is its simplicity. Overtime, the core language developers and maintainers have shown that simple doesn’t imply powerless. Python indeed is a powerful programming language with a rich ecosystem that cater for scientific calculations, data analysis, machine learning and web application development. The addition of the multiprocessing, concurrency, and asyncio packages to Python brings the benefit of executing multiple tasks simultaneously. The asyncio package enable developers to write faster code using Coroutine, Task, and Future objects. These objects can typically execute a code on an event loop. Results from running such codes can be received by waiting for execution of the on the event loop in a non-blocking manner. Details of the asyncio package is beyond the scope of this book but to better appreciate the FastAPI framework and the mWallet project we will look into Generator (this is not part of the asyncio package), Coroutine, Task, and Thread.</p>
-<p>Generator function in Python is an object which can be iterated and can &ldquo;remember&rdquo; their iterated value. An iterator generator is the result of a generator function. The yield expression in the generator function allows it to produce a succession of values that are retrieved one at a time. Generators are effective for iterating values as each yield halts processing momentarily while keeping track of the execution state of the location (including variables and pending statements) unlike functions which begin from scratch with each call. Internally, a generator has the special <code>__next__</code> method that defines how it can be iterated and retain its last state. Calling <code>next()</code> function on a generator will move it forward by a step. If all values of the generator has been retrieved and next() is called, the generator will raise a <code>StopIteration</code> exception indicating the end of the sequence.</p>
+<p>Python as a programming language has evolved over time with support for features like multiprocessing, asynchronous
+task, generators, concurrency, and type hinting. One of the beautiful things about Python language is its simplicity.
+Overtime, the core language developers and maintainers have shown that &ldquo;simple&rdquo; doesn’t imply &ldquo;powerless&rdquo;. Python indeed is
+a powerful programming language with a rich ecosystem that cater for scientific calculations, data analysis, machine
+learning and web application development. The addition of the multiprocessing, concurrency, and asyncio packages to
+Python brings the benefit of executing multiple tasks simultaneously. The asyncio package enable developers to write
+faster code using Coroutine, Task, and Future objects. These objects can typically execute a code on an event loop.
+Results from running such codes can be received by waiting for execution of the on the event loop in a non-blocking
+manner. Details of the asyncio package is beyond the scope of this book but to better appreciate the FastAPI framework
+and the mWallet project we will look into Generator (this is not part of the asyncio package), Coroutine, Task, and
+Thread.</p>
+<p>Generator function in Python is an object which can be iterated and can &ldquo;remember&rdquo; their iterated value. An iterator
+generator is the result of a generator function. The yield expression in the generator function allows it to produce a
+succession of values that are retrieved one at a time. Generators are effective for iterating values as each yield halts
+processing momentarily while keeping track of the execution state of the location (including variables and pending
+statements) unlike functions which begin from scratch with each call. Internally, a generator has the special <code>__next__</code>
+method that defines how it can be iterated and retain its last state. Calling <code>next()</code> function on a generator will move
+it forward by a step. If all values of the generator has been retrieved and next() is called, the generator will raise
+a <code>StopIteration</code> exception indicating the end of the sequence.</p>
 
 
 
@@ -191,107 +215,25 @@
 
 <div class="position-relative">
     <div class="position-absolute" style="right:0;">
-        <button class="btn btn-light" data-clipboard-target="#clipboard_c26a28d847">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_23cdaf1c14">
         Copy
         </button>
     </div>
-    <div id="clipboard_c26a28d847">
-    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">class</span> A:
-</span></span><span style="display:flex;"><span>    names = [<span style="color:#0ff;font-weight:bold">&#39;Flash&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;Superman&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;Batman&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;Wonder Woman&#39;</span>]
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">def</span> __next__(self):
-</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">for</span> x in self.names:
-</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">f</span><span style="color:#0ff;font-weight:bold">&#39;Name super hero/heroine: </span><span style="color:#0ff;font-weight:bold">{</span>x<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#39;</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">yield</span> x
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">def</span> named_heroes():
-</span></span><span style="display:flex;"><span>    names = [<span style="color:#0ff;font-weight:bold">&#39;Flash&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;Superman&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;Batman&#39;</span>, <span style="color:#0ff;font-weight:bold">&#39;Wonder Woman&#39;</span>]
-</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">for</span> x in names:
-</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">yield</span> x
-</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#0ff;font-weight:bold">f</span><span style="color:#0ff;font-weight:bold">&#39;Printing the name of heroes after yield. Next execution will print: </span><span style="color:#0ff;font-weight:bold">{</span>x<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#39;</span>)
-</span></span></code></pre></div>
-    </div>
-</div>
-
-
-
-
-<p>Creating an instance of class A and calling the <code>next()</code> on that instance will move the iterator of names by a step. Each call to next will print &lsquo;Flash&rsquo;, &lsquo;Superman&rsquo;, &lsquo;Batman&rsquo; &hellip; in the order in which they ware defined in the list, names. The alternate approach of defining a generator uses a function that yields a name.
-Note the print function is called after the yield. This implies that the next name in the list will be printed after the first call to <code>next()</code>. Hence, the name &lsquo;Flash&rsquo; will not be printed.</p>
-<blockquote>
-<p>&ldquo;Coroutines are computer program components that allow execution to be suspended and resumed, generalizing subroutines for cooperative multitasking.&rdquo; – Wikipedia.</p>
-</blockquote>
-<p>In Python coroutines are defined using the <code>async</code> keywords. Coroutines are only executed or run by calling the <code>asyncio.run</code> function. Calling the coroutine directly will not execute the function but return a type coroutine. To execute a coroutine, one will either await the coroutine or execute it via <code>asyncio.run</code> function.</p>
-
-
-
-
-
-
-    
-    
-
-
-
-
-<div class="position-relative">
-    <div class="position-absolute" style="right:0;">
-        <button class="btn btn-light" data-clipboard-target="#clipboard_53661f7763">
-        Copy
-        </button>
-    </div>
-    <div id="clipboard_53661f7763">
-    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">async</span> <span style="color:#fff;font-weight:bold">def</span> run_later(t: <span style="color:#fff;font-weight:bold">int</span> = <span style="color:#ff0;font-weight:bold">5</span>):
-</span></span><span style="display:flex;"><span>     
-</span></span><span style="display:flex;"><span>     <span style="color:#fff;font-weight:bold">await</span> asyncio.sleep(t)
-</span></span><span style="display:flex;"><span>     <span style="color:#fff;font-weight:bold">print</span>(f<span style="color:#f00">‘</span>Executing after sleeping <span style="color:#fff;font-weight:bold">for</span> {t} seconds<span style="color:#f00">’</span>)
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>asyncio.run(run_later(<span style="color:#ff0;font-weight:bold">10</span>))
-</span></span></code></pre></div>
-    </div>
-</div>
-
-
-
-
-<p>The code above will sleep or wait for <code>t</code> number of seconds. In our example, the code will sleep for ten seconds. If the time, <code>t</code>, is not specified then the code will print a message after five seconds. The function <code>run_later</code> is a coroutine and is defined like any other function in Python but its definition must have an async keyword preceding it.</p>
-<p>Tasks are a major component of the <code>asyncio</code> package. A task is a wrapper function for coroutine. Tasks can be used to schedule and manage the sequence in which coroutines are added to the event loop for execution. Typically, a task is generated by calling the <code>asyncio.create_task</code> function with the desired coroutine. Tasks can also be executed by calling the <code>asyncio.run</code> function.</p>
-
-
-
-
-
-
-    
-    
-
-
-
-
-<div class="position-relative">
-    <div class="position-absolute" style="right:0;">
-        <button class="btn btn-light" data-clipboard-target="#clipboard_fd0e5ebff7">
-        Copy
-        </button>
-    </div>
-    <div id="clipboard_fd0e5ebff7">
-    <div class="highlight"><pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
+    <div id="clipboard_23cdaf1c14">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>:
+</span></span><span style="display:flex;"><span>names <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Flash&#39;</span>, <span style="color:#e6db74">&#39;Superman&#39;</span>, <span style="color:#e6db74">&#39;Batman&#39;</span>, <span style="color:#e6db74">&#39;Wonder Woman&#39;</span>]
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">async</span> <span style="color:#fff;font-weight:bold">def</span> run_later(t: <span style="color:#fff;font-weight:bold">int</span> = <span style="color:#ff0;font-weight:bold">5</span>):
-</span></span><span style="display:flex;"><span>     
-</span></span><span style="display:flex;"><span>     <span style="color:#fff;font-weight:bold">await</span> asyncio.sleep(t)
-</span></span><span style="display:flex;"><span>     <span style="color:#fff;font-weight:bold">print</span>(f<span style="color:#f00">‘</span>Executing after sleeping <span style="color:#fff;font-weight:bold">for</span> {t} seconds<span style="color:#f00">’</span>)
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">async</span> <span style="color:#fff;font-weight:bold">def</span> main():
-</span></span><span style="display:flex;"><span>     task_a = asyncio.create_task(run_later())
-</span></span><span style="display:flex;"><span>     task_b = asyncio.create_task(run_later(<span style="color:#ff0;font-weight:bold">20</span>))
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>     <span style="color:#fff;font-weight:bold">await</span> task_a
-</span></span><span style="display:flex;"><span>     <span style="color:#fff;font-weight:bold">await</span> task_b
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>asyncio.run(main())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __next__(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>names:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Name super hero/heroine: </span><span style="color:#e6db74">{</span>x<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> x
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">named_heroes</span>():
+</span></span><span style="display:flex;"><span>names <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Flash&#39;</span>, <span style="color:#e6db74">&#39;Superman&#39;</span>, <span style="color:#e6db74">&#39;Batman&#39;</span>, <span style="color:#e6db74">&#39;Wonder Woman&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> names:
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">yield</span> x
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Printing the name of heroes after yield. Next execution will print: </span><span style="color:#e6db74">{</span>x<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
 </span></span></code></pre></div>
     </div>
 </div>
@@ -299,17 +241,129 @@ Note the print function is called after the yield. This implies that the next na
 
 
 
-<p>The tasks (<code>task_a</code>, <code>task_b</code>) are both created and associated with the <code>run_later</code> coroutine. Task <code>task_a</code> will wait for 5 seconds while <code>task_b</code> will wait for 20 seconds. Notice we defined a new coroutine main which is then executed by the <code>asyncio.run</code> function. When main executes, tasks will be run and managed internally by the <code>asyncio</code> package. The developer does not need to worry about firing any thread. We only need to wait for the task to execute and terminate. To do this, we use the await keyword to schedule and wait for the task. Failing to call await on a task will leave us without any result.</p>
-<p>Future in <code>asyncio</code> serves as placeholders for results of executing an asynchronous operation. As an example, a task may return a value after completion and this value is not directly available save by a future object. Future objects can be used to implement callback mechanisms for coroutine.</p>
-<p>Thread class in Python represents a mechanism by which a function can be executed on a separate CPU thread. Thread in Python can be managed at a high level by using a thread pool. The <code>concurrent.future.ThreadPoolExecutor</code> offers a high level interface to execute functions on background threads.</p>
-<p><code>Coroutine</code>, <code>Future</code> and <code>Task</code> objects are implementations of the <code>Awaitable</code> abstract base class with <code>Task</code> extending the Future class as shown below.</p>
+<p>Creating an instance of class A and calling the <code>next()</code> on that instance will move the iterator of names by a step.
+Each call to next will print &lsquo;Flash&rsquo;, &lsquo;Superman&rsquo;, &lsquo;Batman&rsquo; &hellip; in the order in which they were defined in the list,
+names. The alternate approach of defining a generator uses a function that yields a name.
+Note the print function is called after the yield. This implies that the next name in the list will be printed after the
+first call to <code>next()</code>. Hence, the name &lsquo;Flash&rsquo; will not be printed.</p>
+<blockquote>
+<p>&ldquo;Coroutines are computer program components that allow execution to be suspended and resumed, generalizing subroutines
+for cooperative multitasking.&rdquo; – Wikipedia.</p>
+</blockquote>
+<p>In Python coroutines are defined using the <code>async</code> keywords. Coroutines are only executed or run by calling
+the <code>asyncio.run</code> function. Calling the coroutine directly will not execute the function but return a type coroutine. To
+execute a coroutine, one will either await the coroutine or execute it via <code>asyncio.run</code> function.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_f5a710e7b4">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_f5a710e7b4">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_later</span>(t: int <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">await</span> asyncio<span style="color:#f92672">.</span>sleep(t)
+</span></span><span style="display:flex;"><span>     print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Executing after sleeping for </span><span style="color:#e6db74">{</span>t<span style="color:#e6db74">}</span><span style="color:#e6db74"> seconds&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>asyncio<span style="color:#f92672">.</span>run(run_later(<span style="color:#ae81ff">10</span>))
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The code above will sleep or wait for <code>t</code> number of seconds. In our example, the code will sleep for ten seconds. If the
+time, <code>t</code>, is not specified then the code will print a message after five seconds. The function <code>run_later</code> is a
+coroutine and is defined like any other function in Python but its definition must have an async keyword preceding it.</p>
+<p>Tasks are a major component of the <code>asyncio</code> package. A task is a wrapper function for coroutine. Tasks can be used to
+schedule and manage the sequence in which coroutines are added to the event loop for execution. Typically, a task is
+generated by calling the <code>asyncio.create_task</code> function with the desired coroutine. Tasks can also be executed by
+calling the <code>asyncio.run</code> function.</p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<div class="position-relative">
+    <div class="position-absolute" style="right:0;">
+        <button class="btn btn-light" data-clipboard-target="#clipboard_98ec2f2c09">
+        Copy
+        </button>
+    </div>
+    <div id="clipboard_98ec2f2c09">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py3" data-lang="py3"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_later</span>(t: int <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">await</span> asyncio<span style="color:#f92672">.</span>sleep(t)
+</span></span><span style="display:flex;"><span>     print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Executing after sleeping for </span><span style="color:#e6db74">{</span>t<span style="color:#e6db74">}</span><span style="color:#e6db74"> seconds&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>task_a <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>create_task(run_later())
+</span></span><span style="display:flex;"><span>task_b <span style="color:#f92672">=</span> asyncio<span style="color:#f92672">.</span>create_task(run_later(<span style="color:#ae81ff">20</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">await</span> task_a
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">await</span> task_b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>asyncio<span style="color:#f92672">.</span>run(main())
+</span></span></code></pre></div>
+    </div>
+</div>
+
+
+
+
+<p>The tasks (<code>task_a</code>, <code>task_b</code>) are both created and associated with the <code>run_later</code> coroutine. Task <code>task_a</code> will wait
+for 5 seconds while <code>task_b</code> will wait for 20 seconds. Notice we defined a new coroutine main which is then executed by
+the <code>asyncio.run</code> function. When main executes, tasks will be run and managed internally by the <code>asyncio</code> package. The
+developer does not need to worry about firing any thread. We only need to wait for the task to execute and terminate. To
+do this, we use the await keyword to schedule and wait for the task. Failing to call await on a task will leave us
+without any result.</p>
+<p>Future in <code>asyncio</code> serves as placeholders for results of executing an asynchronous operation. As an example, a task may
+return a value after completion and this value is not directly available save by a future object. Future objects can be
+used to implement callback mechanisms for coroutine.</p>
+<p>Thread class in Python represents a mechanism by which a function can be executed on a separate CPU thread. Thread in
+Python can be managed at a high level by using a thread pool. The <code>concurrent.future.ThreadPoolExecutor</code> offers a high
+level interface to execute functions on background threads.</p>
+<p><code>Coroutine</code>, <code>Future</code> and <code>Task</code> objects are implementations of the <code>Awaitable</code> abstract base class with <code>Task</code>
+extending the Future class as shown below.</p>
 <figure><a href="https://www.pythontutorial.net/" target="_blank"><img src="https://www.pythontutorial.net/wp-content/uploads/2022/07/python-future.svg"
          alt="Image attribution: The Python Tutorial"/></a><figcaption>
             <p>Image attribution: The Python Tutorial</p>
         </figcaption>
 </figure>
 
-<p>It is important to note that certain processes in computing cannot be run asynchronously. The benefit of <code>asyncio</code>, hence, is not available in every scenario. However, for web-based systems, there are multiple cases in which having a non-blocking process or thread can be a valuable means of saving time. Also, Python Global Interpreter Lock (<code>GIL</code>) ensures multiple Python bytecodes are not ran on various threads by the Python interpreter (for Python versions below 3.12). This means <code>asyncio</code> will not make much savings on a CPU bound task without proper use of multiprocessing. For jobs that are IO intensive, it may be preferable to use Threads as this will not be limited by the <code>GIL</code>. For the mWallet application, database connections are made on separate threads and the connection object passed as a generator object across the application. Results from executing database queries are also not automatically consumed but returned as a Python <code>Generator</code> object. This allows for iterating through results only when they are available at minimal cost of data and a high gain on speed.</p>
+<p>It is important to note that certain processes in computing cannot be run asynchronously. The benefit of <code>asyncio</code>,
+hence, is not available in every scenario. However, for web-based systems, there are multiple cases in which having a
+non-blocking process or thread can be a valuable means of saving time. Also, Python Global Interpreter Lock (<code>GIL</code>)
+ensures multiple Python bytecodes are not ran on various threads by the Python interpreter (for Python versions below
+3.12). This means <code>asyncio</code> will not make much savings on a CPU bound task without proper use of multiprocessing. For
+jobs that are IO intensive, it may be preferable to use Threads as this will not be limited by the <code>GIL</code>. For the
+mWallet application, database connections are made on separate threads and the connection object passed as a generator
+object across the application. Results from executing database queries are also not automatically consumed but returned
+as a Python <code>Generator</code> object. This allows for iterating through results only when they are available at minimal cost
+of data and a high gain on speed.</p>
 <h4 id="-further-read--generators-futures--python-concurrency">📚 Further Read – Generators, Futures &amp; Python Concurrency</h4>
 <blockquote>
 <p><strong>Short reads on Coroutine</strong></p>
@@ -336,21 +390,66 @@ Note the print function is called after the yield. This implies that the next na
 </ul>
 </blockquote>
 <h2 id="json-and-api-data">JSON and API data</h2>
-<p>Web API provides application developers, third party systems, or other users a means by which they can access specialized web resources, computer programs or functions. Web API comprises the set of HTTP requests and their responses. Modern web API uses a subset of HTTP concepts with other computer concepts like endpoint with parameters common in Remote Procedure Call (RPC) systems. Since data is often shared via web API, it is important to define the semantic and type of data between the web API server and other system users. A common messaging construct for sharing data is Extensible Markup Language (XML) and JavaScript Object Notation (JSON). Due to the simplicity of JSON, ubiquitous nature of JavaScript and its wide usage in the web, the JSON data format is the de facto means of sharing data for web APIs. The JSON standard requires only key-value pairs and supports a small range of data types like string, Boolean, Null, and Number. It is advisable to keep JSON of web API simple with each key being intuitive or appropriate names for your model attributes.</p>
+<p>Web API provides application developers, third party systems, or other users a means by which they can access
+specialized web resources, computer programs or functions. Web API comprises the set of HTTP requests and their
+responses. Modern web API uses a subset of HTTP concepts with other computer concepts like endpoint with parameters
+common in Remote Procedure Call (RPC) systems. Since data is often shared via web API, it is important to define the
+semantic and type of data between the web API server and other system users. A common messaging construct for sharing
+data is Extensible Markup Language (XML) and JavaScript Object Notation (JSON). Due to the simplicity of JSON,
+ubiquitous nature of JavaScript and its wide usage in the web, the JSON data format is the de facto means of sharing
+data for web APIs. The JSON standard requires only key-value pairs and supports a small range of data types like string,
+Boolean, Null, and Number. It is advisable to keep JSON of web API simple with each key being intuitive or appropriate
+names for your model attributes.</p>
 <h4 id="ℹ-tips-and-tricks--towards-a-better-data-representation">ℹ️ Tips and Tricks – towards a better data representation</h4>
 <blockquote>
-<p>In FastAPI, the Pydantic model class is used to provide the service of matching a data model to JSON response output. Pydantic models can also be returned as Python dictionary type or initialized from dictionary types with matching keys to that of the model fields. This makes for easy parsing from one data structure to another (dictionary to model vis-à-vis). For the mWallet project, API endpoints by default accepts a dictionary or Pydantic model. Responses to HTTP requests are returned as JSON by default while return values of endpoints are database ORM instances that can be dynamically parsed to Pydantic models or a dictionary. References to linked objects can be captured using an id field or as nested model. However, in the JSON representation, these references could be represented as URLs that points to the referenced object. This is more in line with HTTP standard for RESTful web APIs.</p>
+<p>In FastAPI, the Pydantic model class is used to provide the service of matching a data model to JSON response output.
+Pydantic models can also be returned as Python dictionary type or initialized from dictionary types with matching keys
+to that of the model fields. This makes for easy parsing from one data structure to another (dictionary to model
+vis-à-vis). For the mWallet project, API endpoints by default accepts a dictionary or Pydantic model. Responses to HTTP
+requests are returned as JSON by default while return values of endpoints are database ORM instances that can be
+dynamically parsed to Pydantic models or a dictionary. References to linked objects can be captured using an id field or
+as nested model. However, in the JSON representation, these references could be represented as URLs that points to the
+referenced object. This is more in line with HTTP standard for RESTful web APIs.</p>
 </blockquote>
 <h2 id="why-fastapi">Why FastAPI?</h2>
-<p>My first impression when I looked at FastAPI was: &ldquo;this is simple&rdquo;! However, like many other Python programmers then, I had to make the choice of working with FastAPI and Django. At the time, I already had toolkits for generating from my Django models associated forms.py, views.py, and urls.py scripts. Django has a rich ecosystem and is a well-structured framework. However, FastAPI introduced type hints, async web servers, and data validation to the web development space. This was a major consideration for me. Aside from automatic validation of data, there was also the <a href="https://swagger.io/docs/">Swagger documentation</a> that comes ready with the FastAPI framework. Added to this was the fact that FastAPI had a higher performance in terms of server response due to its use of an asynchronous framework under the hood. So, a typical web application (app) on FastAPI comes ready with web documentation, support for asynchronous server, data validation, to name a few. Some impressive features are:</p>
+<p>My first impression when I looked at FastAPI was: &ldquo;this is simple&rdquo;! However, like many other Python programmers then, I
+had to make the choice of working with FastAPI and Django. At the time, I already had toolkits for generating from my
+Django models associated forms.py, views.py, and urls.py scripts. Django has a rich ecosystem and is a well-structured
+framework. However, FastAPI introduced type hints, async web servers, and data validation to the web development space.
+This was a major consideration for me. Aside from automatic validation of data, there was also
+the <a href="https://swagger.io/docs/">Swagger documentation</a> that comes ready with the FastAPI framework. Added to this was the
+fact that FastAPI had a higher performance in terms of server response due to its use of an asynchronous framework under
+the hood. So, a typical web application (app) on FastAPI comes ready with web documentation, support for asynchronous
+server, data validation, to name a few. Some impressive features are:</p>
 <ol>
-<li>Routing system. The routing system is based on Starlette as FastAPI is built on the Starlette framework. For people coming from a background using Flask, they will find the routing very similar or equivalent to that of Flask. There however is the power of data type hints used in FastAPI routing and the benefit of using dependency to automatically inject code into route functions. More details on this will be seen in the routing section of the book.</li>
-<li>Flexible framework structure. There is no defined or adopted file structure for FastAPI. However, for this book, we propose a file structure we believe will help separate various system behaviours into packages. This is not compulsory as the FastAPI system on modern Python can simply resolve imported class paths as needed.</li>
-<li>Pydantic Feature. The <a href="https://docs.pydantic.dev/latest/">Pydantic</a> model allows for a simple yet powerful data validation system for Python. Pydantic enforces type hints at runtime and provides user friendly errors when data is invalid. FastAPI incorporates Pydantic in parsing web requests into data schemas. Schemas have an inbuilt validation method for ensuring posted data matching native Python data types. Furthermore, developers can add custom validation logic to match their business use case.</li>
-<li>Starlette Features. FastAPI is built on Starlette hence any Starlette code works seamlessly with FastAPI. Also, some classes (example APIRoute and APIRouter) of FastAPI are simply wrapper classes of the underlying Starlette counterpart. In such cases, developers may use either classes defined in FastAPI or those defined in Starlette. In this book, some code snippets may have imported classes from Starlette.</li>
-<li>Third party integration. Python packages and plugins can be easily imported into web applications running on FastAPI. Simply install desired packages using the pip or similar package installer and import needed classes into your web application. The <a href="https://github.com/blockcypher/blockcypher-python">blockcypher python SDK</a>, <a href="https://aws.amazon.com/ses/">Amazon Web Services (AWS) SES</a>, and a Python <a href="https://paystack.com/docs/api/">PayStack</a> wrapper was used extensively in the project covered in this book.</li>
-<li>Authentication and Permission. FastAPI comes with security and authentication that complies with standards such as OAuth2. All security features supported by OpenAPI are supported by FastAPI. Security can also be modified or integrated with data models, relational databases etc.</li>
-<li>Editor Support. With type hinting, modern editors can provide suggestions and autocompletion for coding while using FastAPI. Multiple IDEs provide these features when using FastAPI making it easy to use the framework. Furthermore, class, methods, and function names are intuitive, and the framework code base is well documented.</li>
+<li>Routing system. The routing system is based on Starlette as FastAPI is built on the Starlette framework. For people
+coming from a background using Flask, they will find the routing very similar or equivalent to that of Flask. There
+however is the power of data type hints used in FastAPI routing and the benefit of using dependency to automatically
+inject code into route functions. More details on this will be seen in the routing section of the book.</li>
+<li>Flexible framework structure. There is no defined or adopted file structure for FastAPI. However, for this book, we
+propose a file structure we believe will help separate various system behaviours into packages. This is not
+compulsory as the FastAPI system on modern Python can simply resolve imported class paths as needed.</li>
+<li>Pydantic Feature. The <a href="https://docs.pydantic.dev/latest/">Pydantic</a> model allows for a simple yet powerful data
+validation system for Python. Pydantic enforces type hints at runtime and provides user friendly errors when data is
+invalid. FastAPI incorporates Pydantic in parsing web requests into data schemas. Schemas have an inbuilt validation
+method for ensuring posted data matching native Python data types. Furthermore, developers can add custom validation
+logic to match their business use case.</li>
+<li>Starlette Features. FastAPI is built on Starlette hence any Starlette code works seamlessly with FastAPI. Also, some
+classes (example APIRoute and APIRouter) of FastAPI are simply wrapper classes of the underlying Starlette
+counterpart. In such cases, developers may use either classes defined in FastAPI or those defined in Starlette. In
+this book, some code snippets may have imported classes from Starlette.</li>
+<li>Third party integration. Python packages and plugins can be easily imported into web applications running on FastAPI.
+Simply install desired packages using the pip or similar package installer and import needed classes into your web
+application.
+The <a href="https://github.com/blockcypher/blockcypher-python">blockcypher python SDK</a>, <a href="https://aws.amazon.com/ses/">Amazon Web Services (AWS) SES</a>,
+and a Python <a href="https://paystack.com/docs/api/">PayStack</a> wrapper was used extensively in the project covered in this
+book.</li>
+<li>Authentication and Permission. FastAPI comes with security and authentication that complies with standards such as
+OAuth2. All security features supported by OpenAPI are supported by FastAPI. Security can also be modified or
+integrated with data models, relational databases etc.</li>
+<li>Editor Support. With type hinting, modern editors can provide suggestions and autocompletion for coding while using
+FastAPI. Multiple IDEs provide these features when using FastAPI making it easy to use the framework. Furthermore,
+class, methods, and function names are intuitive, and the framework code base is well documented.</li>
 </ol>
 <figure><img src="fastapi-ide.png"
          alt="IDE support for FastAPI with hints"/><figcaption>
@@ -358,9 +457,15 @@ Note the print function is called after the yield. This implies that the next na
         </figcaption>
 </figure>
 
-<p>FastAPI in my opinion did effectively capture modern web development trends and gives developers access to a rich collection of features in Starlette, Pydantic and the Python programming language.</p>
-<p>At the end of the day, every framework simply boils down to codes of a programming language. One of the major benefits of a framework is that it simplifies development by providing out of the box features which are generally repeated in web projects. Each framework has a development culture, and it is the development culture that drives the design and use of all frameworks whether it is CakePHP, ZendFramework, CodeIgniter, Ruby on Rails, or django. Each framework, with its set of philosophies,  aims to solve common problems thereby enabling developers to focus on the business need.</p>
-<p>FastAPI is not any different in the regard of development culture. Loads of common features are also provided with little configuration enabling developers to quickly mock up a prototype for projects.</p>
+<p>FastAPI in my opinion did effectively capture modern web development trends and gives developers access to a rich
+collection of features in Starlette, Pydantic and the Python programming language.</p>
+<p>At the end of the day, every framework simply boils down to codes of a programming language. One of the major benefits
+of a framework is that it simplifies development by providing out of the box features which are generally repeated in
+web projects. Each framework has a development culture, and it is the development culture that drives the design and use
+of all frameworks whether it is CakePHP, ZendFramework, CodeIgniter, Ruby on Rails, or django. Each framework, with its
+set of philosophies, aims to solve common problems thereby enabling developers to focus on the business need.</p>
+<p>FastAPI is not any different in the regard of development culture. Loads of common features are also provided with
+little configuration enabling developers to quickly mock up a prototype for projects.</p>
 
 
     

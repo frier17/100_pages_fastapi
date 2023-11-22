@@ -6,7 +6,7 @@
 *   @license https://github.com/vantagedesign/ace-documentation/blob/master/LICENSE
 * ------------------------------------------------------------------------ */
 
-$primary:       #007bff;
+$primary:       #2c318d; /*#007bff;**/
 $secondary:     #6610f2;
 $success:       #28a745;
 $info:          #17a2b8;
@@ -56,55 +56,6 @@ $docs_toc_position_top: 4rem;
     height: 1.5rem;
 }
 
-/* Side navigation menus */
-.docs-sidenav span.badge.badge-primary, .docs-toc span.badge.badge-primary{
-    font-size: 10px;
-}
-
-@media (min-width: 768px) {
-    .docs-sidenav, .docs-toc{
-        height: calc(100vh - $docs_toc_position_top - $docs_toc_padding_top);
-        top: $docs_toc_position_top;
-        position: sticky;
-        overflow: auto;
-    }
-    .docs-sidenav .navbar, .docs-toc .navbar{
-        padding-right: 0;
-    }
-    .docs-sidenav .navbar-collapse, .docs-sidenav .navbar-nav{
-        width: 100%;
-    }
-    .docs-sidenav .nav-link, .docs-toc li a{
-        display: flex;
-        align-items: start;
-        justify-content: space-between;
-    }
-    .docs-sidenav .nav-link > span.badge.badge-primary, .docs-toc li a > span.badge.badge-primary{
-        margin-top: 5px;
-    }
-    #book-cover {
-    width: auto;
-}
-}
-
-@media (min-width: 1200px) {
-    .docs-toc.large{
-        height: calc(100vh - $docs_toc_position_top - $docs_toc_padding_top);
-    }
-    #book-cover {
-    width: 75%;
-}
-}
-
-@media (max-width: 1200px) {
-    .docs-toc.large{
-        display:none;
-    }
-    #book-cover {
-    width: 75%;
-}
-}
-
 .docs-toc{
     padding-top: $docs_toc_padding_top;
 }
@@ -141,30 +92,6 @@ table > tbody > tr > td, .bd-content > table > tbody > tr > th, .bd-content > ta
 
 
 /* Modifications **/
-#book-cover {
-    margin: 8em auto 0;
-    padding: 0;
-    font-family: "Arial Narrow";
-    font-size: 20px;
-}
-
-#book-cover div.cover-strip {
-    background-color: #e9edf8;
-    padding: 3rem 10rem;
-}
-#book-cover div.cover-strip h2 {
-    font-size: 38px;
-    font-weight: 550;
-}
-#book-cover div.cover-strip h2 span {
-    text-transform: uppercase;
-}
-#book-cover h4 {
-    text-align: center !important;
-    font-size: 1.2em;
-    font-weight: 550;
-    margin-top: 3.2rem;
-}
 
 .btn {
     border-radius: 0rem !important;
@@ -194,7 +121,6 @@ blockquote {
     padding: 1rem 0;
 
 }
-
 blockquote p {
     padding: 0.5rem 3rem;
     margin-bottom: 0;
@@ -235,4 +161,173 @@ blockquote ul li {
 }
 .table-padded {
     padding-left: 2rem;
+}
+
+navbar .logo {
+    float: right !important;
+}
+navbar .logo:after {
+    content: "";
+    height: 0;
+    clear: both;
+    visibility: none;
+}
+
+/* Side navigation menus */
+.docs-sidenav span.badge.badge-primary, .docs-toc span.badge.badge-primary{
+    font-size: 10px;
+}
+@media (max-width: 768px){
+    h4{
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+    div.logo{
+        visibility: hidden;
+        display: none;
+    }
+    div.strip-img{
+        max-height: 250px;
+        margin: 3em 0;
+    }
+    #book-cover {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow: hidden;
+        font-family: "Arial Narrow";
+        font-size: 1em;
+    }
+    #book-cover div.cover-strip {
+        background-color: #e9edf8;
+        padding: 2rem 1rem;
+    }
+    #book-cover div.cover-strip h2 {
+        font-size: 30px;
+        font-weight: 500;
+    }
+    #book-cover div.cover-strip h2 span {
+        text-transform: uppercase;
+    }
+    #book-cover h4 {
+        text-align: center !important;
+        font-size: 1em;
+        font-weight: 550;
+        margin-top: 3em;
+    }
+    blockquote {
+        margin: 1rem auto;
+        background-color: #efefef;
+        padding: 1rem 0;
+    }
+    blockquote p {
+        padding: 0.5rem 1.5rem;
+        margin-bottom: 0;
+    }
+    blockquote .table p {
+        padding: 0;
+        margin: 0;
+    }
+    blockquote ul {
+        margin: 0;
+
+    }
+    blockquote ul li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .docs-sidenav, .docs-toc{
+        height: calc(100vh - $docs_toc_position_top - $docs_toc_padding_top);
+        top: $docs_toc_position_top;
+        position: sticky;
+        overflow: auto;
+    }
+    .docs-sidenav .navbar, .docs-toc .navbar{
+        padding-right: 0;
+    }
+    .docs-sidenav .navbar-collapse, .docs-sidenav .navbar-nav{
+        width: 100%;
+    }
+    .docs-sidenav .nav-link, .docs-toc li a{
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+    }
+    .docs-sidenav .nav-link > span.badge.badge-primary, .docs-toc li a > span.badge.badge-primary{
+        margin-top: 5px;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .docs-toc.large{
+        height: calc(100vh - $docs_toc_position_top - $docs_toc_padding_top);
+    }
+
+}
+
+@media (max-width: 1200px) {
+    .docs-toc.large{
+        display:none;
+    }
+
+}
+
+div.logo{
+   display: inherit;
+}
+div.strip-img{
+    max-height: 250px;
+    margin: 3rem 0 16rem;
+}
+#book-cover {
+    margin: 0 auto;
+    padding: 0;
+    width: 75%;
+    overflow: hidden;
+    font-family: "Arial Narrow";
+    font-size: 1.3em;
+}
+#book-cover div.cover-strip {
+    background-color: #e9edf8;
+    padding: 5% 15%;
+}
+#book-cover div.cover-strip h2 {
+    font-size: 38px;
+    font-weight: 500;
+}
+#book-cover div.cover-strip h2 span {
+    text-transform: uppercase;
+}
+#book-cover h4 {
+    text-align: center !important;
+    font-size: 1.2em;
+    font-weight: 550;
+    margin-top: 3em;
+}
+blockquote {
+    margin: 1rem auto;
+    background-color: #efefef;
+    padding: 1rem 0;
+}
+blockquote p {
+    padding: 0.5rem 1.5rem;
+    margin-bottom: 0;
+}
+blockquote .table p {
+    padding: 0;
+    margin: 0;
+}
+blockquote ul {
+    margin: 0;
+
+}
+blockquote ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
