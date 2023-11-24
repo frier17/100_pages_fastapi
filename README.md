@@ -9,6 +9,4 @@ Codeskol and Boot camp training, and applications for A17S clients. The audience
 level of knowledge of Python programming who may have a background in web application development using frameworks like
 Django or Flask.
 
-Freely available from support by Bitmast Digital Services LTD.
-
-![Bitmast Digital Services](logo.png)
+Freely available for download from support by ![Bitmast Digital Services](logo.png) Digital Services LTD.
