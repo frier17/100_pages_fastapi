@@ -4,6 +4,7 @@ title = '100 Pages to  FastAPI'
 theme = "ace-documentation"
 pygmentsCodeFences = true
 pygmentsStyle = "monokai"
+BitmastURL = "http://bitmast.co"
 
 [params]
 site_logo = "https://frier17.github.io/100_pages_fastapi/img/nav_logo.png"

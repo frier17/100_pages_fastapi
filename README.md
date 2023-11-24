@@ -4,8 +4,11 @@
 
 ![Book Cover](cover-design.jpg)
 
-This book was written using lessons learned from developing products for Bitmast Digital Services Ltd, tutorials for the Codeskol and Boot camp training, and applications for A17S clients. The audience for this book is developers with some level of knowledge of Python programming who may have a background in web application development using frameworks like Django or Flask. 
+This book was written using lessons learned from developing products for Bitmast Digital Services Ltd, tutorials for the
+Codeskol and Boot camp training, and applications for A17S clients. The audience for this book is developers with some
+level of knowledge of Python programming who may have a background in web application development using frameworks like
+Django or Flask.
 
-Freely available from support by Bitmast Digital Services LTD. 
+Freely available from support by Bitmast Digital Services LTD.
 
-![Bitmast Digital Services](logo.svg)
+![Bitmast Digital Services](logo.png)
