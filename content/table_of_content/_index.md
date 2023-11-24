@@ -51,7 +51,7 @@ draft = true
 		a.	Pytest
 		b.	Doctest
 		c.	Hypothesis
-9.	[Resources](/chapter9/)
+9.	[Resources](/chapter9/) - Coming Soon
 
 		a.	APPENDIX 1: Some technical considerations with FastAPI
 			i. Python Async framework
@@ -70,8 +70,7 @@ draft = true
 				iv. Improving productivity using development tools
 				v. Reducing development cost by in house productivity tools
 		d.	APPENDIX 4: 
-				i. About the Author
-				ii. About Codeskol
-				iii. About A17S
-				iv. About Bitmast Digital Services
-				v. Any further inquiry?
+				i. About the Author				
+				ii. About A17S
+				iii. About Bitmast Digital Services
+				iv. Any further inquiry?
