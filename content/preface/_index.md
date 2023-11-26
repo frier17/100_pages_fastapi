@@ -105,5 +105,12 @@ general and FastAPI in particular. Overall, I hope information contained in this
 environment but at the moment of writing this book, I had the Nigerian ICT environment in mind.
 
 
-Interested in tipping the author? You may send Bitcoin here: bc1qvqvkhplq0zwp2qqruafga6ramft42ufrd073sm or scan QRCode:
-![Donation Bitcoin Address](donation.png). Donations will go towards writing other short text to advance programming skills.
+Interested in tipping the author? You may send Bitcoin here: 
+
+![Donation Bitcoin Address](donation.png) 
+
+{{<code lang="plain" >}}
+bc1qvqvkhplq0zwp2qqruafga6ramft42ufrd073sm
+{{</code>}}
+
+Donations will go towards writing other short text to advance programming skills.
