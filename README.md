@@ -10,3 +10,8 @@ level of knowledge of Python programming who may have a background in web applic
 Django or Flask.
 
 Freely available for download from support by ![Bitmast Digital Services](logo.png) Digital Services LTD.
+
+Interested in tipping the author? You may send Bitcoin here: bc1qvqvkhplq0zwp2qqruafga6ramft42ufrd073sm or scan QRCode:
+![Donation Bitcoin Address](donation.png)
+Donations will go towards writing other short text to 
+advance programming skills.
